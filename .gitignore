@@ -24,3 +24,8 @@ hs_err_pid*
 
 #MS Project
 *.mpp
+
+# Eclipse data and project binaries
+*.metadata*
+*bin*
+
