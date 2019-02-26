@@ -8,7 +8,7 @@ WORKDIR /usr/src/Ambi-like_PC
 RUN mkdir bin
 RUN javac -d bin -sourcepath src src/ch/hearc/Main.java
 
-WORKDIR /usr/src/Ambi-like_PC
+WORKDIR /usr/src/Ambi-like_rp
 RUN mkdir bin
 RUN javac -d bin -sourcepath src src/ch/hearc/Main.java
 
