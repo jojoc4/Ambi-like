@@ -13,7 +13,7 @@ public class LedServerImp extends UnicastRemoteObject implements LedServer{
 
     @Override
     public void setColor(int number, Color c) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        throw new UnsupportedOperationException("Not supported yet.");
     }
 
     public LedServerImp() throws RemoteException {

@@ -37,7 +37,7 @@ public class Main {
 
             LedServerImp informationImpl = new LedServerImp();
 
-            String url = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/TestRMI";
+            String url = "rmi://" + InetAddress.getLocalHost().getHostAddress() + "/ledserver";
 
             System.out.println("Enregistrement de l'objet avec l'url : " + url);
 
