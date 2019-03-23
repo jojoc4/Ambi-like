@@ -30,11 +30,11 @@ public class Main {
 
         try {
             LedServerImp obj = new LedServerImp();
-            LedServer stub = (LedServer) UnicastRemoteObject.exportObject(obj, 0);
 
             // Bind the remote object's stub in the registry
             Registry registry = LocateRegistry.getRegistry();
-            registry.bind("LedServer", stub);
+            registry.unbind("LedServer");
+            registry.bind("LedServer", obj);
 
             System.err.println("Server ready");
         } catch (Exception e) {
