@@ -10,6 +10,6 @@ RUN javac -d bin -sourcepath src src/ch/hearc/Main.java
 
 WORKDIR /usr/src/Ambi-like_rp
 RUN mkdir bin
-RUN javac -d bin -sourcepath src src/ch/hearc/Main.java -cp lib/*
+RUN javac -d bin -sourcepath src src/ch/hearc/Main.java -cp lib/*.jar 
 
 # TODO make .jar and put in artifact
