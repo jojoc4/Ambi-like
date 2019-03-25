@@ -10,6 +10,6 @@ RUN javac -d bin -sourcepath src src/ch/hearc/Main.java
 
 WORKDIR /usr/src/Ambi-like_rp
 RUN mkdir bin
-RUN javac -cp lib/* -d bin -sourcepath src src/ch/hearc/Main.java 
+RUN javac -cp lib/log4j-api-2.11.2.jar -d bin -sourcepath src src/ch/hearc/Main.java 
 
 # TODO make .jar and put in artifact
