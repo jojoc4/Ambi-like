@@ -1,21 +1,31 @@
 package ch.hearc;
 
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+
 /**
  *
  * @author Jonatan Baumgartner
  */
-public class Config {
+public class Config implements Serializable {
 
     private Config() {
         nbLed = new int[4];
     }
 
     //const
+    
+    //used for number of leds on each side
     public static final int NORTH = 0;
     public static final int EAST = 1;
     public static final int SOUTH = 2;
     public static final int WEST = 3;
 
+    //used to indicate the chossen mode
     public static final int AMBILIGHT = 0;
     public static final int COLOR = 1;
     public static final int PERSO = 2;
@@ -74,8 +84,27 @@ public class Config {
 
     public static Config getConfig() {
         if (config == null) {
-            config = new Config();
+            try {
+                FileInputStream fi = new FileInputStream(new File("config.amb"));
+                ObjectInputStream oi = new ObjectInputStream(fi);
+                config = (Config) oi.readObject();
+                fi.close();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
         }
         return config;
+    }
+
+    //serialization
+    public static void save() {
+        try {
+            FileOutputStream fileOut = new FileOutputStream("config.amb");
+            ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
+            objectOut.writeObject(config);
+            objectOut.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
     }
 }
