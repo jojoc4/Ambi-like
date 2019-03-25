@@ -18,18 +18,25 @@ public class Computation implements Runnable {
     private int nbLedTop;
     private int nbLedRight;
     private int nbLedBottom;
+    private int[][] colors;
     
-    public Computation(int left, int top, int right, int bottom)
+    public Computation()
     {
-        nbLedLeft = left;
-        nbLedTop = top;
-        nbLedRight = right;
-        nbLedBottom = bottom;
+        nbLedLeft = 20;
+        nbLedTop = 50;
+        nbLedRight = 20;
+        nbLedBottom = 0;
+        colors = new int[4][];
+        colors[0] = new int[nbLedLeft];
+        colors[1] = new int[nbLedTop];
+        colors[2] = new int[nbLedRight];
+        colors[3] = new int[nbLedBottom];
     }
     
     @Override
     public void run() {
         BufferedImage img = printScreen();
+        
         int rgb = img.getRGB(0, 0);
         int red =   (rgb >> 16) & 0xFF;
         int green = (rgb >>  8) & 0xFF;
