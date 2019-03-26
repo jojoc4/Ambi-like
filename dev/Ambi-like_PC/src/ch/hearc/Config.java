@@ -8,6 +8,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
+ * Config
  *
  * @author Jonatan Baumgartner
  */
@@ -15,10 +16,26 @@ public class Config implements Serializable {
 
     private Config() {
         nbLed = new int[4];
+        raspIp = "192.168.100.100";
+        nbLed[0] = 10;
+        nbLed[1] = 10;
+        nbLed[2] = 10;
+        nbLed[3] = 10;
+
+        lumMax = 255;
+
+        mode = 0;
+
+        persoModeFile = "";
+
+        color = new int[3];
+
+        color[0] = 255;
+        color[1] = 255;
+        color[2] = 255;
     }
 
     //const
-    
     //used for number of leds on each side
     public static final int NORTH = 0;
     public static final int EAST = 1;
@@ -33,9 +50,10 @@ public class Config implements Serializable {
     //attribute
     private String raspIp;
     private int[] nbLed;
-    private byte lumMax;
+    private int lumMax;
     private int mode;
-    private int persoModeFile;
+    private String persoModeFile;
+    private int[] color;
 
     //getter
     public String getRaspIp() {
@@ -46,7 +64,7 @@ public class Config implements Serializable {
         return nbLed[pos];
     }
 
-    public byte getLumMax() {
+    public int getLumMax() {
         return lumMax;
     }
 
@@ -54,8 +72,12 @@ public class Config implements Serializable {
         return mode;
     }
 
-    public int getPersoModeFile() {
+    public String getPersoModeFile() {
         return persoModeFile;
+    }
+
+    public int[] getColor() {
+        return color;
     }
 
     //setter
@@ -67,7 +89,7 @@ public class Config implements Serializable {
         this.nbLed[pos] = nbLed;
     }
 
-    public void setLumMax(byte lumMax) {
+    public void setLumMax(int lumMax) {
         this.lumMax = lumMax;
     }
 
@@ -75,8 +97,12 @@ public class Config implements Serializable {
         this.mode = mode;
     }
 
-    public void setPersoModeFile(int persoModeFile) {
+    public void setPersoModeFile(String persoModeFile) {
         this.persoModeFile = persoModeFile;
+    }
+
+    public void setColor(int[] color) {
+        this.color = color;
     }
 
     //singleton
@@ -85,10 +111,16 @@ public class Config implements Serializable {
     public static Config getConfig() {
         if (config == null) {
             try {
-                FileInputStream fi = new FileInputStream(new File("config.amb"));
-                ObjectInputStream oi = new ObjectInputStream(fi);
-                config = (Config) oi.readObject();
-                fi.close();
+                File f = new File("config.amb");
+                if (f.exists() && !f.isDirectory()) {
+                    FileInputStream fi = new FileInputStream(new File("config.amb"));
+                    ObjectInputStream oi = new ObjectInputStream(fi);
+                    config = (Config) oi.readObject();
+                    fi.close();
+                } else {
+                    config = new Config();
+                    new JFrameConfigurator();
+                }
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -103,6 +135,7 @@ public class Config implements Serializable {
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(config);
             objectOut.close();
+
         } catch (Exception ex) {
             ex.printStackTrace();
         }
