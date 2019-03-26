@@ -44,7 +44,7 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new JFrameConfigurator();
+                new JFrameMainGUI();
             }
         });
 

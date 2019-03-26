@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 
 /**
  *
- * @author Julien Chappuis
+ * @author jonatan.baumgart
  */
 public class JFrameConfigurator extends JFrame{
     
