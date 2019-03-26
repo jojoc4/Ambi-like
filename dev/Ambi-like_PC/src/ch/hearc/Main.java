@@ -21,6 +21,8 @@ import javax.swing.JPanel;
 public class Main {
 
     public static void main(String[] args) {
+        
+        
         //verify that system tray is available, maybe not working on certain os
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported");
@@ -35,6 +37,7 @@ public class Main {
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
+
         //TODO choose trayIcon
         Image image = toolkit.getImage("/images/trayIcon.png");
 
@@ -44,7 +47,7 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new JFrameConfigurator();
+                new JFrameMainGUI();
             }
         });
 
