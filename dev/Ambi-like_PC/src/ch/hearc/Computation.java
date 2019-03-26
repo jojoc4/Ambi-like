@@ -5,73 +5,68 @@ import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
-import java.util.Arrays;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
  *
- * @author téo schaffner
+ * @author Téo Schaffner
  */
 public class Computation implements Runnable {
-    
-    private int nbLedLeft;
-    private int nbLedTop;
-    private int nbLedRight;
-    private int nbLedBottom;
+
+    private int[] nbLed;
     private int[][] colors;
-    
-    public Computation()
-    {
-        nbLedLeft = 20;
-        nbLedTop = 50;
-        nbLedRight = 20;
-        nbLedBottom = 0;
+
+    public Computation() {
+        nbLed = new int[]{20, 50, 20, 0};
         colors = new int[4][];
-        colors[0] = new int[nbLedLeft];
-        colors[1] = new int[nbLedTop];
-        colors[2] = new int[nbLedRight];
-        colors[3] = new int[nbLedBottom];
+        colors[0] = new int[nbLed[0]];
+        colors[1] = new int[nbLed[1]];
+        colors[2] = new int[nbLed[2]];
+        colors[3] = new int[nbLed[3]];
     }
-    
+
     @Override
     public void run() {
         BufferedImage img = printScreen();
-        
-        
-//        int red =   (rgb >> 16) & 0xFF;
-//        int green = (rgb >>  8) & 0xFF;
-//        int blue =  (rgb      ) & 0xFF;
-        //System.out.println("rouge: " + red + " vert: " + green + " bleu: " + blue);
-        
-        for(int i=0; i<nbLedLeft-1; ++i)
+        int rgb;
+
+        for(int i=0; i<4; ++i)
         {
-                int rgb = img.getRGB(0, i*img.getHeight()/nbLedLeft);
-                colors[0][i] = rgb;
-        }
-        for(int i=0; i<nbLedTop-1; ++i)
-        {
-            int rgb = img.getRGB(i*img.getWidth()/nbLedTop, 0);
-            colors[1][i] = rgb;
-        }
-        for(int i=0; i<nbLedRight-1; ++i)
-        {
-            int rgb = img.getRGB(0, i*img.getHeight()/nbLedRight);
-            colors[2][i] = rgb;
-        }
-        for(int i=0; i<nbLedBottom-1; ++i)
-        {
-            int rgb = img.getRGB(i*img.getWidth()/nbLedBottom, 0);
-            colors[3][i] = rgb;
-        }
-        
-        for(int[] a : colors)
-        {
-            for(int b : a)
+            if(nbLed[i] > 0)
             {
-                int red =   (b >> 16) & 0xFF;
-                int green = (b >>  8) & 0xFF;
-                int blue =  (b      ) & 0xFF;
+                for(int j=0; j<colors[i].length; ++j)
+                {
+                    int col = 0;
+                    int lin = 0;
+                    switch(i)
+                    {
+                        case 0:
+                            lin = j*(img.getHeight()-1)/nbLed[i];
+                            break;
+                        case 1:
+                            col = j*(img.getWidth()-1)/nbLed[i];
+                            break;
+                        case 2:
+                            col = img.getWidth()-1;
+                            lin = j*(img.getHeight()-1)/nbLed[i];
+                            break;
+                        case 3:
+                            col = j*(img.getWidth()-1)/nbLed[i];
+                            lin = img.getHeight()-1;
+                    }
+
+                    rgb = img.getRGB(col, lin);
+                    colors[i][j] = rgb;
+                }
+            }
+        }
+        
+        for (int[] a : colors) {
+            for (int b : a) {
+                int red = (b >> 16) & 0xFF;
+                int green = (b >> 8) & 0xFF;
+                int blue = (b) & 0xFF;
                 System.out.println("rouge: " + red + " vert: " + green + " bleu: " + blue);
             }
             System.out.println("coté");
@@ -85,7 +80,6 @@ public class Computation implements Runnable {
      */
     private BufferedImage printScreen() {
         try {
-            System.out.println("ch.hearc.Computation.printScreen()");
             Robot r = new Robot();
             return r.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
         } catch (AWTException ex) {
