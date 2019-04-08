@@ -19,7 +19,7 @@ public class Computation implements Runnable {
 
     private int[] nbLed;
     private int[][][] colors;
-    private int[][] boundaries;
+    private Boundaries boundaries;
     //Thread[] runners;
     private ExecutorService executor;
 
@@ -32,8 +32,8 @@ public class Computation implements Runnable {
         colors[2] = new int[nbLed[2]][];
         colors[3] = new int[nbLed[3]][];
         
-        //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax}
-        boundaries = new int[nbLed[0]+nbLed[1]+nbLed[2]+nbLed[3]][4];
+        //boundaries (nb total LEDs)
+        boundaries = new Boundaries(nbLed[0]+nbLed[1]+nbLed[2]+nbLed[3]);
         
         //runners = new Thread[Runtime.getRuntime().availableProcessors()];
         executor = Executors.newWorkStealingPool();
@@ -55,7 +55,6 @@ public class Computation implements Runnable {
         
         int oldCol = 0;
         int oldLin = 0;
-        int index = 0;
         for (int i = 0; i < 4; ++i) {
             if (nbLed[i] > 0) {
                 int dLin = (img.getHeight() - 1) / nbLed[i];
@@ -91,18 +90,15 @@ public class Computation implements Runnable {
                             oldLin = img.getHeight() - 50;
                     }
                     
-                    boundaries[index][0] = Math.min(col, oldCol);
-                    boundaries[index][1] = Math.min(lin, oldLin);
-                    boundaries[index][2] = Math.max(col, oldCol);
-                    boundaries[index][3] = Math.max(lin, oldLin);
+                    boundaries.setNext(Math.min(col, oldCol), Math.min(lin, oldLin), Math.max(col, oldCol), Math.max(lin, oldLin));
 
                     //System.out.println(oldCol + " " + oldLin + " " + col + " " + lin);
                     
-                    rgb2 = getMoyenneBetween(img, boundaries[index][0], boundaries[index][1], boundaries[index][2], boundaries[index][3]); //img.getRGB(col, lin);
-                    colors[i][j] = rgb2;
+                    //int[] b = boundaries.getNext();
                     
-                    ++index;
-
+                    //rgb2 = getMoyenneBetween(img, b[0], b[1], b[2], b[3]); //img.getRGB(col, lin);
+                    //colors[i][j] = rgb2;
+                    
                     oldCol = col;
                     oldLin = lin;
                 }
