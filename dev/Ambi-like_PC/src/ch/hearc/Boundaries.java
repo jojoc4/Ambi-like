@@ -37,7 +37,8 @@ public class Boundaries {
             return null;
         }
         
-        return boundaries[indexC];
+        final int[] b = boundaries[indexC];
+        return b;
     }
 
     public synchronized void setNext(int xMin, int yMin, int xMax, int yMax) {
