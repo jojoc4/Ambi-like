@@ -33,7 +33,6 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
         for (int i = 0; i < totalLed; i++) {
             setLed(i, new Pixel(0, 0, 0));
         }
-
     }
 
     public String getName() {
@@ -42,6 +41,10 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
 
     public int[] getNbled() {
         return nbled;
+    }
+    
+    public Pixel getPixel(int index){
+        return l.get(index);
     }
 
     public void setLed(int index, Pixel p) {

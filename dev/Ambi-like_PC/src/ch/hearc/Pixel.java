@@ -1,5 +1,7 @@
 package ch.hearc;
 
+import javafx.scene.paint.Color;
+
 /**
  *
  * @author Jonatan Baumgartner
@@ -38,6 +40,16 @@ public class Pixel {
 
     public void setBlue(int blue) {
         this.blue = blue;
+    }
+
+    public Color getColor() {
+        return Color.color(red, green, blue);
+    }
+
+    public void setColor(Color c) {
+        red = (int) c.getRed();
+        green = (int) c.getGreen();
+        blue = (int) c.getBlue();
     }
 
 }
