@@ -64,6 +64,10 @@ public class Config implements Serializable {
         return nbLed[pos];
     }
 
+    public int[] getNbLed() {
+        return nbLed;
+    }
+
     public int getLumMax() {
         return lumMax;
     }
@@ -113,7 +117,7 @@ public class Config implements Serializable {
             try {
                 File f = new File("config.amb");
                 if (f.exists() && !f.isDirectory()) {
-                    FileInputStream fi = new FileInputStream(new File("config.amb"));
+                    FileInputStream fi = new FileInputStream(f);
                     ObjectInputStream oi = new ObjectInputStream(fi);
                     config = (Config) oi.readObject();
                     fi.close();
