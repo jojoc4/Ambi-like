@@ -34,6 +34,16 @@ public class Main {
         Computation c = new Computation();
         Thread t = new Thread(c);
         t.start();
+        
+        //This is a test for stopping the visualization.
+//        try {
+//            Thread.sleep(5000);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        
+//        c.stopComputation();
+        //End of test
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
