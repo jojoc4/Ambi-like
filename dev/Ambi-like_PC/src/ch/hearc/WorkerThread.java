@@ -6,6 +6,8 @@
 package ch.hearc;
 
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -26,15 +28,30 @@ public class WorkerThread implements Runnable{
     private int green;
     private int blue;
     
-    public WorkerThread(Boundaries boundaries, BufferedImage img)
+    private boolean running;
+    
+    public WorkerThread(Boundaries boundaries)
     {
         this.boundaries = boundaries;
+        this.running = false;
+    }
+    
+    public synchronized void setImage(BufferedImage img){
         this.img = img;
     }
     
+    private synchronized int getRGB(int x, int y){
+        if(img != null)
+            return img.getRGB(x, y);
+        else
+            return 0; //0 means the LEDs will be switched off when there's no image available.
+    }
+    
     @Override
-    public void run() {
-        while(true)
+    public void run(){
+        startRun();
+        
+        while(isRunning())
         {
             int[] b = boundaries.getNext();
             
@@ -46,29 +63,45 @@ public class WorkerThread implements Runnable{
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
-            int totalPx = (xMax - xMin) * (yMax - yMin);
+            int totalPx = (Math.max(xMax, xMin) - Math.min(xMax, xMin)) * (Math.max(yMax, yMin) - Math.min(yMax, yMin));
 
             //System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax + " ");
             for (int x = xMin; x <= xMax; ++x) {
                 for (int y = yMin; y <= yMax; ++y) {
-                    int rgb = img.getRGB(x, y);
+                    int rgb = this.getRGB(x, y);
                     totalR += (rgb >> 16) & 0xFF;
                     totalG += (rgb >> 8) & 0xFF;
                     totalB += (rgb) & 0xFF;
                 }
             }
-
+            
+            if(totalPx == 0){totalPx = 1;}
             this.red = totalR / totalPx;
             this.green = totalG / totalPx;
             this.blue = totalB / totalPx;
 
             //System.out.println("rouge: " + moyR + " vert: " + moyG + " bleu: " + moyB);
             sendValues();
+            
         }
     }
     
     private void sendValues(){
         //send the values to the raspberry
+        //For testing :
+        //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
+    }
+    
+    public synchronized void startRun(){
+        this.running = true;
+    }
+    
+    public synchronized void stopRun(){
+        this.running = false;
+    }
+    
+    public synchronized boolean isRunning(){
+        return this.running;
     }
     
 }
