@@ -1,6 +1,7 @@
 package ch.hearc;
 
-import javafx.scene.paint.Color;
+import java.awt.Color;
+
 
 /**
  *
@@ -43,7 +44,7 @@ public class Pixel {
     }
 
     public Color getColor() {
-        return Color.color(red, green, blue);
+        return new Color(red, green, blue);
     }
 
     public void setColor(Color c) {
