@@ -41,10 +41,7 @@ public class WorkerThread implements Runnable{
     }
     
     private synchronized int getRGB(int x, int y){
-        if(img != null)
-            return img.getRGB(x, y);
-        else
-            return 0; //0 means the LEDs will be switched off when there's no image available.
+        return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
     }
     
     @Override
@@ -83,6 +80,11 @@ public class WorkerThread implements Runnable{
             //System.out.println("rouge: " + moyR + " vert: " + moyG + " bleu: " + moyB);
             sendValues();
             
+            try {
+                Thread.sleep(5);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
     
