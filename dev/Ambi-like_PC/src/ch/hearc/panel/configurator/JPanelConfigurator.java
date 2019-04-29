@@ -1,9 +1,6 @@
 package ch.hearc.panel.configurator;
 
 import ch.hearc.Config;
-import javax.swing.InputVerifier;
-import javax.swing.JComponent;
-import javax.swing.JSpinner;
 
 /**
  *
@@ -25,6 +22,7 @@ public class JPanelConfigurator extends javax.swing.JPanel {
         ip.setText(config.getRaspIp());
 
         //TODO verify ip input
+        
     }
 
     /**

@@ -9,8 +9,10 @@ import java.awt.Toolkit;
 import java.awt.TrayIcon;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -21,8 +23,7 @@ import javax.swing.JPanel;
 public class Main {
 
     public static void main(String[] args) {
-        
-        
+
         //verify that system tray is available, maybe not working on certain os
         if (!SystemTray.isSupported()) {
             System.out.println("SystemTray is not supported");
@@ -49,7 +50,8 @@ public class Main {
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
         //TODO choose trayIcon
-        Image image = toolkit.getImage("/images/trayIcon.png");
+        URL path = Main.class.getResource("/ch/hearc/images/logo.png");
+        Image image = new ImageIcon(path).getImage();
 
         PopupMenu menu = new PopupMenu();
 
