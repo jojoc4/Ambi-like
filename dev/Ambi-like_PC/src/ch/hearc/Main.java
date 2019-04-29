@@ -33,6 +33,7 @@ public class Main {
         //start main computation Thread
         Computation c = new Computation();
         Thread t = new Thread(c);
+        t.setName("Computation");
         t.start();
         
         //This is a test for stopping the visualization.

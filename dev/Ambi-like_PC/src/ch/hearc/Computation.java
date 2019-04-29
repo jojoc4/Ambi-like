@@ -120,7 +120,7 @@ public class Computation implements Runnable {
             
             
             try {
-                Thread.sleep(30); // ~30 FPS
+                Thread.sleep(40); // ~30 FPS
             } catch (InterruptedException ex) {
                 Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
