@@ -5,6 +5,10 @@
  */
 package ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation;
 
+
+import ch.hearc.panel.configurator.JFrameConfigurator;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
@@ -26,6 +30,7 @@ public class PanelPrevisualisationBouton extends JPanel {
     }
     
     private void geometry(){
+        jFrameConfigurator = new JFrameConfigurator();
         labelVisuLED = new JLabel("Visualisation LED : ");
         checkBoxVisuLED = new JCheckBox();
         
@@ -57,6 +62,13 @@ public class PanelPrevisualisationBouton extends JPanel {
     
     private void control(){
         
+        buttonParametres.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jFrameConfigurator.setVisible(true);
+            }
+        });
+        
     }
     private void appearance(){
         
@@ -66,5 +78,7 @@ public class PanelPrevisualisationBouton extends JPanel {
     private JLabel labelVisuLED;
     private JCheckBox checkBoxVisuLED;
     private JButton buttonParametres;
+    
+    private JFrameConfigurator jFrameConfigurator;
     
 }

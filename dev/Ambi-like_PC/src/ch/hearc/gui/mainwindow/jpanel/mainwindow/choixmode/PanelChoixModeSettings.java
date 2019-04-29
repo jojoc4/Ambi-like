@@ -31,10 +31,9 @@ public class PanelChoixModeSettings extends JPanel {
         modePersonnalise3 = new JRadioButton("Mode personnalisé 3");
         
         panelChoixModeCouleurs = new PanelChoixModeCouleurs();
-        
-        
-        
+
         group = new ButtonGroup();
+        
         
         group.add(reactifRB);
         group.add(couleurFixeRB);
@@ -62,7 +61,7 @@ public class PanelChoixModeSettings extends JPanel {
     }
     
     private void appearance(){
-        reactifRB.setEnabled(true);
+        reactifRB.setSelected(true);
     }
     
     private PanelChoixModeCouleurs panelChoixModeCouleurs;

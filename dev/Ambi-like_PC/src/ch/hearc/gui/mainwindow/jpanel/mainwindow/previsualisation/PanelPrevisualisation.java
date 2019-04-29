@@ -31,8 +31,7 @@ public class PanelPrevisualisation extends JPanel {
         
         vLayout.add(panelPrevisualisationEcran);
         vLayout.add(panelPrevisualisationBouton);
-        
-        add(panelPrevisualisationEcran,BorderLayout.CENTER);
+        add(vLayout,BorderLayout.CENTER);
         
     }
     

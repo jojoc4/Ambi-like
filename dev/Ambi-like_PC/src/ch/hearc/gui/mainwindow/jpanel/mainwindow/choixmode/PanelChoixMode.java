@@ -5,11 +5,8 @@
  */
 package ch.hearc.gui.mainwindow.jpanel.mainwindow.choixmode;
 
-import java.awt.BorderLayout;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**

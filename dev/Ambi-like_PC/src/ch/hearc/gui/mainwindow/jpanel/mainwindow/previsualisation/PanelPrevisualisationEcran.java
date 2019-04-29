@@ -55,10 +55,7 @@ public class PanelPrevisualisationEcran extends JPanel {
 
 	private void dessiner(Graphics2D g2d)
 	{
-//            int width = this.coffee.getIconWidth();
-//            int height = this.coffee.getIconHeight();
             g2d.drawImage(this.coffee.getImage(), 0, 0, this);
-
 	}
 	private void control()
 		{
