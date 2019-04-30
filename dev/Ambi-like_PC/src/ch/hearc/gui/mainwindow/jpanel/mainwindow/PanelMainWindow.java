@@ -5,7 +5,6 @@
  */
 package ch.hearc.gui.mainwindow.jpanel.mainwindow;
 
-import ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation.PanelPrevisualisation;
 import ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation.PanelPrevisualisationDecorator;
 import java.awt.GridLayout;
 

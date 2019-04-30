@@ -6,6 +6,7 @@
 package ch.hearc.panel.configurator;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -34,10 +35,9 @@ public class JFrameConfigurator extends JFrame {
     }
 
     private void appearance() {
-
-        setSize(600, 400);
+        setSize(jPanelConfigurator.getSize());
         setLocationRelativeTo(null); // frame centrer
-        setVisible(true); // last!
+        setVisible(false); // last!
     }
     
     private JPanelConfigurator jPanelConfigurator;

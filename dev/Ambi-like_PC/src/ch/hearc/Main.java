@@ -1,5 +1,6 @@
 package ch.hearc;
 
+import ch.hearc.gui.mainwindow.FrameMainWindow;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -60,7 +61,7 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new JFrameMainGUI();
+                new FrameMainWindow();
             }
         });
 
