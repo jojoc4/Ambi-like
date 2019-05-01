@@ -1,5 +1,5 @@
 # This file is a template, and might need editing before it works on your project.
-FROM openjdk:8-alpine
+FROM openjdk:11-stretch
 
 COPY dev/Ambi-like_PC /usr/src/Ambi-like_PC
 COPY dev/Ambi-like_rp /usr/src/Ambi-like_rp
