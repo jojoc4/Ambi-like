@@ -5,6 +5,7 @@
  */
 package ch.hearc.compute;
 
+import ch.hearc.compute.senders.Sender;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -22,6 +23,7 @@ public class WorkerThread implements Runnable{
     private int yMin;
     private int xMax;
     private int yMax;
+    //private Sender sender;
     
     //Tools
     private int red;
@@ -30,10 +32,11 @@ public class WorkerThread implements Runnable{
     
     private boolean running;
     
-    public WorkerThread(Boundaries boundaries)
+    public WorkerThread(Boundaries boundaries)//, Sender sender)
     {
         this.boundaries = boundaries;
         this.running = false;
+        //this.sender = sender;
     }
     
     public synchronized void setImage(BufferedImage img){
@@ -92,6 +95,8 @@ public class WorkerThread implements Runnable{
         //send the values to the raspberry
         //For testing :
         System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
+        
+        //sender.send(red, green, blue, num);
     }
     
     public synchronized void startRun(){
