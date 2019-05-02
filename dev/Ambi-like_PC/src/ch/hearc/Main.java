@@ -33,7 +33,7 @@ public class Main {
         }
 
         //start main computation Thread
-        Computation c = new Computation();
+        Computation c = new Computation(Computation.Type.LED);
         Thread t = new Thread(c);
         t.setName("Computation");
         t.start();
