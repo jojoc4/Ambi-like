@@ -45,7 +45,6 @@ public class Computation implements Runnable {
         //boundaries (nb total LEDs)
         boundaries = new Boundaries(nbLed[0]+nbLed[1]+nbLed[2]+nbLed[3]);
         
-        //runners = new Thread[Runtime.getRuntime().availableProcessors()];
         executor = Executors.newWorkStealingPool();
         workers = new WorkerThread[Runtime.getRuntime().availableProcessors()];
         
