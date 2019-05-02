@@ -1,4 +1,4 @@
-package ch.hearc;
+package ch.hearc.compute;
 
 import java.awt.AWTException;
 import java.awt.Rectangle;
@@ -91,11 +91,6 @@ public class Computation implements Runnable {
 
                     //System.out.println(oldCol + " " + oldLin + " " + col + " " + lin);
 
-                    //int[] b = boundaries.getNext();
-
-                    //rgb2 = getMoyenneBetween(img, b[0], b[1], b[2], b[3]); //img.getRGB(col, lin);
-                    //colors[i][j] = rgb2;
-
                     oldCol = col;
                     oldLin = lin;
                 }
@@ -105,7 +100,7 @@ public class Computation implements Runnable {
         
         for(int i=0; i<workers.length; ++i)
             {
-                workers[i] = new WorkerThread(boundaries);
+                workers[i] = new WorkerThread(boundaries); //Executors.defaultThreadFactory().newThread( ... );
                 executor.execute(workers[i]);
             }
             
@@ -120,17 +115,10 @@ public class Computation implements Runnable {
             
             
             try {
-                Thread.sleep(40); // ~30 FPS
+                Thread.sleep(40); // ~25 FPS
             } catch (InterruptedException ex) {
                 Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
-
-//            for (int[][] a : colors) {
-//                for (int[] b : a) {
-//                    System.out.println(Arrays.toString(b));
-//                }
-//                System.out.println("coté");
-//            }
         }
         
         for(int i=0; i<workers.length; ++i)

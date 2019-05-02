@@ -1,5 +1,6 @@
 package ch.hearc;
 
+import ch.hearc.compute.Computation;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
 import java.awt.AWTException;
 import java.awt.Image;

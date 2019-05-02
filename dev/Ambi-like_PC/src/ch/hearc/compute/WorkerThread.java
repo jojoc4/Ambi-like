@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc;
+package ch.hearc.compute;
 
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
@@ -91,7 +91,7 @@ public class WorkerThread implements Runnable{
     private void sendValues(){
         //send the values to the raspberry
         //For testing :
-        //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
+        System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
     }
     
     public synchronized void startRun(){
