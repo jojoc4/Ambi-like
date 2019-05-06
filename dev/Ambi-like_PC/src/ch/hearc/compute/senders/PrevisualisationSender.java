@@ -16,7 +16,7 @@ public class PrevisualisationSender implements Sender{
     }
 
     @Override
-    public void send(int r, int g, int b) {
+    public void send(int nbLed, int r, int g, int b) {
         throw new UnsupportedOperationException("Not supported yet.");
     }
     
