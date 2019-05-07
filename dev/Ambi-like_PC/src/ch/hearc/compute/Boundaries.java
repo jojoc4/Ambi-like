@@ -47,6 +47,7 @@ public class Boundaries {
         boundaries[indexP][1] = yMin;
         boundaries[indexP][2] = xMax;
         boundaries[indexP][3] = yMax;
+        boundaries[indexP][4] = indexP;
         
         if(indexP%len > 0)
         {

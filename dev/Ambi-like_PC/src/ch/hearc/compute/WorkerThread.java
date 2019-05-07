@@ -23,6 +23,7 @@ public class WorkerThread implements Runnable{
     private int yMin;
     private int xMax;
     private int yMax;
+    private int index;
     //private Sender sender;
     
     //Tools
@@ -31,12 +32,13 @@ public class WorkerThread implements Runnable{
     private int blue;
     
     private boolean running;
+    private Sender sender;
     
-    public WorkerThread(Boundaries boundaries)//, Sender sender)
+    public WorkerThread(Boundaries boundaries, Sender sender)//, Sender sender)
     {
         this.boundaries = boundaries;
         this.running = false;
-        //this.sender = sender;
+        this.sender = sender;
     }
     
     public synchronized void setImage(BufferedImage img){
@@ -59,6 +61,7 @@ public class WorkerThread implements Runnable{
             yMin = b[1];
             xMax = b[2];
             yMax = b[3];
+            index = b[4];
             
             int totalR = 0;
             int totalG = 0;
@@ -96,7 +99,7 @@ public class WorkerThread implements Runnable{
         //For testing :
         System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
         
-        //sender.send(red, green, blue, num);
+        //sender.send(index, red, green, blue);
     }
     
     public synchronized void startRun(){

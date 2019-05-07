@@ -5,19 +5,23 @@
  */
 package ch.hearc.compute.senders;
 
+import ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation.PanelPrevisualisationEcran;
+
 /**
  *
  * @author teosc
  */
 public class PrevisualisationSender implements Sender{
     
-    public PrevisualisationSender(){
-        
+    private PanelPrevisualisationEcran ppe;
+    
+    public PrevisualisationSender(PanelPrevisualisationEcran ppe){
+        this.ppe = ppe;
     }
 
     @Override
     public void send(int nbLed, int r, int g, int b) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        //throw new UnsupportedOperationException("Not supported yet.");
     }
     
 }

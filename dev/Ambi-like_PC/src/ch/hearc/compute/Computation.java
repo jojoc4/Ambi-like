@@ -1,11 +1,13 @@
 package ch.hearc.compute;
 
+import ch.hearc.compute.senders.Sender;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.Arrays;
+import java.util.Vector;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
@@ -29,10 +31,10 @@ public class Computation implements Runnable {
     private WorkerThread[] workers;
     private ExecutorService executor;
     private boolean running;
-    private Computation.Type type;
+    private Sender sender;
 
-    public Computation(Computation.Type t) {
-        type = t;
+    public Computation(Sender sender) {
+        this.sender = sender;
         
         nbLed = new int[]{20, 50, 20, 0};
         
@@ -59,7 +61,7 @@ public class Computation implements Runnable {
         //Create the threads and start them.
         for(int i=0; i<workers.length; ++i)
             {
-                workers[i] = new WorkerThread(boundaries); //Executors.defaultThreadFactory().newThread( ... );
+                workers[i] = new WorkerThread(boundaries, sender); //Executors.defaultThreadFactory().newThread( ... );
                 executor.execute(workers[i]);
             }
             
