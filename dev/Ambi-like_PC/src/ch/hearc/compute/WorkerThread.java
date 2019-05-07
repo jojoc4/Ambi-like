@@ -97,9 +97,9 @@ public class WorkerThread implements Runnable{
     private void sendValues(){
         //send the values to the raspberry
         //For testing :
-        System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
+        //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
         
-        //sender.send(index, red, green, blue);
+        sender.send(index, red, green, blue);
     }
     
     public synchronized void startRun(){

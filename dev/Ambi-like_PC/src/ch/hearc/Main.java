@@ -1,7 +1,7 @@
 package ch.hearc;
 
 import ch.hearc.compute.Computation;
-import ch.hearc.compute.senders.RMISender;
+import ch.hearc.compute.senders.*;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
 import java.awt.AWTException;
 import java.awt.Image;
@@ -34,7 +34,7 @@ public class Main {
         }
 
         //start main computation Thread
-        Computation c = new Computation(RMISender.getInstance());
+        Computation c = new Computation(new TestSender());//RMISender.getInstance());
         Thread t = new Thread(c);
         t.setName("Computation");
         t.start();

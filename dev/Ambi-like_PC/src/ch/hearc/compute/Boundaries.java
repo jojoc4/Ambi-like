@@ -13,14 +13,14 @@ package ch.hearc.compute;
 public class Boundaries {
 
     //tools
-    private int[][] boundaries; //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax}
+    private int[][] boundaries; //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax, index}
     private int indexC;
     private int indexP;
     private int len;
     private boolean full;
 
     public Boundaries(int nbLeds) {
-        this.boundaries = new int[nbLeds][4];
+        this.boundaries = new int[nbLeds][5];
         this.indexC = -1;
         this.indexP = -1;
         this.len = nbLeds;
