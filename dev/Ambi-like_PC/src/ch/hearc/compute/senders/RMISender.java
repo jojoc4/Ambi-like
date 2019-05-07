@@ -18,6 +18,10 @@ import java.util.logging.Logger;
  * @author jba
  */
 public class RMISender implements Sender {
+    
+    private static RMISender instance = null;
+
+    private CommandeLed_I commande;
 
     private RMISender() {
         try {
@@ -45,9 +49,4 @@ public class RMISender implements Sender {
             Logger.getLogger(RMISender.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
-    private static RMISender instance = null;
-
-    private CommandeLed_I commande;
-
 }
