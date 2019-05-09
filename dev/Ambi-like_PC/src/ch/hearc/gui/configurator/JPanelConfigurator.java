@@ -1,9 +1,10 @@
 package ch.hearc.gui.configurator;
 
 import ch.hearc.Config;
+import ch.hearc.Main;
 
 /**
- *
+ * configuration panel
  * @author jonatan.baumgart
  */
 public class JPanelConfigurator extends javax.swing.JPanel {
@@ -22,7 +23,6 @@ public class JPanelConfigurator extends javax.swing.JPanel {
         ip.setText(config.getRaspIp());
 
         //TODO verify ip input
-        
     }
 
     /**
@@ -192,19 +192,19 @@ public class JPanelConfigurator extends javax.swing.JPanel {
 
     private void btn_saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_saveActionPerformed
         Config config = Config.getConfig();
-        
-        config.setNbLed((int)haut.getValue(), Config.NORTH);
-        config.setNbLed((int)droite.getValue(), Config.EAST);
-        config.setNbLed((int)bas.getValue(), Config.SOUTH);
-        config.setNbLed((int)gauche.getValue(), Config.WEST);
-        
-        config.setLumMax((int)((int)lumMax.getValue()*(255.0/100.0)));
-        
-        config.setRaspIp(ip.getText());
-        
-        Config.save();
-    }//GEN-LAST:event_btn_saveActionPerformed
 
+        config.setNbLed((int) haut.getValue(), Config.NORTH);
+        config.setNbLed((int) droite.getValue(), Config.EAST);
+        config.setNbLed((int) bas.getValue(), Config.SOUTH);
+        config.setNbLed((int) gauche.getValue(), Config.WEST);
+
+        config.setLumMax((int) ((int) lumMax.getValue() * (255.0 / 100.0)));
+
+        config.setRaspIp(ip.getText());
+
+        Config.save();
+        Main.changeMode();
+    }//GEN-LAST:event_btn_saveActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner bas;

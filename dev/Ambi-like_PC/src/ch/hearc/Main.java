@@ -24,12 +24,12 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Jonatan Baumgartner
+ * @author jonatan.baumgart
  */
 public class Main {
-    
+
     private static Computation_I c;
-    
+
     public static void main(String[] args) {
 
         //verify that system tray is available, maybe not working on certain os
@@ -41,26 +41,17 @@ public class Main {
         //start main computation Thread
         createComputation();
 
-        //This is a test for stopping the visualization.
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        c.stopComputation();
-        //End of test
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-        //TODO choose trayIcon
+        //set tray icon
         URL path = Main.class.getResource("/ch/hearc/images/logo.png");
         Image image = new ImageIcon(path).getImage();
-        
+
         PopupMenu menu = new PopupMenu();
 
-        //add configuration menu, create and opens JFramConfigurator if pressed
+        //add configuration menu, create and opens FrameMainWindow if pressed
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -70,7 +61,7 @@ public class Main {
 
         //add close option, quit the program
         menu.add(messageItem);
-        
+
         MenuItem closeItem = new MenuItem("Fermer");
         closeItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -89,16 +80,23 @@ public class Main {
             final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "cannot add system tray icon, quit", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
-            
+
         }
-        
+
     }
-    
+
+    /**
+     * used to apply new configuration to the computation
+     * stop and destroy the current computation and create the new one with the parameters saved in config
+     */
     public static void changeMode() {
         c.stopComputation();
-        
+        createComputation();
     }
-    
+
+    /**
+     * creates the right new computation depending on Config content
+     */
     private static void createComputation() {
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
@@ -114,5 +112,5 @@ public class Main {
         t.setName("Computation");
         t.start();
     }
-    
+
 }

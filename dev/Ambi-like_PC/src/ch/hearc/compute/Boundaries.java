@@ -12,8 +12,7 @@ import java.util.Vector;
 
 /**
  *
- * @author teosc
- * Fonctionnement inspiré du pattern producteur-consommateur
+ * @author teosc Fonctionnement inspiré du pattern producteur-consommateur
  */
 public class Boundaries {
 
@@ -36,8 +35,7 @@ public class Boundaries {
     }
 
     public synchronized int[] getNext() {
-        if (full || indexC < indexP)
-        {
+        if (full || indexC < indexP) {
             indexC = (++indexC) % len;
         }
         else
@@ -46,12 +44,13 @@ public class Boundaries {
         }
         
         int[] b = boundaries.elementAt(indexC);
+
         return b;
     }
 
     public synchronized void setNext(int xMin, int yMin, int xMax, int yMax) {
         indexP = (++indexP) % len;
-        
+       
         int[] boundary = new int[5];
         
         boundary[0] = xMin;
@@ -67,19 +66,19 @@ public class Boundaries {
             this.full = true;
         }
     }
-    
+
     /**
      * FOR DEBUGGING PURPOSE ONLY!!
      */
-    public void printAll(){
-        int num=0;
-        int cote=0;
-        for(int[] i : boundaries){
+    public void printAll() {
+        int num = 0;
+        int cote = 0;
+        for (int[] i : boundaries) {
             System.out.println(Arrays.toString(i));
-            
-            if(num == Config.getConfig().getNbLed(cote)-1){
+
+            if (num == Config.getConfig().getNbLed(cote) - 1) {
                 System.out.println("Cote");
-                num=-1;
+                num = -1;
                 cote++;
             }
             ++num;

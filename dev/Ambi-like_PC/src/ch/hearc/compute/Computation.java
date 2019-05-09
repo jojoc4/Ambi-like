@@ -23,7 +23,8 @@ import ch.hearc.compute.senders.Sender_I;
  *
  * @author Téo Schaffner
  */
-public class Computation extends Computation_I {    
+public class Computation extends Computation_I {
+
     private int[] nbLed;
     private int[][][] colors;
     private Boundaries boundaries;
@@ -33,21 +34,21 @@ public class Computation extends Computation_I {
 
     public Computation(Sender_I sender) {
         this.sender = sender;
-        
+
         nbLed = Config.getConfig().getNbLed();
-        
+
         colors = new int[4][][];
         colors[0] = new int[nbLed[0]][];
         colors[1] = new int[nbLed[1]][];
         colors[2] = new int[nbLed[2]][];
         colors[3] = new int[nbLed[3]][];
-        
+
         //boundaries (nb total LEDs)
-        boundaries = new Boundaries(nbLed[0]+nbLed[1]+nbLed[2]+nbLed[3]);
-        
+        boundaries = new Boundaries(nbLed[0] + nbLed[1] + nbLed[2] + nbLed[3]);
+
         executor = Executors.newWorkStealingPool();
         workers = new WorkerThread[Runtime.getRuntime().availableProcessors()];
-        
+
         stopComputation(); //set running to false
     }
 
@@ -64,53 +65,48 @@ public class Computation extends Computation_I {
 //        } catch (InterruptedException ex) {
 //            Logger.getLogger(Computation.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-        
+
         //Create the threads and start them.
-        for(int i=0; i<workers.length; ++i)
-            {
-                workers[i] = new WorkerThread(boundaries, sender); //Executors.defaultThreadFactory().newThread( ... );
-                executor.execute(workers[i]);
-            }
-            
-        while(isRunning())
-        {
+        for (int i = 0; i < workers.length; ++i) {
+            workers[i] = new WorkerThread(boundaries, sender); //Executors.defaultThreadFactory().newThread( ... );
+            executor.execute(workers[i]);
+        }
+
+        while (isRunning()) {
             BufferedImage img = printScreen();
-            
+
             //Give new image to all the threads
-            for(int i=0; i<workers.length; ++i)
-            {
+            for (int i = 0; i < workers.length; ++i) {
                 workers[i].setImage(img);
             }
-            
-            
+
             try {
                 Thread.sleep(40); // ~25 FPS pour le refresh de l'image utilisée
             } catch (InterruptedException ex) {
                 Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        
+
         //not running anymore, so tell the workers to finish what they are doing
-        for(int i=0; i<workers.length; ++i)
-            {
-                //Give them a null image, so LEDs will receive (0,0,0) as RGB color
-                workers[i].setImage(null);
-                //And tell them to stop their job
-                workers[i].stopRun();
-            }
+        for (int i = 0; i < workers.length; ++i) {
+            //Give them a null image, so LEDs will receive (0,0,0) as RGB color
+            workers[i].setImage(null);
+            //And tell them to stop their job
+            workers[i].stopRun();
+        }
         //wait for them to finish and it's over
         executor.shutdown();
     }
 
     private void buildBoundaries() {
         BufferedImage img = printScreen();
-        
+
         int oldCol = 0;
         int oldLin = img.getHeight()-1;
         for (int i = 0; i < 4; ++i) {
             if (nbLed[i] > 0) {
-                int dLin = (img.getHeight() ) / nbLed[i];
-                int dCol = (img.getWidth() ) / nbLed[i];
+                int dLin = (img.getHeight()) / nbLed[i];
+                int dCol = (img.getWidth()) / nbLed[i];
                 for (int j = 0; j < nbLed[i]; ++j) {
                     int col = 0;
                     int lin = 0;
@@ -121,11 +117,11 @@ public class Computation extends Computation_I {
                             col = 0;
                             oldCol = 50;
 
-                            lin = img.getHeight() - (j+1) * dLin;//j * (img.getHeight() - 1) / nbLed[i];
+                            lin = img.getHeight() - (j + 1) * dLin;//j * (img.getHeight() - 1) / nbLed[i];
                             break;
                         //TOP
                         case 1:
-                            col = (j+1) * dCol;
+                            col = (j + 1) * dCol;
 
                             lin = 0;
                             oldLin = 50;
@@ -135,16 +131,16 @@ public class Computation extends Computation_I {
                             col = img.getWidth()-1 ;
                             oldCol = img.getWidth() - 50;
 
-                            lin = (j+1) * dLin;
+                            lin = (j + 1) * dLin;
                             break;
                         //BOTTOM
                         case 3:
-                            col = img.getWidth() - (j+1) * dCol;
+                            col = img.getWidth() - (j + 1) * dCol;
 
                             lin = img.getHeight()-1;
                             oldLin = img.getHeight() - 50;
                     }
-                    
+
                     boundaries.setNext(Math.min(col, oldCol), Math.min(lin, oldLin), Math.max(col, oldCol), Math.max(lin, oldLin));
 
                     //System.out.println(oldCol + " " + oldLin + " " + col + " " + lin);
@@ -155,9 +151,10 @@ public class Computation extends Computation_I {
             }
         }
     }
-    
+
     /**
-     * @return a BufferedImage containing the screenshot, or null if an exception is encountered
+     * @return a BufferedImage containing the screenshot, or null if an
+     * exception is encountered
      */
     private BufferedImage printScreen() {
         try {
@@ -168,6 +165,4 @@ public class Computation extends Computation_I {
             return null;
         }
     }
-    
-    
 }

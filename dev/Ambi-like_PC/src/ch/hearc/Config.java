@@ -10,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * Config
- *
+ * singleton, use getConfig to get config instance
  * @author Jonatan Baumgartner
  */
 public class Config implements Serializable {
@@ -83,8 +83,8 @@ public class Config implements Serializable {
     public int[] getColor() {
         return color;
     }
-    
-    public int getNombreTotalLed(){
+
+    public int getNombreTotalLed() {
         return nbLed[Config.NORTH] + nbLed[Config.EAST] + nbLed[Config.SOUTH] + nbLed[Config.WEST];
     }
 

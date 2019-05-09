@@ -14,7 +14,7 @@ public class PanelMainWindow extends JPanel {
 
     private PanelChoix panelChoix;
     private PanelPrevisualisationDecorator panelPrevisualisation;
-    
+
     public PanelMainWindow() {
 
         geometry();
@@ -39,6 +39,5 @@ public class PanelMainWindow extends JPanel {
     private void appearance() {
 
     }
-
 
 }
