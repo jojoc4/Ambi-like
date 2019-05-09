@@ -2,7 +2,9 @@ package ch.hearc.gui.mainwindow.jpanel;
 
 import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationDecorator;
 import ch.hearc.gui.mainwindow.jpanel.choixmode.PanelChoix;
+import java.awt.BorderLayout;
 import java.awt.GridLayout;
+import javax.swing.Box;
 
 import javax.swing.JPanel;
 
@@ -26,10 +28,14 @@ public class PanelMainWindow extends JPanel {
         panelChoix = new PanelChoix();
         panelPrevisualisation = new PanelPrevisualisationDecorator();
 
-        GridLayout layout = new GridLayout(1, 2);
-        setLayout(layout);
-        add(panelChoix);
-        add(panelPrevisualisation);
+        Box boxH = Box.createHorizontalBox();
+        
+        boxH.add(panelChoix);
+        boxH.add(panelPrevisualisation);
+
+        setLayout(new BorderLayout());
+        add(boxH);
+        
     }
 
     private void control() {
