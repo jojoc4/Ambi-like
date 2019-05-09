@@ -58,6 +58,14 @@ public class Computation implements Runnable {
         startComputation();
         buildBoundaries();
         
+        boundaries.printAll();
+        
+        try {
+            Thread.sleep(10000000);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Computation.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         //Create the threads and start them.
         for(int i=0; i<workers.length; ++i)
             {
@@ -102,8 +110,8 @@ public class Computation implements Runnable {
         int oldLin = 0;
         for (int i = 0; i < 4; ++i) {
             if (nbLed[i] > 0) {
-                int dLin = (img.getHeight() - 1) / nbLed[i];
-                int dCol = (img.getWidth() - 1) / nbLed[i];
+                int dLin = (img.getHeight() ) / nbLed[i];
+                int dCol = (img.getWidth() ) / nbLed[i];
                 for (int j = 1; j < colors[i].length; ++j) {
                     int col = 0;
                     int lin = 0;
@@ -125,7 +133,7 @@ public class Computation implements Runnable {
                             break;
                         //RIGHT
                         case 2:
-                            col = img.getWidth() - 1;
+                            col = img.getWidth() ;
                             oldCol = img.getWidth() - 50;
 
                             lin = j * dLin;

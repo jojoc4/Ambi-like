@@ -5,6 +5,8 @@
  */
 package ch.hearc.compute;
 
+import java.util.Arrays;
+
 /**
  *
  * @author teosc
@@ -52,6 +54,12 @@ public class Boundaries {
         if(indexP%len > 0)
         {
             this.full = true;
+        }
+    }
+    
+    public void printAll(){
+        for(int[] i : boundaries){
+            System.out.println(Arrays.toString(i));
         }
     }
 
