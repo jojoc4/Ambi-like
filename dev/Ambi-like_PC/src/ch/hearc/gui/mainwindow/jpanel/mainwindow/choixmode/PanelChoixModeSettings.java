@@ -5,7 +5,10 @@
  */
 package ch.hearc.gui.mainwindow.jpanel.mainwindow.choixmode;
 
+import ch.hearc.Config;
 import java.awt.BorderLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -16,6 +19,18 @@ import javax.swing.JRadioButton;
  * @author julien.chappuis1
  */
 public class PanelChoixModeSettings extends JPanel {
+    
+    private PanelChoixModeCouleurs panelChoixModeCouleurs;
+    
+    private ButtonGroup group;
+    private JRadioButton reactifRB;
+    private JRadioButton couleurFixeRB;
+    private JRadioButton modePersonnalise1;
+    private JRadioButton modePersonnalise2;
+    private JRadioButton modePersonnalise3;
+    
+    private Config configFile;
+    
     public PanelChoixModeSettings(){
         
         geometry();
@@ -53,23 +68,55 @@ public class PanelChoixModeSettings extends JPanel {
         setLayout(new BorderLayout());
 
 	add(boxVertical, BorderLayout.CENTER);
+        
+        configFile = Config.getConfig();
 
     }
     
-    private void control(){
-        
+    private void control()
+    {
+    reactifRB.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(reactifRB.isSelected()){
+                configFile.setMode(0);
+            }
+        }
+    });
+    couleurFixeRB.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if(couleurFixeRB.isSelected()){
+                configFile.setMode(1);
+                int[] tabColor = new int[3];
+                tabColor[0] = panelChoixModeCouleurs.getjSliderRouge().getValue();
+                tabColor[1] = panelChoixModeCouleurs.getjSliderVert().getValue();
+                tabColor[2] = panelChoixModeCouleurs.getjSliderBleu().getValue();
+                configFile.setColor(tabColor);
+            }
+        }
+    });
+    modePersonnalise1.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    });
+    modePersonnalise2.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    });
+    modePersonnalise3.addActionListener(new ActionListener() {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        }
+    });
     }
     
     private void appearance(){
         reactifRB.setSelected(true);
     }
-    
-    private PanelChoixModeCouleurs panelChoixModeCouleurs;
-    
-    private ButtonGroup group;
-    private JRadioButton reactifRB;
-    private JRadioButton couleurFixeRB;
-    private JRadioButton modePersonnalise1;
-    private JRadioButton modePersonnalise2;
-    private JRadioButton modePersonnalise3;
 }

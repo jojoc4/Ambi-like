@@ -14,6 +14,9 @@ import javax.swing.JPanel;
  * @author julien.chappuis1
  */
 public class PanelChoixMode extends JPanel {
+    
+    private PanelChoixModeSettings panelChoixModeSettings;
+    
     public PanelChoixMode(){
         geometry();
         control();
@@ -39,5 +42,5 @@ public class PanelChoixMode extends JPanel {
         setBorder(BorderFactory.createTitledBorder("Choix du mode"));
     }
     
-    private PanelChoixModeSettings panelChoixModeSettings;
+    
 }

@@ -18,6 +18,7 @@ public class MagasinImage
 	public static final ImageIcon coffee = ImageLoader.loadSynchroneJar("ressources/coffee_logo.png");
 	public static final ImageIcon linux = ImageLoader.loadSynchroneJar("ressources/linux.png");
 	public static final ImageIcon cervin = ImageLoader.loadSynchroneJar("ressources/cervin.png");
+        public static final ImageIcon fontNoir = ImageLoader.loadSynchroneJar("ressources/fontNoir.png");
 
 	/*------------------------------------------------------------------*\
 	|*		Version Assynchrone	(non bloquant)							*|

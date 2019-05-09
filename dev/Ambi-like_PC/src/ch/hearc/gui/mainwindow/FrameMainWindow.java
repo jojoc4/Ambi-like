@@ -14,6 +14,8 @@ import javax.swing.JFrame;
  */
 public class FrameMainWindow extends JFrame{
     
+    private PanelMainWindow panelMainWindow;
+    
     public FrameMainWindow(){
         
         geometry();
@@ -35,10 +37,8 @@ public class FrameMainWindow extends JFrame{
     private void appearance()
     {    
         setTitle("Demo");
-	setSize(900, 350);
+	setSize(900, 500);
 	setLocationRelativeTo(null); // frame centrer
 	setVisible(true); // last!
     }
-
-    private PanelMainWindow panelMainWindow;
 }

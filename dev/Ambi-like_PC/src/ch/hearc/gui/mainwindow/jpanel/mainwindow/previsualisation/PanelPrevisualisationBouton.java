@@ -22,6 +22,16 @@ import javax.swing.JPanel;
  * @author julien.chappuis1
  */
 public class PanelPrevisualisationBouton extends JPanel {
+    
+        
+    private JButton buttonCreerModeVisualisation;
+    private JLabel labelVisuLED;
+    private JCheckBox checkBoxVisuLED;
+    private JButton buttonParametres;
+    
+    private JFrameConfigurator jFrameConfigurator;
+    
+    
     public PanelPrevisualisationBouton(){
         geometry();
         control();
@@ -73,12 +83,6 @@ public class PanelPrevisualisationBouton extends JPanel {
     private void appearance(){
         
     }
-    
-    private JButton buttonCreerModeVisualisation;
-    private JLabel labelVisuLED;
-    private JCheckBox checkBoxVisuLED;
-    private JButton buttonParametres;
-    
-    private JFrameConfigurator jFrameConfigurator;
+
     
 }
