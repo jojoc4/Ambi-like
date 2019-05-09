@@ -14,29 +14,28 @@ import javax.swing.JPanel;
  * @author julien.chappuis1
  */
 public class PanelPrevisualisationDecorator extends JPanel {
-    
+
     private PanelPrevisualisation panelPrevisualisation;
-    
-    public PanelPrevisualisationDecorator(){
+
+    public PanelPrevisualisationDecorator() {
         geometry();
         control();
         appearance();
-        
+
     }
-    
-    private void geometry(){
+
+    private void geometry() {
         panelPrevisualisation = new PanelPrevisualisation();
-        
+
         add(panelPrevisualisation);
     }
-    
-    private void control(){
-        
+
+    private void control() {
+
     }
-    private void appearance(){
+
+    private void appearance() {
         //setBorder(BorderFactory.createTitledBorder("Prévisualisation"));
     }
-    
-  
-    
+
 }

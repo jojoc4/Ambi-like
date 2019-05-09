@@ -10,7 +10,7 @@ package ch.hearc.compute.senders;
  * @author teosc
  */
 public interface Sender_I {
-    
+
     public void send(int nbLed, int r, int g, int b);
-    
+
 }

@@ -1,6 +1,9 @@
 package ch.hearc;
 
 import ch.hearc.compute.Computation;
+import ch.hearc.compute.Computation_I;
+import ch.hearc.compute.Computation_fixedColor;
+import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.*;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
 import java.awt.AWTException;
@@ -21,9 +24,11 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Jonatan Baumgartner
+ * @author jonatan.baumgart
  */
 public class Main {
+
+    private static Computation_I c;
 
     public static void main(String[] args) {
 
@@ -34,32 +39,19 @@ public class Main {
         }
 
         //start main computation Thread
-        Computation c = new Computation(new TestSender());//RMISender.getInstance());
-        Thread t = new Thread(c);
-        t.setName("Computation");
-        t.start();
-        
-        //This is a test for stopping the visualization.
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        c.stopComputation();
-        //End of test
+        createComputation();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-        //TODO choose trayIcon
+        //set tray icon
         URL path = Main.class.getResource("/ch/hearc/images/logo.png");
         Image image = new ImageIcon(path).getImage();
 
         PopupMenu menu = new PopupMenu();
 
-        //add configuration menu, create and opens JFramConfigurator if pressed
+        //add configuration menu, create and opens FrameMainWindow if pressed
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -91,6 +83,34 @@ public class Main {
 
         }
 
+    }
+
+    /**
+     * used to apply new configuration to the computation
+     * stop and destroy the current computation and create the new one with the parameters saved in config
+     */
+    public static void changeMode() {
+        c.stopComputation();
+        createComputation();
+    }
+
+    /**
+     * creates the right new computation depending on Config content
+     */
+    private static void createComputation() {
+        switch (Config.getConfig().getMode()) {
+            case Computation_I.MODE_AMBILIGHT:
+                c = new Computation(new TestSender());
+                break;
+            case Computation_I.MODE_FIXE:
+                c = new Computation_fixedColor(new TestSender(), new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
+                break;
+            case Computation_I.MODE_PERSO:
+                c = new Computation_perso(new TestSender(), ModePerso.getMode(Config.getConfig().getPersoModeFile()));
+        }
+        Thread t = new Thread(c);
+        t.setName("Computation");
+        t.start();
     }
 
 }

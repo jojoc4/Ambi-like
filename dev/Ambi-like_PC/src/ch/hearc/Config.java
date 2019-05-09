@@ -1,5 +1,6 @@
 package ch.hearc;
 
+import ch.hearc.compute.Computation_I;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -9,7 +10,7 @@ import java.io.Serializable;
 
 /**
  * Config
- *
+ * singleton, use getConfig to get config instance
  * @author Jonatan Baumgartner
  */
 public class Config implements Serializable {
@@ -24,7 +25,7 @@ public class Config implements Serializable {
 
         lumMax = 255;
 
-        mode = 0;
+        mode = Computation_I.MODE_AMBILIGHT;
 
         persoModeFile = "";
 
@@ -42,16 +43,11 @@ public class Config implements Serializable {
     public static final int SOUTH = 2;
     public static final int WEST = 3;
 
-    //used to indicate the chossen mode
-    public static final int AMBILIGHT = 0;
-    public static final int COLOR = 1;
-    public static final int PERSO = 2;
-
     //attribute
     private String raspIp;
     private int[] nbLed;
     private int lumMax;
-    private int mode;
+    private String mode;
     private String persoModeFile;
     private int[] color;
 
@@ -63,20 +59,20 @@ public class Config implements Serializable {
     public int getNbLed(int pos) {
         return nbLed[pos];
     }
-    
+
     public int[] getNbLed() {
         return nbLed;
     }
-    
+
     public int getNbLedTotal() {
-        return nbLed[0]+nbLed[1]+nbLed[2]+nbLed[3];
+        return nbLed[0] + nbLed[1] + nbLed[2] + nbLed[3];
     }
 
     public int getLumMax() {
         return lumMax;
     }
 
-    public int getMode() {
+    public String getMode() {
         return mode;
     }
 
@@ -87,8 +83,8 @@ public class Config implements Serializable {
     public int[] getColor() {
         return color;
     }
-    
-    public int getNombreTotalLed(){
+
+    public int getNombreTotalLed() {
         return nbLed[Config.NORTH] + nbLed[Config.EAST] + nbLed[Config.SOUTH] + nbLed[Config.WEST];
     }
 
@@ -105,7 +101,7 @@ public class Config implements Serializable {
         this.lumMax = lumMax;
     }
 
-    public void setMode(int mode) {
+    public void setMode(String mode) {
         this.mode = mode;
     }
 

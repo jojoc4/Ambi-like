@@ -10,6 +10,7 @@ import java.util.Iterator;
 import java.util.Vector;
 
 /**
+ * represents a personalized mode, is serializable and iterable
  *
  * @author Jonatan Baumgartner
  */
@@ -41,8 +42,8 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
     public int[] getNbled() {
         return nbled;
     }
-    
-    public Pixel getPixel(int index){
+
+    public Pixel getPixel(int index) {
         return l.get(index);
     }
 
@@ -55,6 +56,12 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
         return l.iterator();
     }
 
+    /**
+     * return a personalized mode loaded from a file
+     *
+     * @param file filename to load
+     * @return
+     */
     public static ModePerso getMode(String file) {
         try {
             File f = new File(file);
@@ -64,6 +71,7 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
                 ModePerso mp = (ModePerso) oi.readObject();
                 fi.close();
 
+                //TODO verify that the number of leds was the same when file created
                 return mp;
             } else {
                 throw new Exception("File don't exsist");
@@ -74,7 +82,11 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
         return null;
     }
 
-    //serialization
+    /**
+     * saves current mode to a file
+     *
+     * @param file name of the file
+     */
     public void save(String file) {
         try {
             this.name = file;
