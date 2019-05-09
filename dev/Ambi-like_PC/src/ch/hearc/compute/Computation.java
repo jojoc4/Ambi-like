@@ -140,7 +140,12 @@ public class Computation extends Computation_I {
                             lin = img.getHeight()-1;
                             oldLin = img.getHeight() - 50;
                     }
-
+                    
+                    col = (col == img.getWidth()) ? col-1 : col;
+                    oldCol = (oldCol == img.getWidth()) ? oldCol-1 : oldCol;
+                    lin = (lin == img.getHeight()) ? lin-1 : lin;
+                    oldLin = (oldLin == img.getHeight()) ? oldLin-1 : oldLin;
+                    
                     boundaries.setNext(Math.min(col, oldCol), Math.min(lin, oldLin), Math.max(col, oldCol), Math.max(lin, oldLin));
 
                     //System.out.println(oldCol + " " + oldLin + " " + col + " " + lin);
