@@ -30,12 +30,12 @@ public class FrameMainWindow extends JFrame {
     }
 
     private void control() {
-
+            
     }
 
     private void appearance() {
         setTitle("Demo");
-        setSize(900, 500);
+        setSize(1000, 600);
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!
     }

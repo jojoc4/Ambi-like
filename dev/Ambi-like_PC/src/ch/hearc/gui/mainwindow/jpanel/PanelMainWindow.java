@@ -1,9 +1,8 @@
 package ch.hearc.gui.mainwindow.jpanel;
 
-import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationDecorator;
 import ch.hearc.gui.mainwindow.jpanel.choixmode.PanelChoix;
+import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisation;
 import java.awt.BorderLayout;
-import java.awt.GridLayout;
 import javax.swing.Box;
 
 import javax.swing.JPanel;
@@ -15,7 +14,7 @@ import javax.swing.JPanel;
 public class PanelMainWindow extends JPanel {
 
     private PanelChoix panelChoix;
-    private PanelPrevisualisationDecorator panelPrevisualisation;
+    private PanelPrevisualisation panelPrevisualisation;
 
     public PanelMainWindow() {
 
@@ -26,7 +25,7 @@ public class PanelMainWindow extends JPanel {
 
     private void geometry() {
         panelChoix = new PanelChoix();
-        panelPrevisualisation = new PanelPrevisualisationDecorator();
+        panelPrevisualisation = new PanelPrevisualisation();
 
         Box boxH = Box.createHorizontalBox();
         

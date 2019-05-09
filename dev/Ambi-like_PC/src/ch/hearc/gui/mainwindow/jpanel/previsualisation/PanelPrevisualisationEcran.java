@@ -27,8 +27,9 @@ import javax.swing.JPanel;
 public class PanelPrevisualisationEcran extends JPanel {
 
     private ImageIcon fontNoir;
-    private static final int LONGUEUR = 400;
-    private static final int LARGEUR = 300;
+    private static final int LONGUEUR = 500;
+    private static final int LARGEUR = 400;
+    private static final int MARGE = 40;
 
     private Vector<Pixel> vectorPixels;
 
@@ -71,40 +72,38 @@ public class PanelPrevisualisationEcran extends JPanel {
         int nbLedsGauche = Config.getConfig().getNbLed(Config.EAST);
         int nbLedsDroite = Config.getConfig().getNbLed(Config.WEST);
 
-        int longueurEcran = LONGUEUR - 10;
-        int largeurEcran = LARGEUR - 10;
+        // Rectangle
+        g2d.translate(MARGE, MARGE);
+        g2d.setStroke(new BasicStroke(1));
+        g2d.drawRect(0, 0, LONGUEUR - MARGE, LARGEUR - MARGE);
 
-        double diametreCercle = (double) longueurEcran / (double) nbLedsHaut / 2.;
-        g2d.setStroke(new BasicStroke(10));
-        g2d.drawRect(10, (int) diametreCercle + 10, longueurEcran, longueurEcran);
+        int diametrePixel = 10;
+        double espaceEntreLeds = (double) (LONGUEUR - 2 * MARGE - nbLedsHaut * diametrePixel -2) / (double) (nbLedsHaut);
+        double espaceEntreLedsLargeur = (double) (LARGEUR - 2 * MARGE - nbLedsDroite * diametrePixel) / (double) (nbLedsDroite);
 
-        g2d.setColor(Color.RED);
-
-        g2d.translate(20, 0);
-
+        g2d.translate(espaceEntreLeds, -MARGE / 2);
+        for(int j = 0; j < 2; j++){
         for (int i = 0; i < nbLedsHaut; i++) {
-            g2d.fill(new Ellipse2D.Double(0, 0, diametreCercle, diametreCercle));
-            g2d.draw(new Ellipse2D.Double(0, 0, diametreCercle, diametreCercle));
-            g2d.translate(diametreCercle * 2, 0);
+            g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
+            g2d.translate(espaceEntreLeds + diametrePixel, 0);
         }
-        g2d.translate(diametreCercle, 0);
-        g2d.rotate(Math.PI / 2);
-        g2d.translate(diametreCercle, 0);
 
-        for (int i = 0; i < nbLedsDroite; i++) {
-            g2d.fill(new Ellipse2D.Double(0, 0, diametreCercle, diametreCercle));
-            g2d.draw(new Ellipse2D.Double(0, 0, diametreCercle, diametreCercle));
-            g2d.translate(diametreCercle * 2, 0);
-        }
-        g2d.translate(2 * diametreCercle, 0);
-
+        g2d.translate(MARGE / 2 + diametrePixel, 0);
+        
         g2d.rotate(Math.PI / 2);
 
-        for (int i = 0; i < nbLedsDroite; i++) {
-            g2d.fill(new Ellipse2D.Double(0, 0, diametreCercle, diametreCercle));
-            g2d.draw(new Ellipse2D.Double(0, 0, diametreCercle, diametreCercle));
-            g2d.translate(diametreCercle * 2, 0);
+        g2d.translate(espaceEntreLedsLargeur + MARGE / 2, 0);
+
+        for (int i = 0; i < nbLedsGauche; i++) {
+            g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
+            g2d.translate(espaceEntreLedsLargeur + diametrePixel, 0);
         }
+        
+        g2d.translate(diametrePixel + MARGE / 2, 0);
+        g2d.rotate(Math.PI / 2);
+        g2d.translate(espaceEntreLeds + MARGE / 2, 0);
+        }
+
     }
 
     public void updateDisplay() {
@@ -116,7 +115,7 @@ public class PanelPrevisualisationEcran extends JPanel {
     }
 
     private void appearance() {
-        setPreferredSize(new Dimension(LONGUEUR + 300, LARGEUR + 300));
+        setPreferredSize(new Dimension(LONGUEUR, LARGEUR));
     }
 
     private void fillVector() {
