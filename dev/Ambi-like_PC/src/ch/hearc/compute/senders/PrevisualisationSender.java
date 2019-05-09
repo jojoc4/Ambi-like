@@ -13,17 +13,17 @@ import java.util.Vector;
  *
  * @author teosc
  */
-public class PrevisualisationSender implements Sender_I{
-    
+public class PrevisualisationSender implements Sender_I {
+
     private PanelPrevisualisationEcran ppe;
-    
-    public PrevisualisationSender(PanelPrevisualisationEcran ppe){
+
+    public PrevisualisationSender(PanelPrevisualisationEcran ppe) {
         this.ppe = ppe;
     }
 
     @Override
     public void send(int nbLed, int r, int g, int b) {
-        Pixel test = (Pixel)ppe.getVectorPixel().elementAt(nbLed);
+        Pixel test = (Pixel) ppe.getVectorPixel().elementAt(nbLed);
         test.setRed(r);
         test.setGreen(g);
         test.setBlue(b);

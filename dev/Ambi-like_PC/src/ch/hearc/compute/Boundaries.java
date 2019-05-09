@@ -10,8 +10,7 @@ import java.util.Arrays;
 
 /**
  *
- * @author teosc
- * Fonctionnement inspiré du pattern producteur-consommateur
+ * @author teosc Fonctionnement inspiré du pattern producteur-consommateur
  */
 public class Boundaries {
 
@@ -31,15 +30,12 @@ public class Boundaries {
     }
 
     public synchronized int[] getNext() {
-        if (full || indexC < indexP)
-        {
+        if (full || indexC < indexP) {
             indexC = (++indexC) % len;
-        }
-        else
-        {
+        } else {
             return null;
         }
-        
+
         final int[] b = boundaries[indexC];
         return b;
     }
@@ -51,25 +47,24 @@ public class Boundaries {
         boundaries[indexP][2] = xMax;
         boundaries[indexP][3] = yMax;
         boundaries[indexP][4] = indexP;
-        
-        if(indexP%len > 0)
-        {
+
+        if (indexP % len > 0) {
             this.full = true;
         }
     }
-    
+
     /**
      * FOR DEBUGGING PURPOSE ONLY!!
      */
-    public void printAll(){
-        int num=0;
-        int cote=0;
-        for(int[] i : boundaries){
+    public void printAll() {
+        int num = 0;
+        int cote = 0;
+        for (int[] i : boundaries) {
             System.out.println(Arrays.toString(i));
-            
-            if(num == Config.getConfig().getNbLed(cote)-1){
+
+            if (num == Config.getConfig().getNbLed(cote) - 1) {
                 System.out.println("Cote");
-                num=-1;
+                num = -1;
                 cote++;
             }
             ++num;

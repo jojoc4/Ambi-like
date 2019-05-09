@@ -16,7 +16,7 @@ import javax.swing.JFrame;
 public class JFrameConfigurator extends JFrame {
 
     private JPanelConfigurator jPanelConfigurator;
-    
+
     public JFrameConfigurator() {
         geometry();
         control();
@@ -33,7 +33,7 @@ public class JFrameConfigurator extends JFrame {
     }
 
     private void control() {
-        
+
     }
 
     private void appearance() {
@@ -41,6 +41,5 @@ public class JFrameConfigurator extends JFrame {
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!
     }
-    
-    
+
 }

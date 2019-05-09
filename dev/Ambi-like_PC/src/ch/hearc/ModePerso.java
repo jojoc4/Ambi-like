@@ -41,8 +41,8 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
     public int[] getNbled() {
         return nbled;
     }
-    
-    public Pixel getPixel(int index){
+
+    public Pixel getPixel(int index) {
         return l.get(index);
     }
 

@@ -27,9 +27,9 @@ import javax.swing.JPanel;
  * @author Jonatan Baumgartner
  */
 public class Main {
-    
+
     private static Computation_I c;
-    
+
     public static void main(String[] args) {
 
         //verify that system tray is available, maybe not working on certain os
@@ -57,7 +57,7 @@ public class Main {
         //TODO choose trayIcon
         URL path = Main.class.getResource("/ch/hearc/images/logo.png");
         Image image = new ImageIcon(path).getImage();
-        
+
         PopupMenu menu = new PopupMenu();
 
         //add configuration menu, create and opens JFramConfigurator if pressed
@@ -70,7 +70,7 @@ public class Main {
 
         //add close option, quit the program
         menu.add(messageItem);
-        
+
         MenuItem closeItem = new MenuItem("Fermer");
         closeItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -89,16 +89,16 @@ public class Main {
             final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "cannot add system tray icon, quit", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
-            
+
         }
-        
+
     }
-    
+
     public static void changeMode() {
         c.stopComputation();
-        
+
     }
-    
+
     private static void createComputation() {
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
@@ -114,5 +114,5 @@ public class Main {
         t.setName("Computation");
         t.start();
     }
-    
+
 }

@@ -12,33 +12,31 @@ import javax.swing.JFrame;
  *
  * @author julien.chappuis1
  */
-public class FrameMainWindow extends JFrame{
-    
+public class FrameMainWindow extends JFrame {
+
     private PanelMainWindow panelMainWindow;
-    
-    public FrameMainWindow(){
-        
+
+    public FrameMainWindow() {
+
         geometry();
         control();
         appearance();
-        
+
     }
-    
-    private void geometry()
-    {
+
+    private void geometry() {
         panelMainWindow = new PanelMainWindow();
         add(panelMainWindow);
     }
-    
-    private void control(){
-        
+
+    private void control() {
+
     }
-    
-    private void appearance()
-    {    
+
+    private void appearance() {
         setTitle("Demo");
-	setSize(900, 500);
-	setLocationRelativeTo(null); // frame centrer
-	setVisible(true); // last!
+        setSize(900, 500);
+        setLocationRelativeTo(null); // frame centrer
+        setVisible(true); // last!
     }
 }

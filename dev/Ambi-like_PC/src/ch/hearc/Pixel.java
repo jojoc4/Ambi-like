@@ -2,7 +2,6 @@ package ch.hearc;
 
 import java.awt.Color;
 
-
 /**
  *
  * @author Jonatan Baumgartner

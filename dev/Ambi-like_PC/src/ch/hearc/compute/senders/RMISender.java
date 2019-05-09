@@ -18,7 +18,7 @@ import java.util.logging.Logger;
  * @author jba
  */
 public class RMISender implements Sender_I {
-    
+
     private static RMISender instance = null;
 
     private CommandeLed_I commande;

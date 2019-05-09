@@ -122,10 +122,10 @@ public class PanelPrevisualisationEcran extends JPanel {
     private void fillVector() {
         Config config = Config.getConfig();
         int nbLeds = config.getNombreTotalLed();
-        
-        for(int i = 0; i < nbLeds; i++){
-            this.vectorPixels.add(new Pixel(0,0,0));
-        }  
+
+        for (int i = 0; i < nbLeds; i++) {
+            this.vectorPixels.add(new Pixel(0, 0, 0));
+        }
     }
 
 }

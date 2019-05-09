@@ -14,33 +14,32 @@ import javax.swing.JPanel;
  * @author julien.chappuis1
  */
 public class PanelChoixMode extends JPanel {
-    
+
     private PanelChoixModeSettings panelChoixModeSettings;
-    
-    public PanelChoixMode(){
+
+    public PanelChoixMode() {
         geometry();
         control();
         appearance();
-        
+
     }
-    
-    private void geometry(){
+
+    private void geometry() {
         panelChoixModeSettings = new PanelChoixModeSettings();
-        
-        
+
         Box boxv = Box.createVerticalBox();
         boxv.add(panelChoixModeSettings);
         boxv.add(Box.createHorizontalGlue());
-        
+
         add(boxv);
     }
-    
-    private void control(){
-        
+
+    private void control() {
+
     }
-    private void appearance(){
+
+    private void appearance() {
         setBorder(BorderFactory.createTitledBorder("Choix du mode"));
     }
-    
-    
+
 }

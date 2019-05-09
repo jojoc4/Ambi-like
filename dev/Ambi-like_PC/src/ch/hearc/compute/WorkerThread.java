@@ -14,8 +14,8 @@ import ch.hearc.compute.senders.Sender_I;
  *
  * @author teosc
  */
-public class WorkerThread implements Runnable{
-    
+public class WorkerThread implements Runnable {
+
     //Inputs
     private Boundaries boundaries;
     private BufferedImage img;
@@ -25,44 +25,42 @@ public class WorkerThread implements Runnable{
     private int yMax;
     private int index;
     //private Sender sender;
-    
+
     //Tools
     private int red;
     private int green;
     private int blue;
-    
+
     private boolean running;
     private Sender_I sender;
-    
-    public WorkerThread(Boundaries boundaries, Sender_I sender)
-    {
+
+    public WorkerThread(Boundaries boundaries, Sender_I sender) {
         this.boundaries = boundaries;
         this.running = false;
         this.sender = sender;
     }
-    
-    public synchronized void setImage(BufferedImage img){
+
+    public synchronized void setImage(BufferedImage img) {
         this.img = img;
     }
-    
-    private synchronized int getRGB(int x, int y){
+
+    private synchronized int getRGB(int x, int y) {
         return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
     }
-    
+
     @Override
-    public void run(){
+    public void run() {
         startRun();
-        
-        while(isRunning())
-        {
+
+        while (isRunning()) {
             int[] b = boundaries.getNext();
-            
+
             xMin = b[0];
             yMin = b[1];
             xMax = b[2];
             yMax = b[3];
             index = b[4];
-            
+
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
@@ -77,15 +75,17 @@ public class WorkerThread implements Runnable{
                     totalB += (rgb) & 0xFF;
                 }
             }
-            
-            if(totalPx == 0){totalPx = 1;}
+
+            if (totalPx == 0) {
+                totalPx = 1;
+            }
             this.red = totalR / totalPx;
             this.green = totalG / totalPx;
             this.blue = totalB / totalPx;
 
             //System.out.println("rouge: " + moyR + " vert: " + moyG + " bleu: " + moyB);
             sendValues();
-            
+
             try {
                 Thread.sleep(5);
             } catch (InterruptedException ex) {
@@ -93,25 +93,25 @@ public class WorkerThread implements Runnable{
             }
         }
     }
-    
-    private void sendValues(){
+
+    private void sendValues() {
         //send the values to the raspberry
         //For testing :
         //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
-        
+
         sender.send(index, red, green, blue);
     }
-    
-    public synchronized void startRun(){
+
+    public synchronized void startRun() {
         this.running = true;
     }
-    
-    public synchronized void stopRun(){
+
+    public synchronized void stopRun() {
         this.running = false;
     }
-    
-    public synchronized boolean isRunning(){
+
+    public synchronized boolean isRunning() {
         return this.running;
     }
-    
+
 }

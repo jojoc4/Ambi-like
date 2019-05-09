@@ -20,44 +20,42 @@ import javax.swing.JRadioButton;
  * @author julien.chappuis1
  */
 public class PanelChoixModeSettings extends JPanel {
-    
+
     private PanelChoixModeCouleurs panelChoixModeCouleurs;
-    
+
     private ButtonGroup group;
     private JRadioButton reactifRB;
     private JRadioButton couleurFixeRB;
     private JRadioButton modePersonnalise1;
     private JRadioButton modePersonnalise2;
     private JRadioButton modePersonnalise3;
-    
+
     private Config configFile;
-    
-    public PanelChoixModeSettings(){
-        
+
+    public PanelChoixModeSettings() {
+
         geometry();
         control();
         appearance();
     }
-    
-    private void geometry(){
+
+    private void geometry() {
         reactifRB = new JRadioButton("Réactif (Ambi-light)");
         couleurFixeRB = new JRadioButton("Couleur fixe : ");
         modePersonnalise1 = new JRadioButton("Mode personnalisé 1");
         modePersonnalise2 = new JRadioButton("Mode personnalisé 2");
         modePersonnalise3 = new JRadioButton("Mode personnalisé 3");
-        
+
         panelChoixModeCouleurs = new PanelChoixModeCouleurs();
 
         group = new ButtonGroup();
-        
-        
+
         group.add(reactifRB);
         group.add(couleurFixeRB);
         group.add(modePersonnalise1);
         group.add(modePersonnalise2);
         group.add(modePersonnalise3);
-        
-        
+
         Box boxVertical = Box.createVerticalBox();
         boxVertical.add(reactifRB);
         boxVertical.add(panelChoixModeCouleurs);
@@ -65,59 +63,58 @@ public class PanelChoixModeSettings extends JPanel {
         boxVertical.add(modePersonnalise1);
         boxVertical.add(modePersonnalise2);
         boxVertical.add(modePersonnalise3);
-        
+
         setLayout(new BorderLayout());
 
-	add(boxVertical, BorderLayout.CENTER);
-        
+        add(boxVertical, BorderLayout.CENTER);
+
         configFile = Config.getConfig();
 
     }
-    
-    private void control()
-    {
-    reactifRB.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(reactifRB.isSelected()){
-                configFile.setMode(Computation_I.MODE_AMBILIGHT);
+
+    private void control() {
+        reactifRB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (reactifRB.isSelected()) {
+                    configFile.setMode(Computation_I.MODE_AMBILIGHT);
+                }
             }
-        }
-    });
-    couleurFixeRB.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if(couleurFixeRB.isSelected()){
-                configFile.setMode(Computation_I.MODE_FIXE);
-                int[] tabColor = new int[3];
-                tabColor[0] = panelChoixModeCouleurs.getjSliderRouge().getValue();
-                tabColor[1] = panelChoixModeCouleurs.getjSliderVert().getValue();
-                tabColor[2] = panelChoixModeCouleurs.getjSliderBleu().getValue();
-                configFile.setColor(tabColor);
+        });
+        couleurFixeRB.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (couleurFixeRB.isSelected()) {
+                    configFile.setMode(Computation_I.MODE_FIXE);
+                    int[] tabColor = new int[3];
+                    tabColor[0] = panelChoixModeCouleurs.getjSliderRouge().getValue();
+                    tabColor[1] = panelChoixModeCouleurs.getjSliderVert().getValue();
+                    tabColor[2] = panelChoixModeCouleurs.getjSliderBleu().getValue();
+                    configFile.setColor(tabColor);
+                }
             }
-        }
-    });
-    modePersonnalise1.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    });
-    modePersonnalise2.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    });
-    modePersonnalise3.addActionListener(new ActionListener() {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-        }
-    });
+        });
+        modePersonnalise1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        modePersonnalise2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        modePersonnalise3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
     }
-    
-    private void appearance(){
+
+    private void appearance() {
         reactifRB.setSelected(true);
     }
 }
