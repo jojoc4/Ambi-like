@@ -1,6 +1,9 @@
 package ch.hearc;
 
 import ch.hearc.compute.Computation;
+import ch.hearc.compute.Computation_I;
+import ch.hearc.compute.Computation_fixedColor;
+import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.*;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
 import java.awt.AWTException;
@@ -24,7 +27,9 @@ import javax.swing.JPanel;
  * @author Jonatan Baumgartner
  */
 public class Main {
-
+    
+    private static Computation_I c;
+    
     public static void main(String[] args) {
 
         //verify that system tray is available, maybe not working on certain os
@@ -34,11 +39,8 @@ public class Main {
         }
 
         //start main computation Thread
-        Computation c = new Computation(new TestSender());//RMISender.getInstance());
-        Thread t = new Thread(c);
-        t.setName("Computation");
-        t.start();
-        
+        createComputation();
+
         //This is a test for stopping the visualization.
 //        try {
 //            Thread.sleep(5000);
@@ -48,7 +50,6 @@ public class Main {
 //        
 //        c.stopComputation();
         //End of test
-
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
@@ -56,7 +57,7 @@ public class Main {
         //TODO choose trayIcon
         URL path = Main.class.getResource("/ch/hearc/images/logo.png");
         Image image = new ImageIcon(path).getImage();
-
+        
         PopupMenu menu = new PopupMenu();
 
         //add configuration menu, create and opens JFramConfigurator if pressed
@@ -69,7 +70,7 @@ public class Main {
 
         //add close option, quit the program
         menu.add(messageItem);
-
+        
         MenuItem closeItem = new MenuItem("Fermer");
         closeItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -88,9 +89,30 @@ public class Main {
             final JPanel panel = new JPanel();
             JOptionPane.showMessageDialog(panel, "cannot add system tray icon, quit", "Error", JOptionPane.ERROR_MESSAGE);
             System.exit(1);
-
+            
         }
-
+        
     }
-
+    
+    public static void changeMode() {
+        c.stopComputation();
+        
+    }
+    
+    private static void createComputation() {
+        switch (Config.getConfig().getMode()) {
+            case Computation_I.MODE_AMBILIGHT:
+                c = new Computation(new TestSender());
+                break;
+            case Computation_I.MODE_FIXE:
+                c = new Computation_fixedColor(new TestSender(), new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
+                break;
+            case Computation_I.MODE_PERSO:
+                c = new Computation_perso(new TestSender(), ModePerso.getMode(Config.getConfig().getPersoModeFile()));
+        }
+        Thread t = new Thread(c);
+        t.setName("Computation");
+        t.start();
+    }
+    
 }

@@ -6,6 +6,7 @@
 package ch.hearc.gui.mainwindow.jpanel.choixmode;
 
 import ch.hearc.Config;
+import ch.hearc.compute.Computation_I;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -79,7 +80,7 @@ public class PanelChoixModeSettings extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(reactifRB.isSelected()){
-                configFile.setMode(0);
+                configFile.setMode(Computation_I.MODE_AMBILIGHT);
             }
         }
     });
@@ -87,7 +88,7 @@ public class PanelChoixModeSettings extends JPanel {
         @Override
         public void actionPerformed(ActionEvent e) {
             if(couleurFixeRB.isSelected()){
-                configFile.setMode(1);
+                configFile.setMode(Computation_I.MODE_FIXE);
                 int[] tabColor = new int[3];
                 tabColor[0] = panelChoixModeCouleurs.getjSliderRouge().getValue();
                 tabColor[1] = panelChoixModeCouleurs.getjSliderVert().getValue();
