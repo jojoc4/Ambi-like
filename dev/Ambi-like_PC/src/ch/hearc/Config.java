@@ -63,7 +63,7 @@ public class Config implements Serializable {
     public int getNbLed(int pos) {
         return nbLed[pos];
     }
-
+    
     public int[] getNbLed() {
         return nbLed;
     }

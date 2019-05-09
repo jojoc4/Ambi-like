@@ -7,8 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Vector;
 
 /**
  *
@@ -18,13 +17,13 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
 
     private String name;
     private int nbled[];
-    private List<Pixel> l;
+    private Vector<Pixel> l;
 
     public ModePerso() {
         Config cfg = Config.getConfig();
         nbled = cfg.getNbLed();
 
-        l = new LinkedList<>();
+        l = new Vector<Pixel>();
 
         int totalLed = 0;
         for (int i = 0; i < nbled.length; i++) {
