@@ -1,11 +1,14 @@
 package ch.hearc.compute;
 
-import ch.hearc.compute.senders.Sender;
+import ch.hearc.Config;
 import java.awt.AWTException;
 import java.awt.Rectangle;
 import java.awt.Robot;
 import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+import java.io.File;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Vector;
 import java.util.concurrent.ExecutorService;
@@ -13,30 +16,25 @@ import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import ch.hearc.compute.senders.Sender_I;
 
 /**
  *
  * @author Téo Schaffner
  */
-public class Computation implements Runnable {
-    
-    public enum Type{
-        LED,
-        PREVISUALISATION
-    }
-    
+public class Computation extends Computation_I {    
     private int[] nbLed;
     private int[][][] colors;
     private Boundaries boundaries;
     private WorkerThread[] workers;
     private ExecutorService executor;
-    private boolean running;
-    private Sender sender;
+    private Sender_I sender;
 
-    public Computation(Sender sender) {
+    public Computation(Sender_I sender) {
         this.sender = sender;
         
-        nbLed = new int[]{20, 50, 20, 0};
+        nbLed = Config.getConfig().getNbLed();
         
         colors = new int[4][][];
         colors[0] = new int[nbLed[0]][];
@@ -50,7 +48,7 @@ public class Computation implements Runnable {
         executor = Executors.newWorkStealingPool();
         workers = new WorkerThread[Runtime.getRuntime().availableProcessors()];
         
-        running = false;
+        stopComputation(); //set running to false
     }
 
     @Override
@@ -171,15 +169,5 @@ public class Computation implements Runnable {
         }
     }
     
-    public synchronized void startComputation(){
-        this.running = true;
-    }
     
-    public synchronized void stopComputation(){
-        this.running = false;
-    }
-    
-    public synchronized boolean isRunning(){
-        return this.running;
-    }
 }

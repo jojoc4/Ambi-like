@@ -5,10 +5,10 @@
  */
 package ch.hearc.compute;
 
-import ch.hearc.compute.senders.Sender;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import ch.hearc.compute.senders.Sender_I;
 
 /**
  *
@@ -32,9 +32,9 @@ public class WorkerThread implements Runnable{
     private int blue;
     
     private boolean running;
-    private Sender sender;
+    private Sender_I sender;
     
-    public WorkerThread(Boundaries boundaries, Sender sender)//, Sender sender)
+    public WorkerThread(Boundaries boundaries, Sender_I sender)
     {
         this.boundaries = boundaries;
         this.running = false;

@@ -9,7 +9,7 @@ package ch.hearc.compute.senders;
  *
  * @author teosc
  */
-public class TestSender implements Sender{
+public class TestSender implements Sender_I{
     
     @Override
     public void send(int nbLed, int r, int g, int b) {

@@ -5,13 +5,15 @@
  */
 package ch.hearc.compute.senders;
 
+import ch.hearc.Pixel;
 import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationEcran;
+import java.util.Vector;
 
 /**
  *
  * @author teosc
  */
-public class PrevisualisationSender implements Sender{
+public class PrevisualisationSender implements Sender_I{
     
     private PanelPrevisualisationEcran ppe;
     
@@ -21,7 +23,9 @@ public class PrevisualisationSender implements Sender{
 
     @Override
     public void send(int nbLed, int r, int g, int b) {
-        //throw new UnsupportedOperationException("Not supported yet.");
+        Pixel test = (Pixel)ppe.getVectorPixel().elementAt(nbLed);
+        test.setRed(r);
+        test.setGreen(g);
+        test.setBlue(b);
     }
-    
 }
