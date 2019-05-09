@@ -83,6 +83,10 @@ public class Config implements Serializable {
     public int[] getColor() {
         return color;
     }
+    
+    public int getNombreTotalLed(){
+        return nbLed[Config.NORTH] + nbLed[Config.EAST] + nbLed[Config.SOUTH] + nbLed[Config.WEST];
+    }
 
     //setter
     public void setRaspIp(String raspIp) {
