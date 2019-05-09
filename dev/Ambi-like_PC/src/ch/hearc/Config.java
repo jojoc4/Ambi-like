@@ -67,6 +67,10 @@ public class Config implements Serializable {
     public int[] getNbLed() {
         return nbLed;
     }
+    
+    public int getNbLedTotal() {
+        return nbLed[0]+nbLed[1]+nbLed[2]+nbLed[3];
+    }
 
     public int getLumMax() {
         return lumMax;
