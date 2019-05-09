@@ -19,6 +19,19 @@ import javax.swing.event.ChangeListener;
  * @author julien.chappuis1
  */
 public class PanelChoixModeCouleurs extends JPanel {
+    
+    private JLabel labelRouge;
+    private JTextField jTextFieldRouge;
+    private JSlider jSliderRouge;
+    
+    private JLabel labelBleu;
+    private JTextField jTextFieldBleu;
+    private JSlider jSliderBleu;
+    
+    private JLabel labelVert;
+    private JTextField jTextFieldVert;
+    private JSlider jSliderVert;
+    
     public PanelChoixModeCouleurs(){
         geometry();
         control();
@@ -90,16 +103,20 @@ public class PanelChoixModeCouleurs extends JPanel {
         jSliderVert.setMinimum(0);
         jSliderVert.setValue(127);
     }
+
+    public JSlider getjSliderRouge() {
+        return jSliderRouge;
+    }
+
+    public JSlider getjSliderBleu() {
+        return jSliderBleu;
+    }
+
+    public JSlider getjSliderVert() {
+        return jSliderVert;
+    }
     
-    private JLabel labelRouge;
-    private JTextField jTextFieldRouge;
-    private JSlider jSliderRouge;
     
-    private JLabel labelBleu;
-    private JTextField jTextFieldBleu;
-    private JSlider jSliderBleu;
     
-    private JLabel labelVert;
-    private JTextField jTextFieldVert;
-    private JSlider jSliderVert;
+
 }

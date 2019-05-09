@@ -15,6 +15,10 @@ import javax.swing.JPanel;
  * @author julien.chappuis1
  */
 public class PanelPrevisualisation extends JPanel {
+    
+    private PanelPrevisualisationEcran panelPrevisualisationEcran;
+    private PanelPrevisualisationBouton panelPrevisualisationBouton;
+   
     public PanelPrevisualisation(){
         geometry();
         control();
@@ -42,7 +46,6 @@ public class PanelPrevisualisation extends JPanel {
         setBorder(BorderFactory.createTitledBorder("Prévisualisation"));
     }
     
-   private PanelPrevisualisationEcran panelPrevisualisationEcran;
-   private PanelPrevisualisationBouton panelPrevisualisationBouton;
+
     
 }

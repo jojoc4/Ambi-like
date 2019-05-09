@@ -15,6 +15,8 @@ import javax.swing.JFrame;
  */
 public class JFrameConfigurator extends JFrame {
 
+    private JPanelConfigurator jPanelConfigurator;
+    
     public JFrameConfigurator() {
         geometry();
         control();
@@ -40,5 +42,5 @@ public class JFrameConfigurator extends JFrame {
         setVisible(false); // last!
     }
     
-    private JPanelConfigurator jPanelConfigurator;
+    
 }
