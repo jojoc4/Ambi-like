@@ -13,9 +13,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * envoie des commandes par rmi
+ * sends command via rmi
  *
- * @author jba
+ * @author jonatan.baumgart
  */
 public class RMISender implements Sender_I {
 
@@ -23,6 +23,9 @@ public class RMISender implements Sender_I {
 
     private CommandeLed_I commande;
 
+    /**
+     * connects to raspberry pi
+     */
     private RMISender() {
         try {
             InetAddress serveurInetAdress = InetAddress.getByName(Config.getConfig().getRaspIp());
@@ -34,6 +37,11 @@ public class RMISender implements Sender_I {
         }
     }
 
+    /**
+     * singletone pattern so the connection is only madae once
+     *
+     * @return
+     */
     public static synchronized RMISender getInstance() {
         if (instance == null) {
             instance = new RMISender();
@@ -41,6 +49,13 @@ public class RMISender implements Sender_I {
         return instance;
     }
 
+    /**
+     * send new color to raspberry pi
+     * @param nbLed led number on ledstrip
+     * @param r red color, beetween 1 and 255
+     * @param g green color, beetween 1 and 255
+     * @param b blue color, beetween 1 and 255
+     */
     @Override
     public void send(int nbLed, int r, int g, int b) {
         try {

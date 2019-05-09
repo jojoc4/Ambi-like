@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author Jonatan Baumgartner
+ * @author jonatan.baumgart
  */
 public class Main {
 
@@ -41,26 +41,17 @@ public class Main {
         //start main computation Thread
         createComputation();
 
-        //This is a test for stopping the visualization.
-//        try {
-//            Thread.sleep(5000);
-//        } catch (InterruptedException ex) {
-//            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        
-//        c.stopComputation();
-        //End of test
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
         Toolkit toolkit = Toolkit.getDefaultToolkit();
 
-        //TODO choose trayIcon
+        //set tray icon
         URL path = Main.class.getResource("/ch/hearc/images/logo.png");
         Image image = new ImageIcon(path).getImage();
 
         PopupMenu menu = new PopupMenu();
 
-        //add configuration menu, create and opens JFramConfigurator if pressed
+        //add configuration menu, create and opens FrameMainWindow if pressed
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
@@ -94,11 +85,18 @@ public class Main {
 
     }
 
+    /**
+     * used to apply new configuration to the computation
+     * stop and destroy the current computation and create the new one with the parameters saved in config
+     */
     public static void changeMode() {
         c.stopComputation();
-
+        createComputation();
     }
 
+    /**
+     * creates the right new computation depending on Config content
+     */
     private static void createComputation() {
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
