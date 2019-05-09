@@ -56,13 +56,13 @@ public class Computation extends Computation_I {
         startComputation();
         buildBoundaries();
         
-        boundaries.printAll();
-        
-        try {
-            Thread.sleep(10000000);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(Computation.class.getName()).log(Level.SEVERE, null, ex);
-        }
+//        boundaries.printAll();
+//        
+//        try {
+//            Thread.sleep(10000000);
+//        } catch (InterruptedException ex) {
+//            Logger.getLogger(Computation.class.getName()).log(Level.SEVERE, null, ex);
+//        }
         
         //Create the threads and start them.
         for(int i=0; i<workers.length; ++i)
@@ -105,12 +105,12 @@ public class Computation extends Computation_I {
         BufferedImage img = printScreen();
         
         int oldCol = 0;
-        int oldLin = 0;
+        int oldLin = img.getHeight();
         for (int i = 0; i < 4; ++i) {
             if (nbLed[i] > 0) {
                 int dLin = (img.getHeight() ) / nbLed[i];
                 int dCol = (img.getWidth() ) / nbLed[i];
-                for (int j = 1; j < colors[i].length; ++j) {
+                for (int j = 0; j < nbLed[i]; ++j) {
                     int col = 0;
                     int lin = 0;
 
@@ -120,11 +120,11 @@ public class Computation extends Computation_I {
                             col = 0;
                             oldCol = 50;
 
-                            lin = img.getHeight() - j * dLin;//j * (img.getHeight() - 1) / nbLed[i];
+                            lin = img.getHeight() - (j+1) * dLin;//j * (img.getHeight() - 1) / nbLed[i];
                             break;
                         //TOP
                         case 1:
-                            col = j * dCol;
+                            col = (j+1) * dCol;
 
                             lin = 0;
                             oldLin = 50;
@@ -134,20 +134,19 @@ public class Computation extends Computation_I {
                             col = img.getWidth() ;
                             oldCol = img.getWidth() - 50;
 
-                            lin = j * dLin;
+                            lin = (j+1) * dLin;
                             break;
                         //BOTTOM
                         case 3:
-                            col = img.getWidth() - j * dCol;
+                            col = img.getWidth() - (j+1) * dCol;
 
-                            lin = img.getHeight() - 1;
+                            lin = img.getHeight();
                             oldLin = img.getHeight() - 50;
                     }
                     
                     boundaries.setNext(Math.min(col, oldCol), Math.min(lin, oldLin), Math.max(col, oldCol), Math.max(lin, oldLin));
 
                     //System.out.println(oldCol + " " + oldLin + " " + col + " " + lin);
-
                     oldCol = col;
                     oldLin = lin;
                 }

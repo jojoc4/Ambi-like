@@ -5,6 +5,7 @@
  */
 package ch.hearc.compute;
 
+import ch.hearc.Config;
 import java.util.Arrays;
 
 /**
@@ -57,9 +58,21 @@ public class Boundaries {
         }
     }
     
+    /**
+     * FOR DEBUGGING PURPOSE ONLY!!
+     */
     public void printAll(){
+        int num=0;
+        int cote=0;
         for(int[] i : boundaries){
             System.out.println(Arrays.toString(i));
+            
+            if(num == Config.getConfig().getNbLed(cote)-1){
+                System.out.println("Cote");
+                num=-1;
+                cote++;
+            }
+            ++num;
         }
     }
 
