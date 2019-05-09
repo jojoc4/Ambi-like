@@ -56,6 +56,7 @@ public class Computation extends Computation_I {
         startComputation();
         buildBoundaries();
         
+        //This block is only usefule when testing the boundaries
 //        boundaries.printAll();
 //        
 //        try {
@@ -105,7 +106,7 @@ public class Computation extends Computation_I {
         BufferedImage img = printScreen();
         
         int oldCol = 0;
-        int oldLin = img.getHeight();
+        int oldLin = img.getHeight()-1;
         for (int i = 0; i < 4; ++i) {
             if (nbLed[i] > 0) {
                 int dLin = (img.getHeight() ) / nbLed[i];
@@ -131,7 +132,7 @@ public class Computation extends Computation_I {
                             break;
                         //RIGHT
                         case 2:
-                            col = img.getWidth() ;
+                            col = img.getWidth()-1 ;
                             oldCol = img.getWidth() - 50;
 
                             lin = (j+1) * dLin;
@@ -140,7 +141,7 @@ public class Computation extends Computation_I {
                         case 3:
                             col = img.getWidth() - (j+1) * dCol;
 
-                            lin = img.getHeight();
+                            lin = img.getHeight()-1;
                             oldLin = img.getHeight() - 50;
                     }
                     

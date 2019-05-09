@@ -46,6 +46,7 @@ public class WorkerThread implements Runnable{
     }
     
     private synchronized int getRGB(int x, int y){
+        //System.out.println("x: " + x + " y: " + y);
         return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
     }
     
