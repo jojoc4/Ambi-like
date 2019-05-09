@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation;
+package ch.hearc.gui.mainwindow.jpanel.previsualisation;
 
 
-import ch.hearc.panel.configurator.JFrameConfigurator;
+import ch.hearc.gui.configurator.JFrameConfigurator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -40,7 +40,6 @@ public class PanelPrevisualisationBouton extends JPanel {
     }
     
     private void geometry(){
-        jFrameConfigurator = new JFrameConfigurator();
         labelVisuLED = new JLabel("Visualisation LED : ");
         checkBoxVisuLED = new JCheckBox();
         
@@ -75,7 +74,7 @@ public class PanelPrevisualisationBouton extends JPanel {
         buttonParametres.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                jFrameConfigurator.setVisible(true);
+                jFrameConfigurator = new JFrameConfigurator();
             }
         });
         

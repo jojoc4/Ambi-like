@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.mainwindow.choixmode;
+package ch.hearc.gui.mainwindow.jpanel.choixmode;
 
 import ch.hearc.Config;
 import java.awt.BorderLayout;

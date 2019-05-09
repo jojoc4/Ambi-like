@@ -1,5 +1,5 @@
 
-package ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation;
+package ch.hearc.gui.mainwindow.jpanel.previsualisation;
 
 import java.awt.Image;
 import java.awt.Toolkit;

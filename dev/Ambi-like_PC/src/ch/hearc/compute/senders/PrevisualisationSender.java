@@ -5,7 +5,7 @@
  */
 package ch.hearc.compute.senders;
 
-import ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation.PanelPrevisualisationEcran;
+import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationEcran;
 
 /**
  *

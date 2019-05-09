@@ -5,7 +5,7 @@
  */
 package ch.hearc.gui.mainwindow;
 
-import ch.hearc.gui.mainwindow.jpanel.mainwindow.PanelMainWindow;
+import ch.hearc.gui.mainwindow.jpanel.PanelMainWindow;
 import javax.swing.JFrame;
 
 /**

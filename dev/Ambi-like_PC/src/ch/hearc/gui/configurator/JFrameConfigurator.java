@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.panel.configurator;
+package ch.hearc.gui.configurator;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -33,13 +33,13 @@ public class JFrameConfigurator extends JFrame {
     }
 
     private void control() {
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        
     }
 
     private void appearance() {
-        setSize(jPanelConfigurator.getSize());
+        setSize(jPanelConfigurator.getPreferredSize());
         setLocationRelativeTo(null); // frame centrer
-        setVisible(false); // last!
+        setVisible(true); // last!
     }
     
     

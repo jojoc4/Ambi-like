@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation;
+package ch.hearc.gui.mainwindow.jpanel.previsualisation;
 
 import java.awt.BorderLayout;
 import javax.swing.BorderFactory;

@@ -1,7 +1,7 @@
-package ch.hearc.gui.mainwindow.jpanel.mainwindow;
+package ch.hearc.gui.mainwindow.jpanel;
 
-import ch.hearc.gui.mainwindow.jpanel.mainwindow.previsualisation.PanelPrevisualisationDecorator;
-import ch.hearc.gui.mainwindow.jpanel.mainwindow.choixmode.PanelChoix;
+import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationDecorator;
+import ch.hearc.gui.mainwindow.jpanel.choixmode.PanelChoix;
 import java.awt.GridLayout;
 
 import javax.swing.JPanel;
