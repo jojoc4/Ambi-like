@@ -125,8 +125,7 @@ public class PanelPrevisualisationEcran extends JPanel {
         
         for(int i = 0; i < nbLeds; i++){
             this.vectorPixels.add(new Pixel(0,0,0));
-        }
-           
+        }  
     }
 
 }
