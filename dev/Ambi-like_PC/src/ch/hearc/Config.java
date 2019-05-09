@@ -43,11 +43,6 @@ public class Config implements Serializable {
     public static final int SOUTH = 2;
     public static final int WEST = 3;
 
-    //used to indicate the chossen mode
-    public static final int AMBILIGHT = 0;
-    public static final int COLOR = 1;
-    public static final int PERSO = 2;
-
     //attribute
     private String raspIp;
     private int[] nbLed;
