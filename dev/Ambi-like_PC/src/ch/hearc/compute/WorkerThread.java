@@ -47,13 +47,13 @@ public class WorkerThread implements Runnable {
     private synchronized int getRGB(int x, int y){
         //System.out.println("x: " + x + " y: " + y);
         try{
-            int test = img.getRGB(x, y);
+            return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
         }catch(ArrayIndexOutOfBoundsException e){
-            System.out.println("x: " + x + " y: " + y);
-        }catch(NullPointerException e){
-            
+            System.err.println(e.getClass()+ " -- problematic coordinates (x: " + x + "; y: " + y + 
+                                    "). Image size : " + img.getWidth() + " x " + img.getHeight() + 
+                                    " Please contact the devs and tell them this error message.");
         }
-        return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
+        return 0;
     }
 
     @Override
@@ -67,31 +67,33 @@ public class WorkerThread implements Runnable {
             yMin = b[1];
             xMax = b[2];
             yMax = b[3];
-            index = b[4];
+            index = b[4]; //this is the LED's id
 
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
-            int totalPx = (Math.max(xMax, xMin) - Math.min(xMax, xMin)) * (Math.max(yMax, yMin) - Math.min(yMax, yMin));
+            int totalPx = (Math.max(xMax, xMin) - Math.min(xMax, xMin)) * (Math.max(yMax, yMin) - Math.min(yMax, yMin)); //length * height
 
             //System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax + " ");
             for (int x = xMin; x <= xMax; ++x) {
                 for (int y = yMin; y <= yMax; ++y) {
                     int rgb = this.getRGB(x, y);
+                    //int rgb contains red green blue and alpha values, 8 bits for each. shifts to get correct values for each color
                     totalR += (rgb >> 16) & 0xFF;
                     totalG += (rgb >> 8) & 0xFF;
                     totalB += (rgb) & 0xFF;
                 }
             }
-
-            if (totalPx == 0) {
-                totalPx = 1;
-            }
+            
+            totalPx = (totalPx == 0) ? 1 : totalPx; //make sure there is no zero-division if the area to compute is ill-formed.
+            
             this.red = totalR / totalPx;
             this.green = totalG / totalPx;
             this.blue = totalB / totalPx;
 
             //System.out.println("rouge: " + moyR + " vert: " + moyG + " bleu: " + moyB);
+            
+            //send the values to the specified output (chosen in constructor)
             sendValues();
 
             try {
@@ -103,10 +105,10 @@ public class WorkerThread implements Runnable {
     }
 
     private void sendValues() {
-        //send the values to the raspberry
-        //For testing :
+        //For testing : (can also simply use a TestSender object)
         //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
-
+        
+        //send the values to the desired output
         sender.send(index, red, green, blue);
     }
 

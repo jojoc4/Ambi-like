@@ -7,7 +7,6 @@ package ch.hearc.compute.senders;
 
 import ch.hearc.Pixel;
 import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationEcran;
-import java.util.Vector;
 
 /**
  *

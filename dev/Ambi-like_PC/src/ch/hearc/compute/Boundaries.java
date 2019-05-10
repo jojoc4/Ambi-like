@@ -7,8 +7,6 @@ package ch.hearc.compute;
 
 import ch.hearc.Config;
 import java.util.Arrays;
-import java.util.Iterator;
-import java.util.Vector;
 
 /**
  *
@@ -17,17 +15,15 @@ import java.util.Vector;
 public class Boundaries {
 
     //tools
-    //private int[][] boundaries; //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax, index}
-    private Vector<int[]> boundaries;
+    private int[][] boundaries; //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax, index}
+    //private Vector<int[]> boundaries;
     private int indexC;
     private int indexP;
     private int len;
     private boolean full;
-    private Iterator<int[]> iter;
 
     public Boundaries(int nbLeds) {
-        this.boundaries = new Vector<int[]>(nbLeds); //int[nbLeds][5];
-        this.iter = this.boundaries.iterator();
+        this.boundaries = new int[nbLeds][5]; //new Vector<int[]>(nbLeds);
         this.indexC = -1;
         this.indexP = -1;
         this.len = nbLeds;
@@ -35,36 +31,25 @@ public class Boundaries {
     }
 
     public synchronized int[] getNext() {
-        if (full || indexC < indexP) {
+        if (full || indexC < indexP)
             indexC = (++indexC) % len;
-        }
         else
-        {
             return new int[]{0,0,0,0,0};
-        }
         
-        int[] b = boundaries.elementAt(indexC);
-
-        return b;
+        //return boundaries.elementAt(indexC);
+        return boundaries[indexC];
     }
 
     public synchronized void setNext(int xMin, int yMin, int xMax, int yMax) {
         indexP = (++indexP) % len;
        
-        int[] boundary = new int[5];
-        
-        boundary[0] = xMin;
-        boundary[1] = yMin;
-        boundary[2] = xMax;
-        boundary[3] = yMax;
-        boundary[4] = indexP;
-        
-        this.boundaries.add(indexP, boundary);
+        int[] boundary = new int[]{xMin, yMin, xMax, yMax, indexP};
+       
+        //this.boundaries.add(indexP, boundary);
+        this.boundaries[indexP] = boundary;
         
         if(indexP%len > 0)
-        {
             this.full = true;
-        }
     }
 
     /**

@@ -54,10 +54,9 @@ public class Computation extends Computation_I {
 
     @Override
     public void run() {
-        startComputation();
         buildBoundaries();
         
-        //This block is only usefule when testing the boundaries
+        //This part is only useful when testing the boundaries
 //        boundaries.printAll();
 //        
 //        try {
@@ -71,13 +70,16 @@ public class Computation extends Computation_I {
             workers[i] = new WorkerThread(boundaries, sender); //Executors.defaultThreadFactory().newThread( ... );
             executor.execute(workers[i]);
         }
-
+        
+        //Set the flag "running" to true. Needed for the loop to do anything.
+        startComputation();
+        
         while (isRunning()) {
             BufferedImage img = printScreen();
 
             //Give new image to all the threads
-            for (int i = 0; i < workers.length; ++i) {
-                workers[i].setImage(img);
+            for (WorkerThread t : workers) {
+                t.setImage(img);
             }
 
             try {
@@ -87,15 +89,18 @@ public class Computation extends Computation_I {
             }
         }
 
-        //not running anymore, so tell the workers to finish what they are doing
-        for (int i = 0; i < workers.length; ++i) {
-            //Give them a null image, so LEDs will receive (0,0,0) as RGB color
-            workers[i].setImage(null);
+        //not running anymore, so tell the workers to finish what they are doing (finish properly, cleaner than just killing them)
+        for (WorkerThread t : workers) {
             //And tell them to stop their job
-            workers[i].stopRun();
+            t.stopRun();
         }
         //wait for them to finish and it's over
         executor.shutdown();
+        
+        //delete the threads, because they are not needed anymore. Always free the memory as soon as possible!
+        for(WorkerThread t : workers){
+            t = null;
+        }
     }
 
     private void buildBoundaries() {
