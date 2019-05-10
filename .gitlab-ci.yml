@@ -27,7 +27,7 @@ build:
         - docker build -t ${DOCKER_IMAGE} .
         - docker push ${DOCKER_IMAGE}
         - mkdir a
-        - docker run --mount type=bind,source="$(pwd)"/a,target=/usr/jarf ${DOCKER_IMAGE} cp /usr/jar/ /usr/jarf
+        - docker run --mount type=bind,source="$(pwd)"/a,target=/usr/jarf ${DOCKER_IMAGE} cp -r /usr/jar/ /usr/jarf
     artifacts:
         paths:
         - a/jar/alpc.jar
