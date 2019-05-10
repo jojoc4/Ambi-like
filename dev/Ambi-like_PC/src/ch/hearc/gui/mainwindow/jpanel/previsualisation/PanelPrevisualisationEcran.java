@@ -43,7 +43,7 @@ public class PanelPrevisualisationEcran extends JPanel {
         //ImageIcon warning = MagasinImage.coffee;
         this.fontNoir = MagasinImage.fontNoir;
         //button = new JButton(warning);
-        vectorPixels = new Vector<Pixel>();
+        vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
 
         fillVector();
     }
@@ -112,6 +112,13 @@ public class PanelPrevisualisationEcran extends JPanel {
 
     public Vector getVectorPixel() {
         return this.vectorPixels;
+    }
+    
+    public synchronized void setPixelAt(int index, Pixel pixel) throws ArrayIndexOutOfBoundsException{
+        if(index >= vectorPixels.size())
+            throw new ArrayIndexOutOfBoundsException("index " + index + " too big for vectorPixel (" + vectorPixels.size() + " elements)");
+        
+        vectorPixels.set(index, pixel);
     }
 
     private void appearance() {

@@ -21,10 +21,16 @@ public class PrevisualisationSender implements Sender_I {
     }
 
     @Override
-    public void send(int nbLed, int r, int g, int b) {
-        Pixel test = (Pixel) ppe.getVectorPixel().elementAt(nbLed);
-        test.setRed(r);
-        test.setGreen(g);
-        test.setBlue(b);
+    public void send(int indexLed, int r, int g, int b) {
+//        Pixel test = (Pixel) ppe.getVectorPixel().elementAt(nbLed);
+//        test.setRed(r);
+//        test.setGreen(g);
+//        test.setBlue(b);
+        
+        try{
+            ppe.setPixelAt(indexLed, new Pixel(r, g, b));
+        }catch(ArrayIndexOutOfBoundsException e){
+            System.err.println(e.getMessage());
+        }
     }
 }
