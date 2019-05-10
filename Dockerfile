@@ -18,6 +18,6 @@ RUN javac -proc:none -cp "lib/*" -d bin -sourcepath src src/ch/hearc/Main.java
 RUN jar cMf alrp.jar bin/*
 RUN cp alrp.jar /usr/jar/
 
-ENTRYPOINT ["cp", "/usr/jar/*", "/usr/jarf/*"]
+#ENTRYPOINT ["cp", "/usr/jar/*", "/usr/jarf/*"]
 
 # TODO get artifacts
