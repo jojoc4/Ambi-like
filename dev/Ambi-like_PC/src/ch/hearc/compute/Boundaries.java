@@ -10,20 +10,20 @@ import java.util.Arrays;
 
 /**
  *
- * @author teosc Fonctionnement inspiré du pattern producteur-consommateur
+ * @author teosc
+ * Fonctionnement inspiré du pattern producteur-consommateur
  */
 public class Boundaries {
 
     //tools
-    private int[][] boundaries; //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax, index}
-    //private Vector<int[]> boundaries;
+    private int[][] boundaries; 
     private int indexC;
     private int indexP;
-    private int len;
+    private final int len;
     private boolean full;
 
     public Boundaries(int nbLeds) {
-        this.boundaries = new int[nbLeds][5]; //new Vector<int[]>(nbLeds);
+        this.boundaries = new int[nbLeds][5];
         this.indexC = -1;
         this.indexP = -1;
         this.len = nbLeds;
@@ -31,25 +31,31 @@ public class Boundaries {
     }
 
     public synchronized int[] getNext() {
-        if (full || indexC < indexP)
+        //only return something that has been initialized already
+        if (full || indexC < indexP){
             indexC = (++indexC) % len;
-        else
+        }else{
             return new int[]{0,0,0,0,0};
-        
-        //return boundaries.elementAt(indexC);
+        }
         return boundaries[indexC];
     }
 
-    public synchronized void setNext(int xMin, int yMin, int xMax, int yMax) {
-        indexP = (++indexP) % len;
-       
-        int[] boundary = new int[]{xMin, yMin, xMax, yMax, indexP};
-       
-        //this.boundaries.add(indexP, boundary);
-        this.boundaries[indexP] = boundary;
+    public void setNext(int xMin, int yMin, int xMax, int yMax) {
+        int ind;
         
-        if(indexP%len > 0)
+        //protect this part where we use the shared index
+        synchronized(this){
+            ind = ++indexP;
+            indexP = indexP % len;
+        }
+        
+        //circle!
+        if(ind == len-1){
             this.full = true;
+            ind = 0;
+        }
+       
+        this.boundaries[ind] = new int[]{xMin, yMin, xMax, yMax, ind};
     }
 
     /**

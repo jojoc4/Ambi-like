@@ -13,8 +13,8 @@ import java.util.logging.Logger;
  */
 public class Computation_fixedColor extends Computation_I {
 
-    private Sender_I sender;
-    private Pixel p;
+    private final Sender_I sender;
+    private final Pixel p;
 
     /**
      * 
