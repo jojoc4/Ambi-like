@@ -7,8 +7,10 @@ package ch.hearc.gui.mainwindow.jpanel.choixmode;
 
 import ch.hearc.Config;
 import ch.hearc.Main;
+import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -33,8 +35,13 @@ public class PanelChoix extends JPanel {
         panelChoixMode = new PanelChoixMode();
         buttonApplyParameter = new JButton("Appliquer le mode sélectionné");
 
-        add(panelChoixMode);
-        add(buttonApplyParameter);
+        BorderLayout layout = new BorderLayout();
+        Box boxV = Box.createVerticalBox();
+        boxV.add(panelChoixMode);
+        boxV.add(buttonApplyParameter);
+        boxV.add(Box.createVerticalGlue());
+        setLayout(layout);
+        add(boxV, BorderLayout.CENTER);
     }
 
     private void control() {

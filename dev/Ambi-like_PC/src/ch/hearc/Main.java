@@ -38,6 +38,7 @@ public class Main {
             return;
         }
 
+        new FrameMainWindow();
         //start main computation Thread
         createComputation();
 

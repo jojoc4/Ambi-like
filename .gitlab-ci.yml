@@ -26,6 +26,13 @@ build:
     script:
         - docker build -t ${DOCKER_IMAGE} .
         - docker push ${DOCKER_IMAGE}
+        - mkdir a
+        - docker run --mount type=bind,source="$(pwd)"/a,target=/usr/jarf ${DOCKER_IMAGE} cp -r /usr/jar/ /usr/jarf
+    artifacts:
+        paths:
+        - a/jar/alpc.jar
+        - a/jar/alrp.jar
+        expire_in: 1 week
 
 
 #
