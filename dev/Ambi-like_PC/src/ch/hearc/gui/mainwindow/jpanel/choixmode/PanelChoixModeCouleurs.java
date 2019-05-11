@@ -95,6 +95,7 @@ public class PanelChoixModeCouleurs extends JPanel {
         jSliderRouge.setMaximum(255);
         jSliderRouge.setMinimum(0);
         jSliderRouge.setValue(127);
+        
 
         jSliderBleu.setMaximum(255);
         jSliderBleu.setMinimum(0);
@@ -103,6 +104,8 @@ public class PanelChoixModeCouleurs extends JPanel {
         jSliderVert.setMaximum(255);
         jSliderVert.setMinimum(0);
         jSliderVert.setValue(127);
+        
+        this.setVisible(false);
     }
 
     public JSlider getjSliderRouge() {

@@ -13,12 +13,16 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
+import java.util.TimerTask;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
+import javax.swing.Timer;
 
 /**
  *
@@ -32,6 +36,7 @@ public class PanelPrevisualisationEcran extends JPanel {
     private static final int MARGE = 40;
 
     private Vector<Pixel> vectorPixels;
+    private Graphics2D g2d;
 
     public PanelPrevisualisationEcran() {
         geometry();
@@ -67,6 +72,18 @@ public class PanelPrevisualisationEcran extends JPanel {
 
     private void dessiner(Graphics2D g2d) {
 
+        AffineTransform backup = g2d.getTransform();
+        
+        this.g2d = g2d;
+
+        updateDisplay();
+
+        g2d.setTransform(backup);
+
+    }
+
+    public void updateDisplay() {
+
         int nbLedsHaut = Config.getConfig().getNbLed(Config.NORTH);
         int nbLedsBas = Config.getConfig().getNbLed(Config.SOUTH);
         int nbLedsGauche = Config.getConfig().getNbLed(Config.EAST);
@@ -75,49 +92,50 @@ public class PanelPrevisualisationEcran extends JPanel {
         // Rectangle
         g2d.translate(MARGE, MARGE);
         g2d.setStroke(new BasicStroke(1));
-        g2d.drawRect(0, 0, LONGUEUR - MARGE, LARGEUR - MARGE);
+        g2d.drawRect(0, 0, LONGUEUR - 2 * MARGE, LARGEUR - 2 * MARGE);
 
-        int diametrePixel = 10;
-        double espaceEntreLeds = (double) (LONGUEUR - 2 * MARGE - nbLedsHaut * diametrePixel -2) / (double) (nbLedsHaut);
-        double espaceEntreLedsLargeur = (double) (LARGEUR - 2 * MARGE - nbLedsDroite * diametrePixel) / (double) (nbLedsDroite);
+        double diametrePixel = 10.;
+        double espaceEntreLeds = (double) (LONGUEUR - 2 * MARGE - nbLedsHaut * diametrePixel) / (double) (nbLedsHaut + 1);
+        double espaceEntreLedsLargeur = (double) (LARGEUR - 2 * MARGE - nbLedsDroite * diametrePixel - 2) / (double) (nbLedsDroite + 1);
 
-        g2d.translate(espaceEntreLeds, -MARGE / 2);
-        for(int j = 0; j < 2; j++){
-        for (int i = 0; i < nbLedsHaut; i++) {
+        double demiMarge = MARGE / 2;
+
+        g2d.translate(espaceEntreLeds, -demiMarge);
+        int index = nbLedsGauche - 1;
+        for (int j = 0; j < 2; j++) {
+            for (int i = 0; i < nbLedsHaut; i++) {
+                Pixel pixel = this.vectorPixels.get(index);
+                System.out.println(pixel.getColor());
+                //g2d.setColor(pixel.getColor());
+                index++;
+                g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
+                g2d.translate(espaceEntreLeds + diametrePixel, 0.0);
+            }
+
+            g2d.translate(demiMarge, demiMarge);
+            g2d.rotate(Math.PI / 2);
+            g2d.translate(espaceEntreLedsLargeur, 0.0);
+
+            for (int i = 0; i < nbLedsGauche; i++) {
+                g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
+                g2d.translate(espaceEntreLedsLargeur + diametrePixel, 0.0);
+            }
+            g2d.translate(demiMarge, demiMarge);
+            g2d.rotate(Math.PI / 2);
+            g2d.translate(espaceEntreLeds, 0.0);
             g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
-            g2d.translate(espaceEntreLeds + diametrePixel, 0);
         }
-
-        g2d.translate(MARGE / 2 + diametrePixel, 0);
-        
-        g2d.rotate(Math.PI / 2);
-
-        g2d.translate(espaceEntreLedsLargeur + MARGE / 2, 0);
-
-        for (int i = 0; i < nbLedsGauche; i++) {
-            g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
-            g2d.translate(espaceEntreLedsLargeur + diametrePixel, 0);
-        }
-        
-        g2d.translate(diametrePixel + MARGE / 2, 0);
-        g2d.rotate(Math.PI / 2);
-        g2d.translate(espaceEntreLeds + MARGE / 2, 0);
-        }
-
-    }
-
-    public void updateDisplay() {
-
     }
 
     public Vector getVectorPixel() {
         return this.vectorPixels;
     }
-    
-    public synchronized void setPixelAt(int index, Pixel pixel) throws ArrayIndexOutOfBoundsException{
-        if(index >= vectorPixels.size())
+
+    public synchronized void setPixelAt(int index, Pixel pixel) throws ArrayIndexOutOfBoundsException {
+        if (index >= vectorPixels.size()) {
             throw new ArrayIndexOutOfBoundsException("index " + index + " too big for vectorPixel (" + vectorPixels.size() + " elements)");
-        
+        }
+        this.updateDisplay();
         vectorPixels.set(index, pixel);
     }
 

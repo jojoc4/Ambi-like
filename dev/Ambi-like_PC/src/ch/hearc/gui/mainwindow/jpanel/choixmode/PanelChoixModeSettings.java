@@ -58,8 +58,8 @@ public class PanelChoixModeSettings extends JPanel {
 
         Box boxVertical = Box.createVerticalBox();
         boxVertical.add(reactifRB);
-        boxVertical.add(panelChoixModeCouleurs);
         boxVertical.add(couleurFixeRB);
+        boxVertical.add(panelChoixModeCouleurs);
         boxVertical.add(modePersonnalise1);
         boxVertical.add(modePersonnalise2);
         boxVertical.add(modePersonnalise3);
@@ -76,6 +76,7 @@ public class PanelChoixModeSettings extends JPanel {
         reactifRB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                panelChoixModeCouleurs.setVisible(false);
                 if (reactifRB.isSelected()) {
                     configFile.setMode(Computation_I.MODE_AMBILIGHT);
                 }
@@ -85,6 +86,7 @@ public class PanelChoixModeSettings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (couleurFixeRB.isSelected()) {
+                    panelChoixModeCouleurs.setVisible(true);
                     configFile.setMode(Computation_I.MODE_FIXE);
                     int[] tabColor = new int[3];
                     tabColor[0] = panelChoixModeCouleurs.getjSliderRouge().getValue();
@@ -97,18 +99,22 @@ public class PanelChoixModeSettings extends JPanel {
         modePersonnalise1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                panelChoixModeCouleurs.setVisible(false);
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
         modePersonnalise2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                panelChoixModeCouleurs.setVisible(false);
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                
             }
         });
         modePersonnalise3.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                panelChoixModeCouleurs.setVisible(false);
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
             }
         });
@@ -116,5 +122,8 @@ public class PanelChoixModeSettings extends JPanel {
 
     private void appearance() {
         reactifRB.setSelected(true);
+        modePersonnalise1.setVisible(false);
+        modePersonnalise2.setVisible(false);
+        modePersonnalise3.setVisible(false);
     }
 }
