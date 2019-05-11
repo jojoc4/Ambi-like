@@ -24,27 +24,27 @@ public class Pixel {
         this.blue = bleu;
     }
 
-    public int getRed() {
+    public synchronized int getRed() {
         return red;
     }
 
-    public void setRed(int red) {
+    public synchronized void setRed(int red) {
         this.red = red;
     }
 
-    public int getGreen() {
+    public synchronized int getGreen() {
         return green;
     }
 
-    public void setGreen(int green) {
+    public synchronized void setGreen(int green) {
         this.green = green;
     }
 
-    public int getBlue() {
+    public synchronized int getBlue() {
         return blue;
     }
 
-    public void setBlue(int blue) {
+    public synchronized void setBlue(int blue) {
         this.blue = blue;
     }
 
@@ -52,7 +52,7 @@ public class Pixel {
      * returns the color of the pixel
      * @return Color of the pixel
      */
-    public Color getColor() {
+    public synchronized Color getColor() {
         return new Color(red, green, blue);
     }
 
@@ -60,7 +60,7 @@ public class Pixel {
      * set pixel color
      * @param c new Color
      */
-    public void setColor(Color c) {
+    public synchronized void setColor(Color c) {
         red = (int) c.getRed();
         green = (int) c.getGreen();
         blue = (int) c.getBlue();

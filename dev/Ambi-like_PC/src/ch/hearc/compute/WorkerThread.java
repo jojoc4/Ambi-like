@@ -17,22 +17,20 @@ import ch.hearc.compute.senders.Sender_I;
 public class WorkerThread implements Runnable {
 
     //Inputs
-    private Boundaries boundaries;
+    private final Boundaries boundaries;
     private BufferedImage img;
     private int xMin;
     private int yMin;
     private int xMax;
     private int yMax;
     private int index;
-    //private Sender sender;
+    private final Sender_I sender;
 
     //Tools
     private int red;
     private int green;
     private int blue;
-
     private boolean running;
-    private Sender_I sender;
 
     public WorkerThread(Boundaries boundaries, Sender_I sender) {
         this.boundaries = boundaries;
@@ -44,10 +42,10 @@ public class WorkerThread implements Runnable {
         this.img = img;
     }
     
-    private synchronized int getRGB(int x, int y){
+    private int getRGB(int x, int y){
         //System.out.println("x: " + x + " y: " + y);
         try{
-            return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
+            synchronized(this){return (img != null) ? img.getRGB(x, y) : 0;} //0 means the LEDs will be switched off when there's no image available.
         }catch(ArrayIndexOutOfBoundsException e){
             System.err.println(e.getClass()+ " -- problematic coordinates (x: " + x + "; y: " + y + 
                                     "). Image size : " + img.getWidth() + " x " + img.getHeight() + 
