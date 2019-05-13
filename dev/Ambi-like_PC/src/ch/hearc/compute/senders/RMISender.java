@@ -58,10 +58,22 @@ public class RMISender implements Sender_I {
      */
     @Override
     public void send(int nbLed, int r, int g, int b) {
+        r = checkColor(r);
+        g = checkColor(g);
+        b = checkColor(g);
+            
         try {
             commande.setLed(nbLed, r, g, b);
         } catch (RemoteException ex) {
             Logger.getLogger(RMISender.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    private int checkColor(int color){
+        if(color > 255)
+            return 255;
+        if(color < 0)
+            return 0;
+        return color;
     }
 }

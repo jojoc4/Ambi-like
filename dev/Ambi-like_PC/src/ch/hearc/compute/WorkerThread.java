@@ -5,6 +5,7 @@
  */
 package ch.hearc.compute;
 
+import ch.hearc.Config;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -70,7 +71,7 @@ public class WorkerThread implements Runnable {
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
-            int totalPx = (Math.max(xMax, xMin) - Math.min(xMax, xMin)) * (Math.max(yMax, yMin) - Math.min(yMax, yMin)); //length * height
+            int totalPx = 0;
 
             //System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax + " ");
             for (int x = xMin; x <= xMax; ++x) {
@@ -80,16 +81,20 @@ public class WorkerThread implements Runnable {
                     totalR += (rgb >> 16) & 0xFF;
                     totalG += (rgb >> 8) & 0xFF;
                     totalB += (rgb) & 0xFF;
+                    ++totalPx;
                 }
             }
             
+//            System.out.println(totalR + " " + totalG + " " + totalB);
+//            System.out.println((int)((((float)totalR / (float)totalPx) / 255f ) * Config.getConfig().getLumMax()));
+            
             totalPx = (totalPx == 0) ? 1 : totalPx; //make sure there is no zero-division if the area to compute is ill-formed.
             
-            this.red = totalR / totalPx;
-            this.green = totalG / totalPx;
-            this.blue = totalB / totalPx;
-
-            //System.out.println("rouge: " + moyR + " vert: " + moyG + " bleu: " + moyB);
+            this.red = (int)((((float)totalR / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+            this.green = (int)((((float)totalG / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+            this.blue = (int)((((float)totalB / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+            
+            //System.out.println("rouge: " + red + " vert: " + green + " bleu: " + blue);
             
             //send the values to the specified output (chosen in constructor)
             sendValues();

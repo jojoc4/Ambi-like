@@ -12,8 +12,23 @@ package ch.hearc.compute.senders;
 public class TestSender implements Sender_I {
 
     @Override
-    public void send(int nbLed, int r, int g, int b) {
+    public synchronized void send(int nbLed, int r, int g, int b) {
+        r = checkColor(r);
+        g = checkColor(g);
+        b = checkColor(g);
         System.out.println("Led n°" + nbLed + ") : RGB(" + r + "; " + g + "; " + b + ")");
+    }
+    
+    private int checkColor(int color){
+        if(color > 255){
+            System.out.print(" Color error! (corrected from " + color + ") ");
+            return 255;
+        }if(color < 0){
+            System.out.print(" Color error! (corrected from " + color + ") ");
+            return 0;
+        }
+        
+        return color;
     }
 
 }
