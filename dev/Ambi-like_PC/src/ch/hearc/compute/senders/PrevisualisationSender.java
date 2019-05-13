@@ -29,7 +29,6 @@ public class PrevisualisationSender implements Sender_I {
         
         try{
             ppe.setPixelAt(indexLed, new Pixel(r, g, b));
-            ppe.updateDisplay();
         }catch(ArrayIndexOutOfBoundsException e){
             System.err.println(e.getMessage());
         }
