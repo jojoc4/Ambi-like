@@ -3,38 +3,37 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow;
+package ch.hearc.gui.creator;
 
+import ch.hearc.gui.creator.jpanel.PanelCreator;
 import ch.hearc.gui.mainwindow.jpanel.PanelMainWindow;
 import javax.swing.JFrame;
 
 /**
  *
- * @author julien.chappuis1
+ * @author teosc
  */
-public class FrameMainWindow extends JFrame {
+public class FrameCreator  extends JFrame {
 
-    private PanelMainWindow panelMainWindow;
+    private PanelCreator panel;
 
-    public FrameMainWindow() {
-
+    public FrameCreator() {
         geometry();
         control();
         appearance();
-
     }
 
     private void geometry() {
-        panelMainWindow = new PanelMainWindow();
-        add(panelMainWindow);
+        panel = new PanelCreator();
+        add(panel);
     }
 
     private void control() {
-            
+        
     }
 
     private void appearance() {
-        setTitle("Demo");
+        setTitle("Création de mode personnalisé");
         setSize(1000, 600);
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!

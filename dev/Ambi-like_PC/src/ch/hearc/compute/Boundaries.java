@@ -10,15 +10,16 @@ import java.util.Arrays;
 
 /**
  *
- * @author teosc Fonctionnement inspiré du pattern producteur-consommateur
+ * @author teosc
+ * Fonctionnement inspiré du pattern producteur-consommateur
  */
 public class Boundaries {
 
     //tools
-    private int[][] boundaries; //boundaries[nb total LEDs]{xMin, yMin, xMax, yMax, index}
+    private int[][] boundaries; 
     private int indexC;
     private int indexP;
-    private int len;
+    private final int len;
     private boolean full;
 
     public Boundaries(int nbLeds) {
@@ -30,27 +31,31 @@ public class Boundaries {
     }
 
     public synchronized int[] getNext() {
-        if (full || indexC < indexP) {
+        //only return something that has been initialized already
+        if (full || indexC < indexP){
             indexC = (++indexC) % len;
-        } else {
-            return null;
+        }else{
+            return new int[]{0,0,0,0,0};
         }
-
-        final int[] b = boundaries[indexC];
-        return b;
+        return boundaries[indexC];
     }
 
-    public synchronized void setNext(int xMin, int yMin, int xMax, int yMax) {
-        indexP = (++indexP) % len;
-        boundaries[indexP][0] = xMin;
-        boundaries[indexP][1] = yMin;
-        boundaries[indexP][2] = xMax;
-        boundaries[indexP][3] = yMax;
-        boundaries[indexP][4] = indexP;
-
-        if (indexP % len > 0) {
-            this.full = true;
+    public void setNext(int xMin, int yMin, int xMax, int yMax) {
+        int ind;
+        
+        //protect this part where we use the shared index
+        synchronized(this){
+            ind = ++indexP;
+            indexP = indexP % len;
         }
+        
+        //circle!
+        if(ind == len-1){
+            this.full = true;
+            ind = 0;
+        }
+       
+        this.boundaries[ind] = new int[]{xMin, yMin, xMax, yMax, ind};
     }
 
     /**

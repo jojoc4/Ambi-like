@@ -6,6 +6,7 @@
 package ch.hearc.gui.mainwindow.jpanel.previsualisation;
 
 import ch.hearc.gui.configurator.JFrameConfigurator;
+import ch.hearc.gui.creator.FrameCreator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.BorderFactory;
@@ -33,18 +34,15 @@ public class PanelPrevisualisationBouton extends JPanel {
         geometry();
         control();
         appearance();
-
     }
 
     private void geometry() {
         labelVisuLED = new JLabel("Visualisation LED : ");
         checkBoxVisuLED = new JCheckBox();
 
-        String message1 = "<html>" + "Créer un mode" + "<br>" + "de visualisation LED"
-                + "</html>";
+        String message1 = "<html>Créer un mode<br>de visualisation LED</html>";
 
-        String message2 = "<html>" + "Paramètres de" + "<br>" + "l'application"
-                + "</html>";
+        String message2 = "<html>Paramètres de<br>l'application</html>";
 
         buttonCreerModeVisualisation = new JButton(message1);
         buttonParametres = new JButton(message2);
@@ -58,18 +56,22 @@ public class PanelPrevisualisationBouton extends JPanel {
         hBox.add(buttonParametres);
 
         add(hBox);
-
     }
 
     private void control() {
-
         buttonParametres.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jFrameConfigurator = new JFrameConfigurator();
             }
         });
-
+        
+        buttonCreerModeVisualisation.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new FrameCreator();
+            }
+        });
     }
 
     private void appearance() {

@@ -1,6 +1,6 @@
 package ch.hearc;
 
-import ch.hearc.compute.Computation;
+import ch.hearc.compute.Computation_Ambilight;
 import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
@@ -38,6 +38,7 @@ public class Main {
             return;
         }
 
+        new FrameMainWindow();
         //start main computation Thread
         createComputation();
 
@@ -100,7 +101,7 @@ public class Main {
     private static void createComputation() {
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
-                c = new Computation(new TestSender());
+                c = new Computation_Ambilight(new TestSender());
                 break;
             case Computation_I.MODE_FIXE:
                 c = new Computation_fixedColor(new TestSender(), new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));

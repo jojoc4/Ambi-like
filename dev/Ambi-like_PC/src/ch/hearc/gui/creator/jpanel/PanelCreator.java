@@ -3,54 +3,51 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.previsualisation;
+package ch.hearc.gui.creator.jpanel;
 
 import ch.hearc.Config;
 import ch.hearc.Pixel;
+import ch.hearc.gui.mainwindow.jpanel.previsualisation.MagasinImage;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.util.TimerTask;
 import java.util.Vector;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
  *
- * @author julien.chappuis1
+ * @author teosc
  */
-public class PanelPrevisualisationEcran extends JPanel {
+public class PanelCreator extends JPanel {
 
-    private ImageIcon fontNoir;
     private static final int LONGUEUR = 500;
     private static final int LARGEUR = 400;
     private static final int MARGE = 40;
 
-    private Vector<Pixel> vectorPixels;
+    private Vector<Pixel> vectorLEDs;
     private Graphics2D g2d;
 
-    public PanelPrevisualisationEcran() {
+    public PanelCreator() {
         geometry();
+        control();
         appearance();
 
     }
 
     private void geometry() {
-        //ImageIcon warning = MagasinImage.coffee;
-        this.fontNoir = MagasinImage.fontNoir;
-        //button = new JButton(warning);
-        vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
+        vectorLEDs = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
 
         fillVector();
+    }
+    
+    private void control() {
+        
     }
 
     @Override
@@ -104,7 +101,7 @@ public class PanelPrevisualisationEcran extends JPanel {
         int index = nbLedsGauche - 1;
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < nbLedsHaut; i++) {
-                Pixel pixel = this.vectorPixels.get(index);
+                Pixel pixel = this.vectorLEDs.get(index);
                 System.out.println(pixel.getColor());
                 //g2d.setColor(pixel.getColor());
                 index++;
@@ -127,16 +124,16 @@ public class PanelPrevisualisationEcran extends JPanel {
         }
     }
 
-    public Vector getVectorPixel() {
-        return this.vectorPixels;
+    public Vector<Pixel> getVectorPixel() {
+        return this.vectorLEDs;
     }
 
     public synchronized void setPixelAt(int index, Pixel pixel) throws ArrayIndexOutOfBoundsException {
-        if (index >= vectorPixels.size()) {
-            throw new ArrayIndexOutOfBoundsException("index " + index + " too big for vectorPixel (" + vectorPixels.size() + " elements)");
+        if (index >= vectorLEDs.size()) {
+            throw new ArrayIndexOutOfBoundsException("index " + index + " too big for vectorPixel (" + vectorLEDs.size() + " elements)");
         }
         this.updateDisplay();
-        vectorPixels.set(index, pixel);
+        vectorLEDs.set(index, pixel);
     }
 
     private void appearance() {
@@ -144,11 +141,10 @@ public class PanelPrevisualisationEcran extends JPanel {
     }
 
     private void fillVector() {
-        Config config = Config.getConfig();
-        int nbLeds = config.getNombreTotalLed();
+        int nbLeds = Config.getConfig().getNombreTotalLed();
 
-        for (int i = 0; i < nbLeds; i++) {
-            this.vectorPixels.add(new Pixel(0, 0, 0));
+        for (int i = 0; i < nbLeds; ++i) {
+            this.vectorLEDs.add(new Pixel(0, 0, 0));
         }
     }
 

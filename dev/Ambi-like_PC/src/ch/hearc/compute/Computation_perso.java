@@ -15,17 +15,17 @@ import java.util.logging.Logger;
  */
 public class Computation_perso extends Computation_I {
 
-    private Sender_I s;
-    private ModePerso m;
+    private final Sender_I sender;
+    private final ModePerso mode;
 
     /**
      * 
      * @param s used sender
-     * @param m Personalized mode to aplly
+     * @param m Personalized mode to apply
      */
     public Computation_perso(Sender_I s, ModePerso m) {
-        this.s = s;
-        this.m = m;
+        this.sender = s;
+        this.mode = m;
     }
 
     @Override
@@ -33,8 +33,8 @@ public class Computation_perso extends Computation_I {
         while (isRunning()) {
             try {
                 int i = 0;
-                for (Pixel p : m) {
-                    s.send(i, p.getRed(), p.getGreen(), p.getBlue());
+                for (Pixel p : mode) {
+                    sender.send(i++, p.getRed(), p.getGreen(), p.getBlue());
                 }
                 Thread.sleep(100);
             } catch (InterruptedException ex) {
