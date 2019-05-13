@@ -43,10 +43,10 @@ public class Boundaries {
 
     public int[] getNext() {
         int ind = 0;
-        lock.lock();
         
+        lock.lock();
         try{
-            //If all areas parsed, stop and wait for next image.
+            //If all areas have been parsed, stop and wait for next image.
             while(indexC >= len-1){
                 try {
                     condition.await();
@@ -54,12 +54,13 @@ public class Boundaries {
                     Logger.getLogger(Boundaries.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            //only return something that has been initialized already
+            
+            //only return something that has already been initialized
             if (full || indexC < indexP){
                 //indexC = (++indexC) % len;
                 ind = ++indexC;
             }else{
-                return null;//new int[]{0,0,0,0,0};
+                return new int[]{0,0,0,0,0};
             }
         }catch(Exception e){e.printStackTrace();}
         finally{

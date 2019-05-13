@@ -8,7 +8,6 @@ package ch.hearc.gui.creator.jpanel;
 import ch.hearc.Config;
 import ch.hearc.Pixel;
 import java.awt.BasicStroke;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
