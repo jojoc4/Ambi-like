@@ -94,11 +94,11 @@ public class WorkerThread implements Runnable {
             //send the values to the specified output (chosen in constructor)
             sendValues();
 
-            try {
-                Thread.sleep(5);
-            } catch (InterruptedException ex) {
-                Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
-            }
+//            try {
+//                Thread.sleep(5);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
+//            }
         }
     }
 

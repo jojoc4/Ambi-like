@@ -13,7 +13,7 @@ public class TestSender implements Sender_I {
 
     @Override
     public void send(int nbLed, int r, int g, int b) {
-        //System.out.println("Led n°" + nbLed + ") : RGB(" + r + "; " + g + "; " + b + ")");
+        System.out.println("Led n°" + nbLed + ") : RGB(" + r + "; " + g + "; " + b + ")");
     }
 
 }

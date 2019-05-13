@@ -22,6 +22,7 @@ public class Computation_Ambilight extends Computation_I {
     private final int[] nbLed;
     private final int[][][] colors;
     private final Boundaries boundaries;
+    private BufferedImage img;
     private final WorkerThread[] workers;
     private final ExecutorService executor;
     private final Sender_I sender;
@@ -36,7 +37,9 @@ public class Computation_Ambilight extends Computation_I {
         colors[1] = new int[nbLed[1]][];
         colors[2] = new int[nbLed[2]][];
         colors[3] = new int[nbLed[3]][];
-
+        
+        img = null;
+        
         //boundaries (nb total LEDs)
         boundaries = new Boundaries(nbLed[0] + nbLed[1] + nbLed[2] + nbLed[3]);
         
@@ -61,8 +64,10 @@ public class Computation_Ambilight extends Computation_I {
 //        }
 
         //Create the threads and start them.
+        img = printScreen();
         for (int i = 0; i < workers.length; ++i) {
             workers[i] = new WorkerThread(boundaries, sender);
+            workers[i].setImage(img);
             executor.execute(workers[i]);
         }
         
@@ -70,15 +75,16 @@ public class Computation_Ambilight extends Computation_I {
         startComputation();
         
         while (isRunning()) {
-            BufferedImage img = printScreen();
+            img.setData(printScreen().getData());
+            boundaries.allowNextLoop();
 
             //Give new image to all the threads
-            for (WorkerThread t : workers) {
-                t.setImage(img);
-            }
+//            for (WorkerThread t : workers) {
+//                t.setImage(img);
+//            }
 
             try {
-                Thread.sleep(40); // ~25 FPS pour le refresh de l'image utilisée
+                Thread.sleep(100); // ~25 FPS pour le refresh de l'image utilisée
             } catch (InterruptedException ex) {
                 Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
