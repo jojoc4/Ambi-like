@@ -7,6 +7,11 @@ package ch.hearc.compute;
 
 import ch.hearc.Config;
 import java.util.Arrays;
+import java.util.concurrent.locks.Condition;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -21,6 +26,9 @@ public class Boundaries {
     private int indexP;
     private final int len;
     private boolean full;
+    
+    private Lock lock;
+    private Condition condition;
 
     public Boundaries(int nbLeds) {
         this.boundaries = new int[nbLeds][5];
@@ -28,34 +36,72 @@ public class Boundaries {
         this.indexP = -1;
         this.len = nbLeds;
         this.full = false;
+        
+        this.lock = new ReentrantLock();
+        this.condition = lock.newCondition();
     }
 
-    public synchronized int[] getNext() {
-        //only return something that has been initialized already
-        if (full || indexC < indexP){
-            indexC = (++indexC) % len;
-        }else{
-            return new int[]{0,0,0,0,0};
+    public int[] getNext() {
+        int ind = 0;
+        
+        lock.lock();
+        try{
+            //If all areas have been parsed, stop and wait for next image.
+            while(indexC >= len-1){
+                try {
+                    condition.await();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(Boundaries.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            
+            //only return something that has already been initialized
+            if (full || indexC < indexP){
+                //indexC = (++indexC) % len;
+                ind = ++indexC;
+            }else{
+                return new int[]{0,0,0,0,0};
+            }
+        }catch(Exception e){e.printStackTrace();}
+        finally{
+            lock.unlock();
         }
-        return boundaries[indexC];
+        
+        
+        return boundaries[ind];
     }
 
     public void setNext(int xMin, int yMin, int xMax, int yMax) {
         int ind;
         
         //protect this part where we use the shared index
-        synchronized(this){
+        lock.lock();
+        try{
             ind = ++indexP;
             indexP = indexP % len;
+        }finally{
+            lock.unlock();
         }
         
         //circle!
-        if(ind == len-1){
+        if(ind == len){
             this.full = true;
             ind = 0;
         }
        
         this.boundaries[ind] = new int[]{xMin, yMin, xMax, yMax, ind};
+    }
+    
+    public void allowNextLoop(){
+        lock.lock();
+        
+        try{
+            indexC = -1;
+
+            condition.signalAll();
+        }finally{
+            lock.unlock();
+        }
     }
 
     /**

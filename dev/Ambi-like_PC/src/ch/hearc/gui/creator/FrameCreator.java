@@ -7,6 +7,7 @@ package ch.hearc.gui.creator;
 
 import ch.hearc.gui.creator.jpanel.PanelCreator;
 import ch.hearc.gui.mainwindow.jpanel.PanelMainWindow;
+import java.awt.BorderLayout;
 import javax.swing.JFrame;
 
 /**
@@ -24,8 +25,9 @@ public class FrameCreator  extends JFrame {
     }
 
     private void geometry() {
+        setLayout(new BorderLayout());
         panel = new PanelCreator();
-        add(panel);
+        add(panel, BorderLayout.CENTER);
     }
 
     private void control() {
@@ -34,7 +36,7 @@ public class FrameCreator  extends JFrame {
 
     private void appearance() {
         setTitle("Création de mode personnalisé");
-        setSize(1000, 600);
+        setSize(1200, 650);
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!
     }
