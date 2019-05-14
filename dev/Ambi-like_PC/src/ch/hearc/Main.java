@@ -101,7 +101,7 @@ public class Main {
     private static void createComputation() {
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
-                c = new Computation_Ambilight(new TestSender());
+                c = new Computation_Ambilight(RMISender.getInstance());
                 break;
             case Computation_I.MODE_FIXE:
                 c = new Computation_fixedColor(new TestSender(), new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
