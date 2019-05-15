@@ -60,7 +60,7 @@ public class RMISender implements Sender_I {
     public void send(int nbLed, int r, int g, int b) {
         r = checkColor(r);
         g = checkColor(g);
-        b = checkColor(g);
+        b = checkColor(b);
             
         try {
             commande.setLed(nbLed, r, g, b);

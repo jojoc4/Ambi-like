@@ -76,7 +76,7 @@ public class Computation_Ambilight extends Computation_I {
         
         while (isRunning()) {
             img.setData(printScreen().getData());
-            boundaries.allowNextLoop();
+            //boundaries.allowNextLoop();
 
             //Give new image to all the threads
 //            for (WorkerThread t : workers) {
@@ -84,7 +84,7 @@ public class Computation_Ambilight extends Computation_I {
 //            }
 
             try {
-                Thread.sleep(100); // ~25 FPS pour le refresh de l'image utilisée
+                Thread.sleep(50); // ~25 FPS pour le refresh de l'image utilisée
             } catch (InterruptedException ex) {
                 Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }

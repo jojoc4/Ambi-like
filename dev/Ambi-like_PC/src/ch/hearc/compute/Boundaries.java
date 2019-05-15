@@ -21,14 +21,14 @@ import java.util.logging.Logger;
 public class Boundaries {
 
     //tools
-    private int[][] boundaries; 
+    private final int[][] boundaries; 
     private int indexC;
     private int indexP;
     private final int len;
     private boolean full;
     
-    private Lock lock;
-    private Condition condition;
+    private final Lock lock;
+    private final Condition condition;
 
     public Boundaries(int nbLeds) {
         this.boundaries = new int[nbLeds][5];
@@ -47,18 +47,19 @@ public class Boundaries {
         lock.lock();
         try{
             //If all areas have been parsed, stop and wait for next image.
-            while(indexC >= len-1){
-                try {
-                    condition.await();
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Boundaries.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+//            while(indexC >= len-1){
+//                try {
+//                    condition.await();
+//                } catch (InterruptedException ex) {
+//                    Logger.getLogger(Boundaries.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
             
             //only return something that has already been initialized
             if (full || indexC < indexP){
-                //indexC = (++indexC) % len;
-                ind = ++indexC;
+                indexC = (++indexC) % len;
+                ind = indexC;
+                //ind = ++indexC;
             }else{
                 return new int[]{0,0,0,0,0};
             }
@@ -66,7 +67,6 @@ public class Boundaries {
         finally{
             lock.unlock();
         }
-        
         
         return boundaries[ind];
     }
@@ -84,7 +84,7 @@ public class Boundaries {
         }
         
         //circle!
-        if(ind == len){
+        if(ind == len-1){
             this.full = true;
             ind = 0;
         }
