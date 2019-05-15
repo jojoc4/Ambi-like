@@ -10,6 +10,7 @@ import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ch.hearc.compute.senders.Sender_I;
+import java.awt.Color;
 
 /**
  *
@@ -71,6 +72,9 @@ public class WorkerThread implements Runnable {
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
+            int totalR2 = 0;
+            int totalG2 = 0;
+            int totalB2 = 0;
             int totalPx = 0;
 
             //System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax + " ");
@@ -81,6 +85,11 @@ public class WorkerThread implements Runnable {
                     totalR += (rgb >> 16) & 0xFF;
                     totalG += (rgb >> 8) & 0xFF;
                     totalB += (rgb) & 0xFF;
+//                    Color c = new Color(rgb);
+//                    totalR2 += c.getRed();
+//                    totalG2 += c.getGreen();
+//                    totalB2 += c.getBlue();
+                    
                     ++totalPx;
                 }
             }
@@ -94,16 +103,22 @@ public class WorkerThread implements Runnable {
             this.green = (int)((((float)totalG / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
             this.blue = (int)((((float)totalB / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
             
-            //System.out.println("rouge: " + red + " vert: " + green + " bleu: " + blue);
+//            System.out.println(index + ") rouge: " + red + " vert: " + green + " bleu: " + blue);
+//            
+//            this.red = (int)((((float)totalR2 / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+//            this.green = (int)((((float)totalG2 / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+//            this.blue = (int)((((float)totalB2 / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+//            
+//            System.out.println(index + ") rouge2: " + red + " vert2: " + green + " bleu2: " + blue);
             
             //send the values to the specified output (chosen in constructor)
             sendValues();
 
-//            try {
-//                Thread.sleep(5);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
-//            }
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException ex) {
+                Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 
