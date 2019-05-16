@@ -24,6 +24,7 @@ public class Computation_fixedColor extends Computation_I {
     public Computation_fixedColor(Sender_I sender, Pixel p) {
         this.sender = sender;
         this.p = p;
+        startComputation();
     }
 
     @Override

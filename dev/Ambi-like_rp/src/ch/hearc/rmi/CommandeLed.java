@@ -35,7 +35,6 @@ public class CommandeLed implements CommandeLed_I {
     @Override
     public void setLed(int nbLed, int r, int g, int b) throws RemoteException {
         led.setPixel(nbLed, r, g, b);
-        led.render();
         lastSetLed = System.currentTimeMillis();
     }
 

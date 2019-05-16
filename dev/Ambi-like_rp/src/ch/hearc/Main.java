@@ -39,25 +39,31 @@ public class Main {
             System.exit(2);
         }
 
-        //thread that turn the led strip of if no command is received during 2 seconds
+        //thread that render the led strip and power it off when no command is received within 3 minutes
         Runnable check = new Runnable() {
             @Override
             public void run() {
-                if (System.currentTimeMillis() - commande.lastSetLed > 2000) {
-                    led.setStrip(0, 0, 0);
+                while (true) {
+                    if (System.currentTimeMillis() - commande.lastSetLed > 2000) {
+                        led.setStrip(0, 0, 0);
+                    }
+                    System.out.println("render");
                     led.render();
-                }
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException ex) {
-                    Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    try {
+                        Thread.sleep(100);
+                    } catch (InterruptedException ex) {
+                        Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
+                    }
                 }
             }
         };
 
-        new Thread(check).start();
-        while (true) {
-
+        Thread t = new Thread(check);
+        t.start();
+        try {
+            t.join();
+        } catch (InterruptedException ex) {
+            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
         }
 
     }

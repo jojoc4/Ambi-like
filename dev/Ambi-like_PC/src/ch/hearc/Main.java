@@ -41,6 +41,14 @@ public class Main {
         //new FrameMainWindow();
         //start main computation Thread
         createComputation();
+        
+        //test
+//        {
+//            c = new Computation_fixedColor(RMISender.getInstance(), new Pixel(0, 0, 255));
+//            Thread t = new Thread(c);
+//            t.setName("Computation");
+//            t.start();
+//        }
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
@@ -87,8 +95,9 @@ public class Main {
     }
 
     /**
-     * used to apply new configuration to the computation
-     * stop and destroy the current computation and create the new one with the parameters saved in config
+     * used to apply new configuration to the computation stop and destroy the
+     * current computation and create the new one with the parameters saved in
+     * config
      */
     public static void changeMode() {
         c.stopComputation();
