@@ -77,7 +77,6 @@ public class Pixel {
      * @return Color of the pixel
      */
     public synchronized Color getColor() {
-        System.out.println(red + " " + green + " " + blue);
         return new Color(red, green, blue);
     }
 

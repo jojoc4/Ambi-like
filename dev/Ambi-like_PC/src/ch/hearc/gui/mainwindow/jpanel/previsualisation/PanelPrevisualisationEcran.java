@@ -47,6 +47,8 @@ public class PanelPrevisualisationEcran extends JPanel {
 
     private PrevisualisationSender previsualisationSender;
     private Computation_I computation;
+    
+    private int nbRefresh = 0;
 
     public PanelPrevisualisationEcran() {
         geometry();
@@ -103,6 +105,10 @@ public class PanelPrevisualisationEcran extends JPanel {
         int nbLedsBas = Config.getConfig().getNbLed(Config.SOUTH);
         int nbLedsGauche = Config.getConfig().getNbLed(Config.EAST);
         int nbLedsDroite = Config.getConfig().getNbLed(Config.WEST);
+        
+
+        
+        
 
         // Rectangle
         g2d.translate(MARGE, MARGE);
@@ -116,14 +122,11 @@ public class PanelPrevisualisationEcran extends JPanel {
         double demiMarge = MARGE / 2;
 
         g2d.translate(espaceEntreLeds, -demiMarge);
-        int index = 0;
+        int index = nbLedsGauche;
         for (int j = 0; j < 2; j++) {
-
+            
             for (int i = 0; i < nbLedsHaut; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
-
-                //System.out.println(pixel.getColor().getRGB());
-
                 g2d.setColor(pixel.getColor());
                 index++;
                 index %= Config.getConfig().getNbLedTotal();
@@ -131,19 +134,15 @@ public class PanelPrevisualisationEcran extends JPanel {
                 g2d.translate(espaceEntreLeds + diametrePixel, 0.0);
             }
 
-//            if(j == 1){
-//                index = 0;
-//            }
             g2d.translate(demiMarge, demiMarge);
             g2d.rotate(Math.PI / 2);
             g2d.translate(espaceEntreLedsLargeur, 0.0);
 
             for (int i = 0; i < nbLedsGauche; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
-                pixel.toString();
-                System.out.println("asd " + index);
+                g2d.setColor(pixel.getColor());
                 index %= Config.getConfig().getNbLedTotal();
-                //g2d.setColor(pixel.getColor());
+
                 g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
                 g2d.translate(espaceEntreLedsLargeur + diametrePixel, 0.0);
                 index++;
@@ -163,8 +162,13 @@ public class PanelPrevisualisationEcran extends JPanel {
     public synchronized void setPixelAt(int index, Pixel pixel) {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
-            System.out.println(vectorPixels);
-            repaint();
+                nbRefresh++;
+                if(nbRefresh % 100 == 0 ){
+                    nbRefresh = 0;
+                    repaint();
+                }
+        
+            
         }
     }
 
