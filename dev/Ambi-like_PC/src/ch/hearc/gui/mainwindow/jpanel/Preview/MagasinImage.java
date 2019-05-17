@@ -1,4 +1,4 @@
-package ch.hearc.gui.mainwindow.jpanel.previsualisation;
+package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import javax.swing.ImageIcon;
 

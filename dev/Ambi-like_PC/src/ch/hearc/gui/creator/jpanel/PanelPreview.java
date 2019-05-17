@@ -22,16 +22,16 @@ import javax.swing.JPanel;
  *
  * @author teosc
  */
-public class PanelVisualisation extends JPanel {
+public class PanelPreview extends JPanel {
 
-    private static final int LONGUEUR = 500;
-    private static final int LARGEUR = 400;
-    private static final int MARGE = 40;
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 400;
+    private static final int MARGIN = 40;
 
     private Vector<Pixel> vectorLEDs;
     private Graphics2D g2d;
 
-    public PanelVisualisation() {
+    public PanelPreview() {
         geometry();
         control();
         appearance();
@@ -41,9 +41,9 @@ public class PanelVisualisation extends JPanel {
         vectorLEDs = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
         fillVector();
     }
-    
+
     private void control() {
-        
+
     }
 
     @Override
@@ -65,7 +65,7 @@ public class PanelVisualisation extends JPanel {
 
     private void dessiner(Graphics2D g2d) {
         AffineTransform backup = g2d.getTransform();
-        
+
         this.g2d = g2d;
 
         updateDisplay();
@@ -81,15 +81,15 @@ public class PanelVisualisation extends JPanel {
         int nbLedsDroite = Config.getConfig().getNbLed(Config.WEST);
 
         // Rectangle
-        g2d.translate(MARGE, MARGE);
+        g2d.translate(MARGIN, MARGIN);
         g2d.setStroke(new BasicStroke(1));
-        g2d.drawRect(0, 0, LONGUEUR - 2 * MARGE, LARGEUR - 2 * MARGE);
+        g2d.drawRect(0, 0, WIDTH - 2 * MARGIN, HEIGHT - 2 * MARGIN);
 
         double diametrePixel = 10.;
-        double espaceEntreLeds = (double) (LONGUEUR - 2 * MARGE - nbLedsHaut * diametrePixel) / (double) (nbLedsHaut + 1);
-        double espaceEntreLedsLargeur = (double) (LARGEUR - 2 * MARGE - nbLedsDroite * diametrePixel - 2) / (double) (nbLedsDroite + 1);
+        double espaceEntreLeds = (double) (WIDTH - 2 * MARGIN - nbLedsHaut * diametrePixel) / (double) (nbLedsHaut + 1);
+        double espaceEntreLedsLargeur = (double) (HEIGHT - 2 * MARGIN - nbLedsDroite * diametrePixel - 2) / (double) (nbLedsDroite + 1);
 
-        double demiMarge = MARGE / 2;
+        double demiMarge = MARGIN / 2;
 
         g2d.translate(espaceEntreLeds, -demiMarge);
         int index = nbLedsGauche - 1;
@@ -130,7 +130,7 @@ public class PanelVisualisation extends JPanel {
     }
 
     private void appearance() {
-        setPreferredSize(new Dimension(LONGUEUR, LARGEUR));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
     private void fillVector() {

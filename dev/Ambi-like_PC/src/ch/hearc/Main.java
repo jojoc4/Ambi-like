@@ -43,7 +43,7 @@ public class Main {
 
         //start main computation Thread
         createComputation();
-        
+
         //test
         new JPanelConfigurator();
 
@@ -106,12 +106,12 @@ public class Main {
      */
     private static void createComputation() {
         Sender_I sender = null;
-        if("TEST".equals(MODE)){
-            sender= new TestSender();
-        }else if("RMI".equals(MODE)){
-            sender= RMISender.getInstance();
+        if ("TEST".equals(MODE)) {
+            sender = new TestSender();
+        } else if ("RMI".equals(MODE)) {
+            sender = RMISender.getInstance();
         }
-        
+
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
                 c = new Computation_Ambilight(sender);
@@ -120,7 +120,7 @@ public class Main {
                 c = new Computation_fixedColor(sender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[2]));
                 break;
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(sender, ModePerso.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(sender, PrivateMode.getMode(Config.getConfig().getPersoModeFile()));
         }
         Thread t = new Thread(c);
         t.setName("Computation");

@@ -37,12 +37,12 @@ public class Computation_Ambilight extends Computation_I {
         colors[1] = new int[nbLed[1]][];
         colors[2] = new int[nbLed[2]][];
         colors[3] = new int[nbLed[3]][];
-        
+
         img = null;
-        
+
         //boundaries (nb total LEDs)
         boundaries = new Boundaries(nbLed[0] + nbLed[1] + nbLed[2] + nbLed[3]);
-        
+
         //Use 1 single thread if the work will be done for previsualisation on the GUI, hammer the CPU otherwise.
         executor = (sender instanceof PrevisualisationSender) ? Executors.newSingleThreadExecutor() : Executors.newWorkStealingPool();
         int nbThreads = (sender instanceof PrevisualisationSender) ? 1 : Runtime.getRuntime().availableProcessors();
@@ -54,7 +54,7 @@ public class Computation_Ambilight extends Computation_I {
     @Override
     public void run() {
         buildBoundaries();
-        
+
         //This part is only useful when testing the boundaries
 //        boundaries.printAll();
 //        try {
@@ -62,7 +62,6 @@ public class Computation_Ambilight extends Computation_I {
 //        } catch (InterruptedException ex) {
 //            Logger.getLogger(Computation_Ambilight.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
         //Create the threads and start them.
         img = printScreen();
         for (int i = 0; i < workers.length; ++i) {
@@ -70,10 +69,10 @@ public class Computation_Ambilight extends Computation_I {
             workers[i].setImage(img);
             executor.execute(workers[i]);
         }
-        
+
         //Set the flag "running" to true. Needed for the loop to do anything.
         startComputation();
-        
+
         while (isRunning()) {
             img.setData(printScreen().getData());
             //boundaries.allowNextLoop();
@@ -82,7 +81,6 @@ public class Computation_Ambilight extends Computation_I {
 //            for (WorkerThread t : workers) {
 //                t.setImage(img);
 //            }
-
             try {
                 Thread.sleep(50); // ~25 FPS pour le refresh de l'image utilisée
             } catch (InterruptedException ex) {
@@ -97,29 +95,29 @@ public class Computation_Ambilight extends Computation_I {
         }
         //wait for them to finish and it's over
         executor.shutdown();
-        
+
         //delete the threads, because they are not needed anymore. Always free the memory as soon as possible!
-        for(WorkerThread t : workers){
+        for (WorkerThread t : workers) {
             t = null;
         }
     }
 
     private void buildBoundaries() {
         BufferedImage img = printScreen();
-        
+
         //col and oldCol = X axis (columns of pixels)
         //lin and oldLin = Y axis (lines of pixels)
         int oldCol = 0;
-        int oldLin = img.getHeight()-1;
-        
+        int oldLin = img.getHeight() - 1;
+
         //loop all sides of the screen (0 = left, counter-clockwise from bottom-left corner)
-        for (int i = 0; i < 4; ++i) { 
+        for (int i = 0; i < 4; ++i) {
             //not necessary to do any job if there is no LED on this side of the screen...
-            if (nbLed[i] > 0) { 
+            if (nbLed[i] > 0) {
                 //number of pixels for each LED on lines and columns (used as delta)
                 int dLin = (img.getHeight()) / nbLed[i];
                 int dCol = (img.getWidth()) / nbLed[i];
-                
+
                 //loop all LEDs on the current side of the screen
                 for (int j = 0; j < nbLed[i]; ++j) {
                     int col = 0;
@@ -146,7 +144,7 @@ public class Computation_Ambilight extends Computation_I {
                             break;
                         //RIGHT
                         case 2:
-                            col = img.getWidth()-1 ;
+                            col = img.getWidth() - 1;
                             oldCol = img.getWidth() - 50;
 
                             lin = (j + 1) * dLin;
@@ -155,16 +153,16 @@ public class Computation_Ambilight extends Computation_I {
                         case 3:
                             col = img.getWidth() - (j + 1) * dCol;
 
-                            lin = img.getHeight()-1;
+                            lin = img.getHeight() - 1;
                             oldLin = img.getHeight() - 50;
                     }
-                    
+
                     //make sure there is no indexOutOfBounds. Like, never.
-                    col = (col == img.getWidth()) ? col-1 : col;
-                    oldCol = (oldCol == img.getWidth()) ? oldCol-1 : oldCol;
-                    lin = (lin == img.getHeight()) ? lin-1 : lin;
-                    oldLin = (oldLin == img.getHeight()) ? oldLin-1 : oldLin;
-                    
+                    col = (col == img.getWidth()) ? col - 1 : col;
+                    oldCol = (oldCol == img.getWidth()) ? oldCol - 1 : oldCol;
+                    lin = (lin == img.getHeight()) ? lin - 1 : lin;
+                    oldLin = (oldLin == img.getHeight()) ? oldLin - 1 : oldLin;
+
                     //store the calculated coordinates as (xMin, yMin, xMax, yMax)
                     boundaries.setNext(Math.min(col, oldCol), Math.min(lin, oldLin), Math.max(col, oldCol), Math.max(lin, oldLin));
 
@@ -189,7 +187,7 @@ public class Computation_Ambilight extends Computation_I {
             return null;
         }
     }
-    
+
     @Override
     public synchronized BufferedImage getImage() {
         return this.img;

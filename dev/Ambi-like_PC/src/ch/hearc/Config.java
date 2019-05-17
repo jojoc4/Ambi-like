@@ -9,8 +9,8 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
 /**
- * Config
- * singleton, use getConfig to get config instance
+ * Config singleton, use getConfig to get config instance
+ *
  * @author Jonatan Baumgartner
  */
 public class Config implements Serializable {

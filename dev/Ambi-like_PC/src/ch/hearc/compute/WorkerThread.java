@@ -43,15 +43,17 @@ public class WorkerThread implements Runnable {
     public synchronized void setImage(BufferedImage img) {
         this.img = img;
     }
-    
-    private int getRGB(int x, int y){
+
+    private int getRGB(int x, int y) {
         //System.out.println("x: " + x + " y: " + y);
-        try{
-            synchronized(this){return (img != null) ? img.getRGB(x, y) : 0;} //0 means the LEDs will be switched off when there's no image available.
-        }catch(ArrayIndexOutOfBoundsException e){
-            System.err.println(e.getClass()+ " -- problematic coordinates (x: " + x + "; y: " + y + 
-                                    "). Image size : " + img.getWidth() + " x " + img.getHeight() + 
-                                    " Please contact the devs and tell them this error message.");
+        try {
+            synchronized (this) {
+                return (img != null) ? img.getRGB(x, y) : 0;
+            } //0 means the LEDs will be switched off when there's no image available.
+        } catch (ArrayIndexOutOfBoundsException e) {
+            System.err.println(e.getClass() + " -- problematic coordinates (x: " + x + "; y: " + y
+                    + "). Image size : " + img.getWidth() + " x " + img.getHeight()
+                    + " Please contact the devs and tell them this error message.");
         }
         return 0;
     }
@@ -89,20 +91,19 @@ public class WorkerThread implements Runnable {
 //                    totalR2 += c.getRed();
 //                    totalG2 += c.getGreen();
 //                    totalB2 += c.getBlue();
-                    
+
                     ++totalPx;
                 }
             }
-            
+
 //            System.out.println(totalR + " " + totalG + " " + totalB);
 //            System.out.println((int)((((float)totalR / (float)totalPx) / 255f ) * Config.getConfig().getLumMax()));
-            
             totalPx = (totalPx == 0) ? 1 : totalPx; //make sure there is no zero-division if the area to compute is ill-formed.
-            
+
             this.red = (totalR / totalPx);
             this.green = (totalG / totalPx);
             this.blue = (totalB / totalPx);
-            
+
 //            System.out.println(index + ") rouge: " + red + " vert: " + green + " bleu: " + blue);
 //            
 //            this.red = (totalR2 / totalPx);
@@ -110,7 +111,6 @@ public class WorkerThread implements Runnable {
 //            this.blue = (totalB2 / totalPx);
 //            
 //            System.out.println(index + ") rouge2: " + red + " vert2: " + green + " bleu2: " + blue);
-            
             //send the values to the specified output (chosen in constructor)
             sendValues();
 
@@ -125,7 +125,7 @@ public class WorkerThread implements Runnable {
     private void sendValues() {
         //For testing : (can also simply use a TestSender object)
         //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
-        
+
         //send the values to the desired output
         sender.send(index, red, green, blue);
     }

@@ -8,8 +8,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * computation used to set a fixed color to the ledstrip.
- * needs to send color at least once every 2 seconds so the ledstrip don't turn off
+ * computation used to set a fixed color to the ledstrip. needs to send color at
+ * least once every 2 seconds so the ledstrip don't turn off
+ *
  * @author jonatan.baumgart
  */
 public class Computation_fixedColor extends Computation_I {
@@ -18,7 +19,7 @@ public class Computation_fixedColor extends Computation_I {
     private final Pixel p;
 
     /**
-     * 
+     *
      * @param sender used sender
      * @param p pixel witch represent the color applied to the led
      */
@@ -41,7 +42,7 @@ public class Computation_fixedColor extends Computation_I {
             }
         }
     }
-    
+
     @Override
     public synchronized BufferedImage getImage() {
         //TODO

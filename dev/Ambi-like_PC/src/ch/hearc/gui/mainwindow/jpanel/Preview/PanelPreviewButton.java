@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.previsualisation;
+package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.gui.configurator.JFrameConfigurator;
 import ch.hearc.gui.creator.FrameCreator;
@@ -21,52 +21,52 @@ import javax.swing.JPanel;
  *
  * @author julien.chappuis1
  */
-public class PanelPrevisualisationBouton extends JPanel {
+public class PanelPreviewButton extends JPanel {
 
-    private JButton buttonCreerModeVisualisation;
-    private JLabel labelVisuLED;
-    private JCheckBox checkBoxVisuLED;
-    private JButton buttonParametres;
+    private JButton buttonCreateNewDisplayMode;
+    private JLabel labelDisplayLED;
+    private JCheckBox checkBoxDisplayLED;
+    private JButton buttonParameters;
 
     private JFrameConfigurator jFrameConfigurator;
 
-    public PanelPrevisualisationBouton() {
+    public PanelPreviewButton() {
         geometry();
         control();
         appearance();
     }
 
     private void geometry() {
-        labelVisuLED = new JLabel("Visualisation LED : ");
-        checkBoxVisuLED = new JCheckBox();
+        labelDisplayLED = new JLabel("Visualisation LED : ");
+        checkBoxDisplayLED = new JCheckBox();
 
-        String message1 = "<html>Créer un mode<br>de visualisation LED</html>";
+        String message1 = "<html>Créer un mode<br>de visualisation LED</html>s";
 
-        String message2 = "<html>Paramètres de<br>l'application</html>";
+        String message2 = "<html> Paramètres de<br>l'application</html>";
 
-        buttonCreerModeVisualisation = new JButton(message1);
-        buttonParametres = new JButton(message2);
+        buttonCreateNewDisplayMode = new JButton(message1);
+        buttonParameters = new JButton(message2);
 
         Box hBox = Box.createHorizontalBox();
-        hBox.add(labelVisuLED);
-        hBox.add(checkBoxVisuLED);
+        hBox.add(labelDisplayLED);
+        hBox.add(checkBoxDisplayLED);
         hBox.add(Box.createHorizontalGlue());
 
-        hBox.add(buttonCreerModeVisualisation);
-        hBox.add(buttonParametres);
+        hBox.add(buttonCreateNewDisplayMode);
+        hBox.add(buttonParameters);
 
         add(hBox);
     }
 
     private void control() {
-        buttonParametres.addActionListener(new ActionListener() {
+        buttonParameters.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 jFrameConfigurator = new JFrameConfigurator();
             }
         });
         
-        buttonCreerModeVisualisation.addActionListener(new ActionListener() {
+        buttonCreateNewDisplayMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 new FrameCreator();

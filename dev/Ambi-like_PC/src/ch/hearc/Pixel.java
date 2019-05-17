@@ -15,25 +15,25 @@ public class Pixel {
 
     /**
      *
-     * @param rouge red, beetween 0 and 255
-     * @param vert green, beetween 0 and 255
-     * @param bleu blue, beetween 0 and 255
+     * @param red red, beetween 0 and 255
+     * @param green green, beetween 0 and 255
+     * @param blue blue, beetween 0 and 255
      */
-    public Pixel(int rouge, int vert, int bleu) throws IllegalArgumentException{
+    public Pixel(int red, int green, int blue) throws IllegalArgumentException {
 
-        if (rouge > 255 || rouge < 0) {
-            throw new IllegalArgumentException("red value must be between [0-255], got " + rouge);
+        if (red > 255 || red < 0) {
+            throw new IllegalArgumentException("red value must be between [0-255], got " + red);
         }
-        if (vert > 255 || vert < 0) {
-            throw new IllegalArgumentException("green value must be between [0-255], got " + rouge);
+        if (green > 255 || green < 0) {
+            throw new IllegalArgumentException("green value must be between [0-255], got " + red);
         }
-        if (bleu > 255 || bleu < 0) {
-            throw new IllegalArgumentException("blue value must be between [0-255], got " + rouge);
+        if (blue > 255 || blue < 0) {
+            throw new IllegalArgumentException("blue value must be between [0-255], got " + red);
         }
-        
-        this.red = rouge;
-        this.green = vert;
-        this.blue = bleu;
+
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
     }
 
     public synchronized int getRed() {

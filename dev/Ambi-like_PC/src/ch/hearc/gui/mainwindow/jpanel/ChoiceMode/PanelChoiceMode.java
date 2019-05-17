@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.choixmode;
+package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -13,11 +13,11 @@ import javax.swing.JPanel;
  *
  * @author julien.chappuis1
  */
-public class PanelChoixMode extends JPanel {
+public class PanelChoiceMode extends JPanel {
 
-    private PanelChoixModeSettings panelChoixModeSettings;
+    private PanelChoiceModeSettings panelChoiceModeSettings;
 
-    public PanelChoixMode() {
+    public PanelChoiceMode() {
         geometry();
         control();
         appearance();
@@ -25,10 +25,10 @@ public class PanelChoixMode extends JPanel {
     }
 
     private void geometry() {
-        panelChoixModeSettings = new PanelChoixModeSettings();
+        panelChoiceModeSettings = new PanelChoiceModeSettings();
 
         Box boxv = Box.createVerticalBox();
-        boxv.add(panelChoixModeSettings);
+        boxv.add(panelChoiceModeSettings);
         boxv.add(Box.createHorizontalGlue());
 
         add(boxv);

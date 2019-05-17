@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.previsualisation;
+package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.Config;
-import ch.hearc.ModePerso;
+import ch.hearc.PrivateMode;
 import ch.hearc.Pixel;
 import ch.hearc.compute.Computation_Ambilight;
 import ch.hearc.compute.Computation_I;
@@ -35,22 +35,22 @@ import javax.swing.Timer;
  *
  * @author julien.chappuis1
  */
-public class PanelPrevisualisationEcran extends JPanel {
+public class PanelPreviewScreen extends JPanel {
 
-    private ImageIcon fontNoir;
-    private static final int LONGUEUR = 500;
-    private static final int LARGEUR = 400;
-    private static final int MARGE = 40;
+    private ImageIcon background;
+    private static final int WIDTH = 500;
+    private static final int HEIGHT = 400;
+    private static final int MARGIN = 40;
 
     private Vector<Pixel> vectorPixels;
     private Graphics2D g2d;
 
-    private PrevisualisationSender previsualisationSender;
+    private PrevisualisationSender previewSender;
     private Computation_I computation;
-    
+
     private int nbRefresh = 0;
 
-    public PanelPrevisualisationEcran() {
+    public PanelPreviewScreen() {
         geometry();
         appearance();
 
@@ -58,7 +58,7 @@ public class PanelPrevisualisationEcran extends JPanel {
 
     private void geometry() {
         //ImageIcon warning = MagasinImage.coffee;
-        this.fontNoir = MagasinImage.fontNoir;
+        this.background = MagasinImage.fontNoir;
         //button = new JButton(warning);
         vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
         fillVector();
@@ -68,7 +68,6 @@ public class PanelPrevisualisationEcran extends JPanel {
         t.setName("Computation");
         t.start();
 
-        
     }
 
     @Override
@@ -81,73 +80,73 @@ public class PanelPrevisualisationEcran extends JPanel {
         Color color = g2D.getColor(); //sauvegarde
         Font font = g2D.getFont(); //sauvegarde
 
-        dessiner(g2D);
+        draw(g2D);
 
         g2D.setFont(font); //restore
         g2D.setColor(color); //restore
         g2D.setTransform(transform); //restore
     }
 
-    private void dessiner(Graphics2D g2d) {
+    private void draw(Graphics2D g2d) {
 
         AffineTransform backup = g2d.getTransform();
 
         //this.g2d = g2d;
-
         updateDisplay(g2d);
 
         g2d.setTransform(backup);
 
     }
+
     public void updateDisplay(Graphics2D g2d) {
 
-        int nbLedsHaut = Config.getConfig().getNbLed(Config.NORTH);
-        int nbLedsBas = Config.getConfig().getNbLed(Config.SOUTH);
-        int nbLedsGauche = Config.getConfig().getNbLed(Config.EAST);
-        int nbLedsDroite = Config.getConfig().getNbLed(Config.WEST);
-        
+        int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
+        int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
+        int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
+        int nbLedsRight = Config.getConfig().getNbLed(Config.WEST);
+
         // Rectangle
-        g2d.translate(MARGE, MARGE);
+        g2d.translate(MARGIN, MARGIN);
         g2d.setStroke(new BasicStroke(1));
-        g2d.drawRect(0, 0, LONGUEUR - 2 * MARGE, LARGEUR - 2 * MARGE);
+        g2d.drawRect(0, 0, WIDTH - 2 * MARGIN, HEIGHT - 2 * MARGIN);
 
-        double diametrePixel = 10.;
-        double espaceEntreLeds = (double) (LONGUEUR - 2 * MARGE - nbLedsHaut * diametrePixel) / (double) (nbLedsHaut + 1);
-        double espaceEntreLedsLargeur = (double) (LARGEUR - 2 * MARGE - nbLedsDroite * diametrePixel - 2) / (double) (nbLedsDroite + 1);
+        double diameterPixel = 10.;
+        double spaceBetweenLeds = (double) (WIDTH - 2 * MARGIN - nbLedsTop * diameterPixel) / (double) (nbLedsTop + 1);
+        double spaceBetweenLedsWidth = (double) (HEIGHT - 2 * MARGIN - nbLedsRight * diameterPixel - 2) / (double) (nbLedsRight + 1);
 
-        double demiMarge = MARGE / 2;
+        double halfMargin = MARGIN / 2;
 
-        g2d.translate(espaceEntreLeds, -demiMarge);
-        int index = nbLedsGauche;
+        g2d.translate(spaceBetweenLeds, -halfMargin);
+        int index = nbLedsLeft;
         for (int j = 0; j < 2; j++) {
-            
-            for (int i = 0; i < nbLedsHaut; i++) {
+
+            for (int i = 0; i < nbLedsTop; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
                 g2d.setColor(pixel.getColor());
                 index++;
                 index %= Config.getConfig().getNbLedTotal();
-                g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
-                g2d.translate(espaceEntreLeds + diametrePixel, 0.0);
+                g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
+                g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
             }
 
-            g2d.translate(demiMarge, demiMarge);
+            g2d.translate(halfMargin, halfMargin);
             g2d.rotate(Math.PI / 2);
-            g2d.translate(espaceEntreLedsLargeur, 0.0);
+            g2d.translate(spaceBetweenLedsWidth, 0.0);
 
-            for (int i = 0; i < nbLedsGauche; i++) {
+            for (int i = 0; i < nbLedsLeft; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
                 g2d.setColor(pixel.getColor());
                 index++;
                 index %= Config.getConfig().getNbLedTotal();
 
-                g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
-                g2d.translate(espaceEntreLedsLargeur + diametrePixel, 0.0);
-                
+                g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
+                g2d.translate(spaceBetweenLedsWidth + diameterPixel, 0.0);
+
             }
-            g2d.translate(demiMarge, demiMarge);
+            g2d.translate(halfMargin, halfMargin);
             g2d.rotate(Math.PI / 2);
-            g2d.translate(espaceEntreLeds, 0.0);
-            g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
+            g2d.translate(spaceBetweenLeds, 0.0);
+            g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
 
         }
     }
@@ -159,18 +158,17 @@ public class PanelPrevisualisationEcran extends JPanel {
     public synchronized void setPixelAt(int index, Pixel pixel) {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
-                nbRefresh++;
-                if(nbRefresh % 100 == 0 ){
-                    nbRefresh = 0;
-                    repaint();
-                }
-        
-            
+            nbRefresh++;
+            if (nbRefresh % 100 == 0) {
+                nbRefresh = 0;
+                repaint();
+            }
+
         }
     }
 
     private void appearance() {
-        setPreferredSize(new Dimension(LONGUEUR, LARGEUR));
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
     private void fillVector() {
@@ -184,20 +182,20 @@ public class PanelPrevisualisationEcran extends JPanel {
 
     private Computation_I createComputation() {
         Computation_I c;
-        this.previsualisationSender = new PrevisualisationSender(this);
+        this.previewSender = new PrevisualisationSender(this);
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
-                c = new Computation_Ambilight(previsualisationSender);
+                c = new Computation_Ambilight(previewSender);
                 break;
             case Computation_I.MODE_FIXE:
-                c = new Computation_fixedColor(previsualisationSender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
+                c = new Computation_fixedColor(previewSender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
                 break;
 
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(previsualisationSender, ModePerso.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(previewSender, PrivateMode.getMode(Config.getConfig().getPersoModeFile()));
                 break;
             default:
-                c = new Computation_Ambilight(previsualisationSender);
+                c = new Computation_Ambilight(previewSender);
         }
         return c;
     }

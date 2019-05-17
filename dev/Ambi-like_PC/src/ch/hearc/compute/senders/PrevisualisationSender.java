@@ -6,7 +6,7 @@
 package ch.hearc.compute.senders;
 
 import ch.hearc.Pixel;
-import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationEcran;
+import ch.hearc.gui.mainwindow.jpanel.Preview.PanelPreviewScreen;
 
 /**
  *
@@ -14,9 +14,9 @@ import ch.hearc.gui.mainwindow.jpanel.previsualisation.PanelPrevisualisationEcra
  */
 public class PrevisualisationSender implements Sender_I {
 
-    private PanelPrevisualisationEcran ppe;
+    private PanelPreviewScreen ppe;
 
-    public PrevisualisationSender(PanelPrevisualisationEcran ppe) {
+    public PrevisualisationSender(PanelPreviewScreen ppe) {
         this.ppe = ppe;
     }
 
@@ -30,19 +30,21 @@ public class PrevisualisationSender implements Sender_I {
         r = checkColor(r);
         g = checkColor(g);
         b = checkColor(b);
-        
-        try{
+
+        try {
             ppe.setPixelAt(indexLed, new Pixel(r, g, b));
-        }catch(ArrayIndexOutOfBoundsException e){
+        } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println(e.getMessage());
         }
     }
-    
-    private int checkColor(int color){
-        if(color > 255)
+
+    private int checkColor(int color) {
+        if (color > 255) {
             return 255;
-        if(color < 0)
+        }
+        if (color < 0) {
             return 0;
+        }
         return color;
     }
 }

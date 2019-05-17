@@ -5,6 +5,7 @@ import ch.hearc.Main;
 
 /**
  * configuration panel
+ *
  * @author jonatan.baumgart
  */
 public class JPanelConfigurator extends javax.swing.JPanel {
@@ -21,7 +22,7 @@ public class JPanelConfigurator extends javax.swing.JPanel {
         gauche.setValue(config.getNbLed(Config.WEST));
         lumMax.setValue((int) ((double) config.getLumMax() * (double) (100.0 / 255.0)));
         ip.setText(config.getRaspIp());
-        
+
         //TODO verify ip input
     }
 

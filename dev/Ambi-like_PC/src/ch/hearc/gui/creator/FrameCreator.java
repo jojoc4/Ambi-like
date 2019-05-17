@@ -14,7 +14,7 @@ import javax.swing.JFrame;
  *
  * @author teosc
  */
-public class FrameCreator  extends JFrame {
+public class FrameCreator extends JFrame {
 
     private PanelCreator panel;
 
@@ -31,7 +31,7 @@ public class FrameCreator  extends JFrame {
     }
 
     private void control() {
-        
+
     }
 
     private void appearance() {

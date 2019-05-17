@@ -30,7 +30,7 @@ public class FrameMainWindow extends JFrame {
     }
 
     private void control() {
-            
+
     }
 
     private void appearance() {

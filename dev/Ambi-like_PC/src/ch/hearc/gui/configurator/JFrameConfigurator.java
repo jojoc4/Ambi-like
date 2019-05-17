@@ -5,7 +5,8 @@ import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
- *  frame that contains the configuration panel
+ * frame that contains the configuration panel
+ *
  * @author jonatan.baumgart
  */
 public class JFrameConfigurator extends JFrame {

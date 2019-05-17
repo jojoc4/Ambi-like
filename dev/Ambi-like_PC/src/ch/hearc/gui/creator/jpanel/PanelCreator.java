@@ -14,10 +14,11 @@ import javax.swing.JPanel;
  * @author teosc
  */
 public class PanelCreator extends JPanel {
+
     private static final int MARGE = 40;
-    
+
     private PanelColorChooser colorChooser;
-    PanelVisualisation visualisation;
+    PanelPreview preview;
     private BorderLayout layout;
 
     public PanelCreator() {
@@ -29,26 +30,26 @@ public class PanelCreator extends JPanel {
     private void geometry() {
         layout = new BorderLayout();
         setLayout(layout);
-        
+
         colorChooser = new PanelColorChooser();
-        visualisation = new PanelVisualisation();
-        
+        preview = new PanelPreview();
+
         add(colorChooser, BorderLayout.WEST);
-        add(visualisation, BorderLayout.CENTER);
+        add(preview, BorderLayout.CENTER);
     }
-    
+
     private void control() {
-        
+
     }
 
     private void appearance() {
-        int w = colorChooser.getWidth() + visualisation.getWidth() + MARGE;
-        int h = Math.max(colorChooser.getHeight(), visualisation.getHeight()) + MARGE;
-        
+        int w = colorChooser.getWidth() + preview.getWidth() + MARGE;
+        int h = Math.max(colorChooser.getHeight(), preview.getHeight()) + MARGE;
+
         System.out.println(w + " " + h);
-        
+
         Dimension d = new Dimension(w, h);
-        
+
         setMinimumSize(d);
         setPreferredSize(d);
     }

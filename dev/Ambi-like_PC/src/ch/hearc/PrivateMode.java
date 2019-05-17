@@ -14,13 +14,13 @@ import java.util.Vector;
  *
  * @author Jonatan Baumgartner
  */
-public class ModePerso implements Iterable<Pixel>, Serializable {
+public class PrivateMode implements Iterable<Pixel>, Serializable {
 
     private String name;
     private int nbled[];
     private Vector<Pixel> l;
 
-    public ModePerso() {
+    public PrivateMode() {
         Config cfg = Config.getConfig();
         nbled = cfg.getNbLed();
 
@@ -62,13 +62,13 @@ public class ModePerso implements Iterable<Pixel>, Serializable {
      * @param file filename to load
      * @return
      */
-    public static ModePerso getMode(String file) {
+    public static PrivateMode getMode(String file) {
         try {
             File f = new File(file);
             if (f.exists() && !f.isDirectory()) {
                 FileInputStream fi = new FileInputStream(f);
                 ObjectInputStream oi = new ObjectInputStream(fi);
-                ModePerso mp = (ModePerso) oi.readObject();
+                PrivateMode mp = (PrivateMode) oi.readObject();
                 fi.close();
 
                 //TODO verify that the number of leds was the same when file created

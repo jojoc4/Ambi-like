@@ -3,28 +3,26 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ch.hearc.gui.mainwindow.jpanel.choixmode;
+package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
-import ch.hearc.Config;
 import ch.hearc.Main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
  * @author julien.chappuis1
  */
-public class PanelChoix extends JPanel {
+public class PanelChoice extends JPanel {
 
-    private PanelChoixMode panelChoixMode;
+    private PanelChoiceMode panelChoiceMode;
     private JButton buttonApplyParameter;
 
-    public PanelChoix() {
+    public PanelChoice() {
         geometry();
         control();
         appearance();
@@ -32,12 +30,12 @@ public class PanelChoix extends JPanel {
     }
 
     private void geometry() {
-        panelChoixMode = new PanelChoixMode();
+        panelChoiceMode = new PanelChoiceMode();
         buttonApplyParameter = new JButton("Appliquer le mode sélectionné");
 
         BorderLayout layout = new BorderLayout();
         Box boxV = Box.createVerticalBox();
-        boxV.add(panelChoixMode);
+        boxV.add(panelChoiceMode);
         boxV.add(buttonApplyParameter);
         boxV.add(Box.createVerticalGlue());
         setLayout(layout);

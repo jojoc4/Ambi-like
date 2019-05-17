@@ -14,29 +14,30 @@ import javax.swing.JPanel;
  *
  * @author teosc
  */
-public class PanelColorChooser extends JPanel{
-    
+public class PanelColorChooser extends JPanel {
+
     private JColorChooser jcc;
     private PanelButtons pb;
-    
-    public PanelColorChooser(){
+
+    public PanelColorChooser() {
         jcc = new JColorChooser();
         pb = new PanelButtons();
-        
+
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
         add(pb, BorderLayout.SOUTH);
     }
 }
 
-class PanelButtons extends JPanel{
+class PanelButtons extends JPanel {
+
     private JButton btnSave;
     private JButton btnQuit;
-    
-    public PanelButtons(){
+
+    public PanelButtons() {
         btnSave = new JButton("Sauvegarder");
         btnQuit = new JButton("Quitter");
-        
+
         setLayout(new BorderLayout());
         add(btnSave, BorderLayout.WEST);
         add(btnQuit, BorderLayout.EAST);

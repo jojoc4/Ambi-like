@@ -15,18 +15,17 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author teosc
- * Fonctionnement inspiré du pattern producteur-consommateur
+ * @author teosc Fonctionnement inspiré du pattern producteur-consommateur
  */
 public class Boundaries {
 
     //tools
-    private final int[][] boundaries; 
+    private final int[][] boundaries;
     private int indexC;
     private int indexP;
     private final int len;
     private boolean full;
-    
+
     private final Lock lock;
     private final Condition condition;
 
@@ -36,16 +35,16 @@ public class Boundaries {
         this.indexP = -1;
         this.len = nbLeds;
         this.full = false;
-        
+
         this.lock = new ReentrantLock();
         this.condition = lock.newCondition();
     }
 
     public int[] getNext() {
         int ind = 0;
-        
+
         lock.lock();
-        try{
+        try {
             //If all areas have been parsed, stop and wait for next image.
 //            while(indexC >= len-1){
 //                try {
@@ -54,54 +53,55 @@ public class Boundaries {
 //                    Logger.getLogger(Boundaries.class.getName()).log(Level.SEVERE, null, ex);
 //                }
 //            }
-            
+
             //only return something that has already been initialized
-            if (full || indexC < indexP){
+            if (full || indexC < indexP) {
                 indexC = (++indexC) % len;
                 ind = indexC;
                 //ind = ++indexC;
-            }else{
-                return new int[]{0,0,0,0,0};
+            } else {
+                return new int[]{0, 0, 0, 0, 0};
             }
-        }catch(Exception e){e.printStackTrace();}
-        finally{
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
             lock.unlock();
         }
-        
+
         return boundaries[ind];
     }
 
     public void setNext(int xMin, int yMin, int xMax, int yMax) {
         int ind;
-        
+
         //protect this part where we use the shared index
         lock.lock();
-        try{
+        try {
             ind = ++indexP;
             indexP = indexP % len;
-        }finally{
+        } finally {
             lock.unlock();
         }
-        
+
         //circle!
-        if(ind == len-1){
+        if (ind == len - 1) {
             this.full = true;
             //ind = 0;
         }
-       
+
         this.boundaries[ind] = new int[]{xMin, yMin, xMax, yMax, ind};
-        
+
         //System.out.println(ind + "  " + this.full + " " + indexP);
     }
-    
-    public void allowNextLoop(){
+
+    public void allowNextLoop() {
         lock.lock();
-        
-        try{
+
+        try {
             indexC = -1;
 
             condition.signalAll();
-        }finally{
+        } finally {
             lock.unlock();
         }
     }
