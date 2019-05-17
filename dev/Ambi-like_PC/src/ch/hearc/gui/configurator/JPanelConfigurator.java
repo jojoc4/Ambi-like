@@ -21,7 +21,7 @@ public class JPanelConfigurator extends javax.swing.JPanel {
         gauche.setValue(config.getNbLed(Config.WEST));
         lumMax.setValue((int) ((double) config.getLumMax() * (double) (100.0 / 255.0)));
         ip.setText(config.getRaspIp());
-
+        
         //TODO verify ip input
     }
 
@@ -53,6 +53,7 @@ public class JPanelConfigurator extends javax.swing.JPanel {
         btn_save = new javax.swing.JButton();
 
         setName(""); // NOI18N
+        setPreferredSize(null);
 
         jLabel1.setText("Nombre de LEDs:");
 

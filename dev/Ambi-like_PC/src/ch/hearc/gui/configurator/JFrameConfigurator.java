@@ -32,7 +32,6 @@ public class JFrameConfigurator extends JFrame {
     }
 
     private void appearance() {
-        setSize(jPanelConfigurator.getPreferredSize());
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!
     }

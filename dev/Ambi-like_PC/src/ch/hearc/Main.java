@@ -5,6 +5,7 @@ import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.*;
+import ch.hearc.gui.configurator.JPanelConfigurator;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
 import java.awt.AWTException;
 import java.awt.Image;
@@ -44,6 +45,7 @@ public class Main {
         createComputation();
         
         //test
+        new JPanelConfigurator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
