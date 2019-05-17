@@ -23,7 +23,7 @@ public class Config implements Serializable {
         nbLed[2] = 10;
         nbLed[3] = 10;
 
-        lumMax = 255;
+        lumMax = 120;
 
         mode = Computation_I.MODE_AMBILIGHT;
 

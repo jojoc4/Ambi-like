@@ -62,6 +62,10 @@ public class RMISender implements Sender_I {
         r = checkColor(r);
         g = checkColor(g);
         b = checkColor(b);
+        
+        r = (r/255) * Config.getConfig().getLumMax();
+        g = (g/255) * Config.getConfig().getLumMax();
+        b = (b/255) * Config.getConfig().getLumMax();
             
         try {
             commande.setLed(nbLed, r, g, b);
