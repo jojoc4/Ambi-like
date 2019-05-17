@@ -127,7 +127,6 @@ public class Config implements Serializable {
                     fi.close();
                 } else {
                     config = new Config();
-                    //new JFrameConfigurator();
                 }
             } catch (Exception ex) {
                 ex.printStackTrace();

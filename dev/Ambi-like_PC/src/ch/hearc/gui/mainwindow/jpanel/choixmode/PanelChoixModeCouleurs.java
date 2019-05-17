@@ -5,6 +5,7 @@
  */
 package ch.hearc.gui.mainwindow.jpanel.choixmode;
 
+import ch.hearc.Config;
 import java.awt.BorderLayout;
 import javax.swing.Box;
 import javax.swing.JLabel;
@@ -32,7 +33,10 @@ public class PanelChoixModeCouleurs extends JPanel {
     private JTextField jTextFieldVert;
     private JSlider jSliderVert;
 
-    public PanelChoixModeCouleurs() {
+    private PanelChoixModeSettings panelChoixModeSettings;
+
+    public PanelChoixModeCouleurs(PanelChoixModeSettings panel) {
+        this.panelChoixModeSettings = panel;
         geometry();
         control();
         appearance();
@@ -87,6 +91,15 @@ public class PanelChoixModeCouleurs extends JPanel {
             @Override
             public void stateChanged(ChangeEvent e) {
                 textField.setText(Integer.toString(slider.getValue()));
+                
+                int[] tabColor = new int[3];
+
+                Config config = Config.getConfig();
+
+                tabColor[0] = jSliderRouge.getValue();
+                tabColor[1] = jSliderVert.getValue();
+                tabColor[2] = jSliderBleu.getValue();
+                config.setColor(tabColor);
             }
         };
     }
@@ -95,7 +108,6 @@ public class PanelChoixModeCouleurs extends JPanel {
         jSliderRouge.setMaximum(255);
         jSliderRouge.setMinimum(0);
         jSliderRouge.setValue(127);
-        
 
         jSliderBleu.setMaximum(255);
         jSliderBleu.setMinimum(0);
@@ -104,20 +116,8 @@ public class PanelChoixModeCouleurs extends JPanel {
         jSliderVert.setMaximum(255);
         jSliderVert.setMinimum(0);
         jSliderVert.setValue(127);
-        
+
         this.setVisible(false);
-    }
-
-    public JSlider getjSliderRouge() {
-        return jSliderRouge;
-    }
-
-    public JSlider getjSliderBleu() {
-        return jSliderBleu;
-    }
-
-    public JSlider getjSliderVert() {
-        return jSliderVert;
     }
 
 }

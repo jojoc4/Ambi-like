@@ -48,8 +48,6 @@ public class PanelChoix extends JPanel {
         buttonApplyParameter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Config config = Config.getConfig();
-                JOptionPane.showMessageDialog(null, "" + config.getColor().toString() + config.getNbLed() + config.getLumMax() + config.getRaspIp(), "InfoBox: ", JOptionPane.INFORMATION_MESSAGE);
                 Main.changeMode();
             }
         });

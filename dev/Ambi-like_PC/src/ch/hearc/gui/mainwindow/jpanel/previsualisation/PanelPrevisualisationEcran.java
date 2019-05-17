@@ -106,10 +106,6 @@ public class PanelPrevisualisationEcran extends JPanel {
         int nbLedsGauche = Config.getConfig().getNbLed(Config.EAST);
         int nbLedsDroite = Config.getConfig().getNbLed(Config.WEST);
         
-
-        
-        
-
         // Rectangle
         g2d.translate(MARGE, MARGE);
         g2d.setStroke(new BasicStroke(1));
@@ -141,11 +137,12 @@ public class PanelPrevisualisationEcran extends JPanel {
             for (int i = 0; i < nbLedsGauche; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
                 g2d.setColor(pixel.getColor());
+                index++;
                 index %= Config.getConfig().getNbLedTotal();
 
                 g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
                 g2d.translate(espaceEntreLedsLargeur + diametrePixel, 0.0);
-                index++;
+                
             }
             g2d.translate(demiMarge, demiMarge);
             g2d.rotate(Math.PI / 2);

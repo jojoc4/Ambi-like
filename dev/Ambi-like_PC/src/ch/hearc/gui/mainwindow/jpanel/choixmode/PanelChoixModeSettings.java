@@ -6,6 +6,7 @@
 package ch.hearc.gui.mainwindow.jpanel.choixmode;
 
 import ch.hearc.Config;
+import ch.hearc.Main;
 import ch.hearc.compute.Computation_I;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -46,7 +47,7 @@ public class PanelChoixModeSettings extends JPanel {
         modePersonnalise2 = new JRadioButton("Mode personnalisé 2");
         modePersonnalise3 = new JRadioButton("Mode personnalisé 3");
 
-        panelChoixModeCouleurs = new PanelChoixModeCouleurs();
+        panelChoixModeCouleurs = new PanelChoixModeCouleurs(this);
 
         group = new ButtonGroup();
 
@@ -85,14 +86,10 @@ public class PanelChoixModeSettings extends JPanel {
         couleurFixeRB.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+
                 if (couleurFixeRB.isSelected()) {
                     panelChoixModeCouleurs.setVisible(true);
                     configFile.setMode(Computation_I.MODE_FIXE);
-                    int[] tabColor = new int[3];
-                    tabColor[0] = panelChoixModeCouleurs.getjSliderRouge().getValue();
-                    tabColor[1] = panelChoixModeCouleurs.getjSliderVert().getValue();
-                    tabColor[2] = panelChoixModeCouleurs.getjSliderBleu().getValue();
-                    configFile.setColor(tabColor);
                 }
             }
         });
@@ -108,7 +105,7 @@ public class PanelChoixModeSettings extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelChoixModeCouleurs.setVisible(false);
                 throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-                
+
             }
         });
         modePersonnalise3.addActionListener(new ActionListener() {
