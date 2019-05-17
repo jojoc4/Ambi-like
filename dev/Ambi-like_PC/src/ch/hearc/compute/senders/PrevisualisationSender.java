@@ -29,7 +29,7 @@ public class PrevisualisationSender implements Sender_I {
 
         r = checkColor(r);
         g = checkColor(g);
-        b = checkColor(g);
+        b = checkColor(b);
         
         try{
             ppe.setPixelAt(indexLed, new Pixel(r, g, b));

@@ -1,5 +1,7 @@
 package ch.hearc.compute;
 
+import java.awt.image.BufferedImage;
+
 /**
  *
  * @author Téo
@@ -26,4 +28,6 @@ public abstract class Computation_I implements Runnable {
     public boolean isRunning() {
         return this.running;
     }
+    
+    public abstract BufferedImage getImage();
 }

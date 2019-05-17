@@ -52,6 +52,7 @@ public class RMISender implements Sender_I {
 
     /**
      * send new color to raspberry pi
+     *
      * @param nbLed led number on ledstrip
      * @param r red color, beetween 1 and 255
      * @param g green color, beetween 1 and 255
@@ -59,26 +60,29 @@ public class RMISender implements Sender_I {
      */
     @Override
     public void send(int nbLed, int r, int g, int b) {
+
+        r = (int) (r / 255f) * Config.getConfig().getLumMax();
+        g = (int) (g / 255f) * Config.getConfig().getLumMax();
+        b = (int) (b / 255f) * Config.getConfig().getLumMax();
+        
         r = checkColor(r);
         g = checkColor(g);
         b = checkColor(b);
-        
-        r = (r/255) * Config.getConfig().getLumMax();
-        g = (g/255) * Config.getConfig().getLumMax();
-        b = (b/255) * Config.getConfig().getLumMax();
-            
+
         try {
             commande.setLed(nbLed, r, g, b);
         } catch (RemoteException ex) {
             Logger.getLogger(RMISender.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    private int checkColor(int color){
-        if(color > 255)
+
+    private int checkColor(int color) {
+        if (color > 255) {
             return 255;
-        if(color < 0)
+        }
+        if (color < 0) {
             return 0;
+        }
         return color;
     }
 }

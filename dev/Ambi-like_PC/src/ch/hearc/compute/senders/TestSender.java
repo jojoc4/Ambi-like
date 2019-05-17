@@ -15,7 +15,7 @@ public class TestSender implements Sender_I {
     public synchronized void send(int nbLed, int r, int g, int b) {
         r = checkColor(r);
         g = checkColor(g);
-        b = checkColor(g);
+        b = checkColor(b);
         System.out.println("Led n°" + nbLed + ") : RGB(" + r + "; " + g + "; " + b + ")");
     }
     

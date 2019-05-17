@@ -189,4 +189,9 @@ public class Computation_Ambilight extends Computation_I {
             return null;
         }
     }
+    
+    @Override
+    public synchronized BufferedImage getImage() {
+        return this.img;
+    }
 }

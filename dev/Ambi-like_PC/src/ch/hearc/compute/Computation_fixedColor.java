@@ -3,6 +3,7 @@ package ch.hearc.compute;
 import ch.hearc.Config;
 import ch.hearc.Pixel;
 import ch.hearc.compute.senders.Sender_I;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -39,6 +40,12 @@ public class Computation_fixedColor extends Computation_I {
                 Logger.getLogger(Computation_fixedColor.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    @Override
+    public synchronized BufferedImage getImage() {
+        //TODO
+        return null;
     }
 
 }

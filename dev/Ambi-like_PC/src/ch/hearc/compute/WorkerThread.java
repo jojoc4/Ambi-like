@@ -72,9 +72,9 @@ public class WorkerThread implements Runnable {
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
-            int totalR2 = 0;
-            int totalG2 = 0;
-            int totalB2 = 0;
+//            int totalR2 = 0;
+//            int totalG2 = 0;
+//            int totalB2 = 0;
             int totalPx = 0;
 
             //System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax + " ");
@@ -99,15 +99,15 @@ public class WorkerThread implements Runnable {
             
             totalPx = (totalPx == 0) ? 1 : totalPx; //make sure there is no zero-division if the area to compute is ill-formed.
             
-            this.red = (int)((((float)totalR / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
-            this.green = (int)((((float)totalG / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
-            this.blue = (int)((((float)totalB / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+            this.red = (totalR / totalPx);
+            this.green = (totalG / totalPx);
+            this.blue = (totalB / totalPx);
             
 //            System.out.println(index + ") rouge: " + red + " vert: " + green + " bleu: " + blue);
 //            
-//            this.red = (int)((((float)totalR2 / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
-//            this.green = (int)((((float)totalG2 / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
-//            this.blue = (int)((((float)totalB2 / (float)totalPx) / 255f ) * Config.getConfig().getLumMax());
+//            this.red = (totalR2 / totalPx);
+//            this.green = (totalG2 / totalPx);
+//            this.blue = (totalB2 / totalPx);
 //            
 //            System.out.println(index + ") rouge2: " + red + " vert2: " + green + " bleu2: " + blue);
             

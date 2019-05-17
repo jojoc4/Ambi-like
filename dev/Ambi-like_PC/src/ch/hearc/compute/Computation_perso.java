@@ -3,6 +3,7 @@ package ch.hearc.compute;
 import ch.hearc.ModePerso;
 import ch.hearc.Pixel;
 import ch.hearc.compute.senders.Sender_I;
+import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -41,6 +42,11 @@ public class Computation_perso extends Computation_I {
                 Logger.getLogger(Computation_perso.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-
+    }
+    
+    @Override
+    public synchronized BufferedImage getImage() {
+        //TODO
+        return null;
     }
 }

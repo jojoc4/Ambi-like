@@ -86,10 +86,12 @@ public class Boundaries {
         //circle!
         if(ind == len-1){
             this.full = true;
-            ind = 0;
+            //ind = 0;
         }
        
         this.boundaries[ind] = new int[]{xMin, yMin, xMax, yMax, ind};
+        
+        //System.out.println(ind + "  " + this.full + " " + indexP);
     }
     
     public void allowNextLoop(){
