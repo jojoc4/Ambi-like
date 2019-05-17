@@ -61,9 +61,9 @@ public class RMISender implements Sender_I {
     @Override
     public void send(int nbLed, int r, int g, int b) {
 
-        r = (int) (r / 255f) * Config.getConfig().getLumMax();
-        g = (int) (g / 255f) * Config.getConfig().getLumMax();
-        b = (int) (b / 255f) * Config.getConfig().getLumMax();
+        r = (int) ((r / 255f) * Config.getConfig().getLumMax());
+        g = (int) ((g / 255f) * Config.getConfig().getLumMax());
+        b = (int) ((b / 255f) * Config.getConfig().getLumMax());
         
         r = checkColor(r);
         g = checkColor(g);
