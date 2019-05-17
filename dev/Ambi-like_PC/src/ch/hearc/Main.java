@@ -29,6 +29,8 @@ import javax.swing.JPanel;
 public class Main {
 
     private static Computation_I c;
+    private static final String MODE = "TEST";
+    //private static final String MODE = "RMI";
 
     public static void main(String[] args) {
 
@@ -108,15 +110,22 @@ public class Main {
      * creates the right new computation depending on Config content
      */
     private static void createComputation() {
+        Sender_I sender = null;
+        if("TEST".equals(MODE)){
+            sender= new TestSender();
+        }else if("RMI".equals(MODE)){
+            sender= RMISender.getInstance();
+        }
+        
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
-                c = new Computation_Ambilight(RMISender.getInstance());
+                c = new Computation_Ambilight(sender);
                 break;
             case Computation_I.MODE_FIXE:
-                c = new Computation_fixedColor(new TestSender(), new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
+                c = new Computation_fixedColor(sender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[2]));
                 break;
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(new TestSender(), ModePerso.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(sender, ModePerso.getMode(Config.getConfig().getPersoModeFile()));
         }
         Thread t = new Thread(c);
         t.setName("Computation");
