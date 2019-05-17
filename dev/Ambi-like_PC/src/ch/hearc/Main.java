@@ -40,17 +40,10 @@ public class Main {
             return;
         }
 
-        new FrameMainWindow();
         //start main computation Thread
         createComputation();
         
         //test
-//        {
-//            c = new Computation_fixedColor(RMISender.getInstance(), new Pixel(0, 0, 255));
-//            Thread t = new Thread(c);
-//            t.setName("Computation");
-//            t.start();
-//        }
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
