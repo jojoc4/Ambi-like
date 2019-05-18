@@ -6,6 +6,7 @@
 package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import ch.hearc.Config;
+import ch.hearc.Main;
 import ch.hearc.compute.Computation_I;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -78,7 +79,7 @@ public class PanelChoiceModeSettings extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelChoiceModeColors.setVisible(false);
                 if (rbAmbilight.isSelected()) {
-                    configFile.setMode(Computation_I.MODE_AMBILIGHT);
+                    configFile.setTempMode(Computation_I.MODE_AMBILIGHT);
                 }
             }
         });
@@ -88,7 +89,8 @@ public class PanelChoiceModeSettings extends JPanel {
 
                 if (rbFixedColor.isSelected()) {
                     panelChoiceModeColors.setVisible(true);
-                    configFile.setMode(Computation_I.MODE_FIXE);
+                    configFile.setTempMode(Computation_I.MODE_FIXE);
+                    
                 }
             }
         });

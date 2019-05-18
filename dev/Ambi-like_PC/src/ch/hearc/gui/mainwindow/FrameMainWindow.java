@@ -6,6 +6,8 @@
 package ch.hearc.gui.mainwindow;
 
 import ch.hearc.gui.mainwindow.jpanel.PanelMainWindow;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
@@ -31,6 +33,14 @@ public class FrameMainWindow extends JFrame {
 
     private void control() {
 
+        addWindowListener(new WindowAdapter() {
+            //I skipped unused callbacks for readability
+
+            @Override
+            public void windowClosing(WindowEvent e) {
+                //panelMainWindow.stopComputation();
+            }
+        });
     }
 
     private void appearance() {

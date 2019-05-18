@@ -45,7 +45,6 @@ public class Computation_fixedColor extends Computation_I {
 
     @Override
     public synchronized BufferedImage getImage() {
-        //TODO
         return null;
     }
 

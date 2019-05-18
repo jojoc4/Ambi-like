@@ -20,8 +20,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
 import java.awt.geom.Rectangle2D;
@@ -47,13 +46,29 @@ public class PanelPreviewScreen extends JPanel {
 
     private PrevisualisationSender previewSender;
     private Computation_I computation;
+    private Thread t;
+    private String lastMode;
 
     private int nbRefresh = 0;
+    
+    private Config config;
+    
+    private Pixel previousPixel;
 
     public PanelPreviewScreen() {
+        config = Config.getConfig();
+        previousPixel = new Pixel(0,0,0);
         geometry();
         appearance();
 
+    }
+
+    public void startComputation() {
+        this.lastMode = Config.getConfig().getMode();
+        this.computation = createComputation();
+        t = new Thread(computation);
+        t.setName("Computation");
+        t.start();
     }
 
     private void geometry() {
@@ -62,12 +77,7 @@ public class PanelPreviewScreen extends JPanel {
         //button = new JButton(warning);
         vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
         fillVector();
-        this.computation = createComputation();
-
-        Thread t = new Thread(computation);
-        t.setName("Computation");
-        t.start();
-
+        startComputation();
     }
 
     @Override
@@ -90,8 +100,8 @@ public class PanelPreviewScreen extends JPanel {
     private void draw(Graphics2D g2d) {
 
         AffineTransform backup = g2d.getTransform();
-
-        //this.g2d = g2d;
+       
+        changeComputation();
         updateDisplay(g2d);
 
         g2d.setTransform(backup);
@@ -99,7 +109,6 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     public void updateDisplay(Graphics2D g2d) {
-
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
         int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
@@ -109,6 +118,7 @@ public class PanelPreviewScreen extends JPanel {
         g2d.translate(MARGIN, MARGIN);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawRect(0, 0, WIDTH - 2 * MARGIN, HEIGHT - 2 * MARGIN);
+        g2d.drawImage(computation.getImage(), 1,1,WIDTH - 2 * MARGIN-1,HEIGHT - 2 * MARGIN-1, this);
 
         double diameterPixel = 10.;
         double spaceBetweenLeds = (double) (WIDTH - 2 * MARGIN - nbLedsTop * diameterPixel) / (double) (nbLedsTop + 1);
@@ -147,7 +157,6 @@ public class PanelPreviewScreen extends JPanel {
             g2d.rotate(Math.PI / 2);
             g2d.translate(spaceBetweenLeds, 0.0);
             g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
-
         }
     }
 
@@ -159,8 +168,11 @@ public class PanelPreviewScreen extends JPanel {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
             nbRefresh++;
-            if (nbRefresh % 100 == 0) {
+            if (nbRefresh % 100 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
                 nbRefresh = 0;
+                repaint();
+            }
+            if(Computation_I.MODE_FIXE.equals(config.getMode())){
                 repaint();
             }
 
@@ -188,7 +200,8 @@ public class PanelPreviewScreen extends JPanel {
                 c = new Computation_Ambilight(previewSender);
                 break;
             case Computation_I.MODE_FIXE:
-                c = new Computation_fixedColor(previewSender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[3]));
+                c = new Computation_fixedColor(previewSender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[2]));
+                this.previousPixel = new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[2]);
                 break;
 
             case Computation_I.MODE_PERSO:
@@ -198,5 +211,14 @@ public class PanelPreviewScreen extends JPanel {
                 c = new Computation_Ambilight(previewSender);
         }
         return c;
+    }
+
+    private void changeComputation() {
+        if(!config.getMode().equals(this.lastMode) || config.getColor()[0] != this.previousPixel.getRed()
+                || config.getColor()[1] != this.previousPixel.getGreen()
+                || config.getColor()[2] != this.previousPixel.getBlue()){
+            this.computation.stopComputation();
+            this.startComputation();
+        }
     }
 }

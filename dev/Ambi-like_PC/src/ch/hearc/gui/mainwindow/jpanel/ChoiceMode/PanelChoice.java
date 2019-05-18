@@ -5,10 +5,13 @@
  */
 package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
+import ch.hearc.Config;
 import ch.hearc.Main;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -21,6 +24,8 @@ public class PanelChoice extends JPanel {
 
     private PanelChoiceMode panelChoiceMode;
     private JButton buttonApplyParameter;
+    
+    private Config config;
 
     public PanelChoice() {
         geometry();
@@ -32,6 +37,8 @@ public class PanelChoice extends JPanel {
     private void geometry() {
         panelChoiceMode = new PanelChoiceMode();
         buttonApplyParameter = new JButton("Appliquer le mode sélectionné");
+        
+        config = Config.getConfig();
 
         BorderLayout layout = new BorderLayout();
         Box boxV = Box.createVerticalBox();
@@ -46,7 +53,11 @@ public class PanelChoice extends JPanel {
         buttonApplyParameter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                Main.changeMode();
+                if (!config.getMode().equals(config.getTempMode())) {
+                    config.setMode(config.getTempMode());
+                    Main.changeMode();
+                }
+
             }
         });
     }

@@ -55,25 +55,25 @@ public class PanelChoiceModeColors extends JPanel {
         jTextFieldGreen = new JTextField();
         jSliderGreen = new JSlider();
 
-        Box boxHorizontalRouge = Box.createHorizontalBox();
-        boxHorizontalRouge.add(labelRed);
-        boxHorizontalRouge.add(jTextFieldRed);
-        boxHorizontalRouge.add(jSliderRed);
+        Box boxHorizontalRed = Box.createHorizontalBox();
+        boxHorizontalRed.add(labelRed);
+        boxHorizontalRed.add(jTextFieldRed);
+        boxHorizontalRed.add(jSliderRed);
 
-        Box boxHorizontalBleu = Box.createHorizontalBox();
-        boxHorizontalBleu.add(labelBlue);
-        boxHorizontalBleu.add(jTextFieldBlue);
-        boxHorizontalBleu.add(jSliderBlue);
+        Box boxHorizontalBlue = Box.createHorizontalBox();
+        boxHorizontalBlue.add(labelBlue);
+        boxHorizontalBlue.add(jTextFieldBlue);
+        boxHorizontalBlue.add(jSliderBlue);
 
-        Box boxHorizontalVert = Box.createHorizontalBox();
-        boxHorizontalVert.add(labelGreen);
-        boxHorizontalVert.add(jTextFieldGreen);
-        boxHorizontalVert.add(jSliderGreen);
+        Box boxHorizontalGreen = Box.createHorizontalBox();
+        boxHorizontalGreen.add(labelGreen);
+        boxHorizontalGreen.add(jTextFieldGreen);
+        boxHorizontalGreen.add(jSliderGreen);
 
         Box boxVertical = Box.createVerticalBox();
-        boxVertical.add(boxHorizontalRouge);
-        boxVertical.add(boxHorizontalBleu);
-        boxVertical.add(boxHorizontalVert);
+        boxVertical.add(boxHorizontalRed);
+        boxVertical.add(boxHorizontalBlue);
+        boxVertical.add(boxHorizontalGreen);
 
         setLayout(new BorderLayout());
         add(boxVertical, BorderLayout.CENTER);

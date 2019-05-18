@@ -46,5 +46,9 @@ public class PanelPreview extends JPanel {
     private void appearance() {
         setBorder(BorderFactory.createTitledBorder("Prévisualisation"));
     }
+    
+    public void stopComputation(){
+        //this.panelPreviewScreen.stopComputation();
+    }
 
 }

@@ -34,6 +34,8 @@ public class Config implements Serializable {
         color[0] = 255;
         color[1] = 255;
         color[2] = 255;
+        
+        tempMode = "";
     }
 
     //const
@@ -48,6 +50,7 @@ public class Config implements Serializable {
     private int[] nbLed;
     private int lumMax;
     private String mode;
+    private String tempMode;
     private String persoModeFile;
     private int[] color;
 
@@ -74,6 +77,10 @@ public class Config implements Serializable {
 
     public String getMode() {
         return mode;
+    }
+    
+    public String getTempMode(){
+        return tempMode;
     }
 
     public String getPersoModeFile() {
@@ -103,6 +110,10 @@ public class Config implements Serializable {
 
     public void setMode(String mode) {
         this.mode = mode;
+    }
+    
+    public void setTempMode(String mode){
+        this.tempMode = mode;
     }
 
     public void setPersoModeFile(String persoModeFile) {
