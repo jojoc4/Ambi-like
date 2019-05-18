@@ -32,6 +32,8 @@ public class Main {
     private static Computation_I c;
     private static final String MODE = "TEST";
     //private static final String MODE = "RMI";
+    
+    private static String requestedMode = "";
 
     public static void main(String[] args) {
 
@@ -125,6 +127,14 @@ public class Main {
         Thread t = new Thread(c);
         t.setName("Computation");
         t.start();
+    }
+    
+    public static String getTempMode(){
+        return requestedMode;
+    }
+    
+    public static void setTempMode(String mode){
+        requestedMode = new String(mode);
     }
 
 }

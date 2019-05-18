@@ -79,7 +79,7 @@ public class Config implements Serializable {
         return mode;
     }
     
-    public String getTempMode(){
+    public String getTempMode() {
         return tempMode;
     }
 

@@ -12,7 +12,7 @@ import ch.hearc.compute.Computation_Ambilight;
 import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
-import ch.hearc.compute.senders.PrevisualisationSender;
+import ch.hearc.compute.senders.PreviewSender;
 import ch.hearc.compute.senders.TestSender;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -44,7 +44,7 @@ public class PanelPreviewScreen extends JPanel {
     private Vector<Pixel> vectorPixels;
     private Graphics2D g2d;
 
-    private PrevisualisationSender previewSender;
+    private PreviewSender previewSender;
     private Computation_I computation;
     private Thread t;
     private String lastMode;
@@ -110,7 +110,6 @@ public class PanelPreviewScreen extends JPanel {
 
     public void updateDisplay(Graphics2D g2d) {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
-        int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
         int nbLedsRight = Config.getConfig().getNbLed(Config.WEST);
 
@@ -168,7 +167,7 @@ public class PanelPreviewScreen extends JPanel {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
             nbRefresh++;
-            if (nbRefresh % 100 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
+            if (nbRefresh % 40 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
                 nbRefresh = 0;
                 repaint();
             }
@@ -194,7 +193,7 @@ public class PanelPreviewScreen extends JPanel {
 
     private Computation_I createComputation() {
         Computation_I c;
-        this.previewSender = new PrevisualisationSender(this);
+        this.previewSender = new PreviewSender(this);
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
                 c = new Computation_Ambilight(previewSender);
