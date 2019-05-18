@@ -38,7 +38,7 @@ public class FrameMainWindow extends JFrame {
 
             @Override
             public void windowClosing(WindowEvent e) {
-                //panelMainWindow.stopComputation();
+                panelMainWindow.stopComputation();
             }
         });
     }

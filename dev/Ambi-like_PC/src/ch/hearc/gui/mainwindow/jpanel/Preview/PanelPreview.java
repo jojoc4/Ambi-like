@@ -48,7 +48,7 @@ public class PanelPreview extends JPanel {
     }
     
     public void stopComputation(){
-        //this.panelPreviewScreen.stopComputation();
+        this.panelPreviewScreen.stopComputation();
     }
 
 }

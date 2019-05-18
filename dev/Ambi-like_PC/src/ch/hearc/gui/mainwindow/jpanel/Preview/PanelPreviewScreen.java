@@ -64,7 +64,7 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     public void startComputation() {
-        this.lastMode = Config.getConfig().getMode();
+        this.lastMode = new String(Config.getConfig().getMode());
         this.computation = createComputation();
         t = new Thread(computation);
         t.setName("Computation");
@@ -219,5 +219,8 @@ public class PanelPreviewScreen extends JPanel {
             this.computation.stopComputation();
             this.startComputation();
         }
+    }
+    public void stopComputation(){
+        this.computation.stopComputation();
     }
 }

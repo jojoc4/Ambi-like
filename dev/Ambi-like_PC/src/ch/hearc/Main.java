@@ -33,7 +33,7 @@ public class Main {
     private static final String MODE = "TEST";
     //private static final String MODE = "RMI";
     
-    private static String requestedMode = "";
+    private static String requestedMode = Computation_I.MODE_AMBILIGHT;
 
     public static void main(String[] args) {
 
@@ -45,7 +45,7 @@ public class Main {
 
         //start main computation Thread
         createComputation();
-
+        
         //test
         new JPanelConfigurator();
 
@@ -108,12 +108,14 @@ public class Main {
      */
     private static void createComputation() {
         Sender_I sender = null;
+
         if ("TEST".equals(MODE)) {
             sender = new TestSender();
         } else if ("RMI".equals(MODE)) {
             sender = RMISender.getInstance();
         }
-
+        
+        System.out.println(Config.getConfig().getMode() + " contenu");
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
                 c = new Computation_Ambilight(sender);
@@ -134,7 +136,7 @@ public class Main {
     }
     
     public static void setTempMode(String mode){
-        requestedMode = new String(mode);
+        requestedMode = mode;
     }
 
 }
