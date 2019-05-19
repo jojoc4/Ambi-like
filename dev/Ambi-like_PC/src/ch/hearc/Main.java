@@ -34,6 +34,8 @@ public class Main {
     //private static final String MODE = "RMI";
     
     private static String requestedMode = Computation_I.MODE_AMBILIGHT;
+    
+    private static FrameMainWindow frameMainWindow = null;
 
     public static void main(String[] args) {
 
@@ -63,7 +65,9 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new FrameMainWindow();
+                if(Main.frameMainWindow == null){
+                    Main.frameMainWindow = new FrameMainWindow();
+                }
             }
         });
 

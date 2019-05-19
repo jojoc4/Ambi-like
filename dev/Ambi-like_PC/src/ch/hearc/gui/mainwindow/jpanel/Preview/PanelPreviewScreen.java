@@ -36,7 +36,6 @@ import javax.swing.Timer;
  */
 public class PanelPreviewScreen extends JPanel {
 
-    private ImageIcon background;
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
     private static final int MARGIN = 40;
@@ -73,7 +72,6 @@ public class PanelPreviewScreen extends JPanel {
 
     private void geometry() {
         //ImageIcon warning = MagasinImage.coffee;
-        this.background = MagasinImage.fontNoir;
         //button = new JButton(warning);
         vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
         fillVector();
@@ -167,11 +165,12 @@ public class PanelPreviewScreen extends JPanel {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
             nbRefresh++;
-            if (nbRefresh % 40 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
+            if (nbRefresh % 100 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
                 nbRefresh = 0;
                 repaint();
             }
-            if(Computation_I.MODE_FIXE.equals(config.getMode())){
+            if(Computation_I.MODE_FIXE.equals(config.getMode()) && nbRefresh % 100 == 0){
+                nbRefresh = 0;
                 repaint();
             }
 
