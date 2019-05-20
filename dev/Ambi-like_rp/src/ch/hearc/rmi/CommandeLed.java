@@ -6,8 +6,8 @@ import java.rmi.RemoteException;
 /**
  * implementation of CommandeLed_I
  * @author jonatan.baumgart
- * @version 1
- * @since 06.05.2019
+ * @version 1.5
+ * @since 20.05.2019
  */
 public class CommandeLed implements CommandeLed_I {
 
