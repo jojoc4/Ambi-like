@@ -51,7 +51,7 @@ public class Main {
         
         //test
         //new JPanelConfigurator();
-        new FrameCreator();
+        //new FrameCreator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
@@ -67,9 +67,7 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(Main.frameMainWindow == null){
-                    Main.frameMainWindow = new FrameMainWindow();
-                }
+                Main.frameMainWindow = new FrameMainWindow();
             }
         });
 
