@@ -79,7 +79,8 @@ public class PanelChoiceModeSettings extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 panelChoiceModeColors.setVisible(false);
                 if (rbAmbilight.isSelected()) {
-                    configFile.setTempMode(Computation_I.MODE_AMBILIGHT);
+                    Main.setTempMode(Computation_I.MODE_AMBILIGHT);
+                    //configFile.setMode(Computation_I.MODE_AMBILIGHT);
                 }
             }
         });
@@ -89,7 +90,8 @@ public class PanelChoiceModeSettings extends JPanel {
 
                 if (rbFixedColor.isSelected()) {
                     panelChoiceModeColors.setVisible(true);
-                    configFile.setTempMode(Computation_I.MODE_FIXE);
+                    Main.setTempMode(Computation_I.MODE_FIXE);
+                    //configFile.setMode(Computation_I.MODE_FIXE);
                     
                 }
             }

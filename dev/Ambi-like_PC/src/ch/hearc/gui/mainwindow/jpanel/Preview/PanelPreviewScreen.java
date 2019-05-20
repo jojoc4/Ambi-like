@@ -12,7 +12,7 @@ import ch.hearc.compute.Computation_Ambilight;
 import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
-import ch.hearc.compute.senders.PrevisualisationSender;
+import ch.hearc.compute.senders.PreviewSender;
 import ch.hearc.compute.senders.TestSender;
 import java.awt.BasicStroke;
 import java.awt.Color;
@@ -36,7 +36,6 @@ import javax.swing.Timer;
  */
 public class PanelPreviewScreen extends JPanel {
 
-    private ImageIcon background;
     private static final int WIDTH = 500;
     private static final int HEIGHT = 400;
     private static final int MARGIN = 40;
@@ -44,10 +43,10 @@ public class PanelPreviewScreen extends JPanel {
     private Vector<Pixel> vectorPixels;
     private Graphics2D g2d;
 
-    private PrevisualisationSender previewSender;
+    private PreviewSender previewSender;
     private Computation_I computation;
     private Thread t;
-    private String lastMode;
+    private int lastMode;
 
     private int nbRefresh = 0;
     
@@ -73,7 +72,6 @@ public class PanelPreviewScreen extends JPanel {
 
     private void geometry() {
         //ImageIcon warning = MagasinImage.coffee;
-        this.background = MagasinImage.fontNoir;
         //button = new JButton(warning);
         vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
         fillVector();
@@ -110,7 +108,6 @@ public class PanelPreviewScreen extends JPanel {
 
     public void updateDisplay(Graphics2D g2d) {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
-        int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
         int nbLedsRight = Config.getConfig().getNbLed(Config.WEST);
 
@@ -168,11 +165,12 @@ public class PanelPreviewScreen extends JPanel {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
             nbRefresh++;
-            if (nbRefresh % 100 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
+            if (nbRefresh % 100 == 0 && config.getMode() == Computation_I.MODE_AMBILIGHT) {
                 nbRefresh = 0;
                 repaint();
             }
-            if(Computation_I.MODE_FIXE.equals(config.getMode())){
+            if(Computation_I.MODE_FIXE == config.getMode() && nbRefresh % 100 == 0){
+                nbRefresh = 0;
                 repaint();
             }
 
@@ -194,7 +192,7 @@ public class PanelPreviewScreen extends JPanel {
 
     private Computation_I createComputation() {
         Computation_I c;
-        this.previewSender = new PrevisualisationSender(this);
+        this.previewSender = new PreviewSender(this);
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
                 c = new Computation_Ambilight(previewSender);
@@ -214,11 +212,14 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void changeComputation() {
-        if(!config.getMode().equals(this.lastMode) || config.getColor()[0] != this.previousPixel.getRed()
+        if(config.getMode() != this.lastMode || config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
                 || config.getColor()[2] != this.previousPixel.getBlue()){
             this.computation.stopComputation();
             this.startComputation();
         }
+    }
+    public void stopComputation(){
+        this.computation.stopComputation();
     }
 }

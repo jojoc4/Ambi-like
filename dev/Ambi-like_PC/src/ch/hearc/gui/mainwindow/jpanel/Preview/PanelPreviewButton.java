@@ -40,7 +40,7 @@ public class PanelPreviewButton extends JPanel {
         labelDisplayLED = new JLabel("Visualisation LED : ");
         checkBoxDisplayLED = new JCheckBox();
 
-        String message1 = "<html>Créer un mode<br>de visualisation LED</html>s";
+        String message1 = "<html>Créer un mode<br>de visualisation LED</html>";
 
         String message2 = "<html> Paramètres de<br>l'application</html>";
 

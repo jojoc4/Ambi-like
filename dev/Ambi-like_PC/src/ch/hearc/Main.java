@@ -32,6 +32,10 @@ public class Main {
     private static Computation_I c;
     private static final String MODE = "TEST";
     //private static final String MODE = "RMI";
+    
+    private static int requestedMode = Computation_I.MODE_AMBILIGHT;
+    
+    private static FrameMainWindow frameMainWindow = null;
 
     public static void main(String[] args) {
 
@@ -43,7 +47,7 @@ public class Main {
 
         //start main computation Thread
         createComputation();
-
+        
         //test
         new JPanelConfigurator();
 
@@ -61,7 +65,9 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                new FrameMainWindow();
+                if(Main.frameMainWindow == null){
+                    Main.frameMainWindow = new FrameMainWindow();
+                }
             }
         });
 
@@ -106,12 +112,14 @@ public class Main {
      */
     private static void createComputation() {
         Sender_I sender = null;
+
         if ("TEST".equals(MODE)) {
             sender = new TestSender();
         } else if ("RMI".equals(MODE)) {
             sender = RMISender.getInstance();
         }
-
+        
+        System.out.println(Config.getConfig().getMode() + " contenu");
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
                 c = new Computation_Ambilight(sender);
@@ -125,6 +133,14 @@ public class Main {
         Thread t = new Thread(c);
         t.setName("Computation");
         t.start();
+    }
+    
+    public static int getTempMode(){
+        return requestedMode;
+    }
+    
+    public static void setTempMode(int mode){
+        requestedMode = mode;
     }
 
 }

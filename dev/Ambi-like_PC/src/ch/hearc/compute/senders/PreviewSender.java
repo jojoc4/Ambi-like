@@ -12,11 +12,11 @@ import ch.hearc.gui.mainwindow.jpanel.Preview.PanelPreviewScreen;
  *
  * @author teosc
  */
-public class PrevisualisationSender implements Sender_I {
+public class PreviewSender implements Sender_I {
 
     private PanelPreviewScreen ppe;
 
-    public PrevisualisationSender(PanelPreviewScreen ppe) {
+    public PreviewSender(PanelPreviewScreen ppe) {
         this.ppe = ppe;
     }
 

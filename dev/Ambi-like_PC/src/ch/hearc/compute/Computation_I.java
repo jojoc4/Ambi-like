@@ -8,10 +8,10 @@ import java.awt.image.BufferedImage;
  */
 public abstract class Computation_I implements Runnable {
 
-    public final static String MODE_AMBILIGHT = "ambilight";
-    public final static String MODE_FIXE = "fixe";
-    public final static String MODE_PERSO = "perso";
-
+    public final static int MODE_AMBILIGHT = 1;
+    public final static int MODE_FIXE = 2;
+    public final static int MODE_PERSO = 3;
+    
     private boolean running;
 
     @Override

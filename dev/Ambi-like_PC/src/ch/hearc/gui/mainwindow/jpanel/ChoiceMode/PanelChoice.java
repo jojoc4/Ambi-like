@@ -25,6 +25,7 @@ public class PanelChoice extends JPanel {
     private PanelChoiceMode panelChoiceMode;
     private JButton buttonApplyParameter;
     
+    
     private Config config;
 
     public PanelChoice() {
@@ -39,7 +40,7 @@ public class PanelChoice extends JPanel {
         buttonApplyParameter = new JButton("Appliquer le mode sélectionné");
         
         config = Config.getConfig();
-
+        
         BorderLayout layout = new BorderLayout();
         Box boxV = Box.createVerticalBox();
         boxV.add(panelChoiceMode);
@@ -53,8 +54,8 @@ public class PanelChoice extends JPanel {
         buttonApplyParameter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!config.getMode().equals(config.getTempMode())) {
-                    config.setMode(config.getTempMode());
+                if (config.getMode() != Main.getTempMode()) {
+                    config.setMode(Main.getTempMode());
                     Main.changeMode();
                 }
 

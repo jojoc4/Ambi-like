@@ -49,7 +49,7 @@ public class Config implements Serializable {
     private String raspIp;
     private int[] nbLed;
     private int lumMax;
-    private String mode;
+    private int mode;
     private String tempMode;
     private String persoModeFile;
     private int[] color;
@@ -75,11 +75,11 @@ public class Config implements Serializable {
         return lumMax;
     }
 
-    public String getMode() {
+    public int getMode() {
         return mode;
     }
     
-    public String getTempMode(){
+    public String getTempMode() {
         return tempMode;
     }
 
@@ -108,7 +108,7 @@ public class Config implements Serializable {
         this.lumMax = lumMax;
     }
 
-    public void setMode(String mode) {
+    public void setMode(int mode) {
         this.mode = mode;
     }
     
