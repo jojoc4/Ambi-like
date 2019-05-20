@@ -54,7 +54,7 @@ public class PanelChoice extends JPanel {
         buttonApplyParameter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (!config.getMode().equals(Main.getTempMode())) {
+                if (config.getMode() != Main.getTempMode()) {
                     config.setMode(Main.getTempMode());
                     Main.changeMode();
                 }

@@ -46,7 +46,7 @@ public class PanelPreviewScreen extends JPanel {
     private PreviewSender previewSender;
     private Computation_I computation;
     private Thread t;
-    private String lastMode;
+    private int lastMode;
 
     private int nbRefresh = 0;
     
@@ -63,7 +63,7 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     public void startComputation() {
-        this.lastMode = new String(Config.getConfig().getMode());
+        this.lastMode = Config.getConfig().getMode();
         this.computation = createComputation();
         t = new Thread(computation);
         t.setName("Computation");
@@ -165,11 +165,11 @@ public class PanelPreviewScreen extends JPanel {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
             nbRefresh++;
-            if (nbRefresh % 100 == 0 && config.getMode().equals(Computation_I.MODE_AMBILIGHT)) {
+            if (nbRefresh % 100 == 0 && config.getMode() == Computation_I.MODE_AMBILIGHT) {
                 nbRefresh = 0;
                 repaint();
             }
-            if(Computation_I.MODE_FIXE.equals(config.getMode()) && nbRefresh % 100 == 0){
+            if(Computation_I.MODE_FIXE == config.getMode() && nbRefresh % 100 == 0){
                 nbRefresh = 0;
                 repaint();
             }
@@ -212,7 +212,7 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void changeComputation() {
-        if(!config.getMode().equals(this.lastMode) || config.getColor()[0] != this.previousPixel.getRed()
+        if(config.getMode() != this.lastMode || config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
                 || config.getColor()[2] != this.previousPixel.getBlue()){
             this.computation.stopComputation();

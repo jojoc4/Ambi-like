@@ -33,7 +33,7 @@ public class Main {
     private static final String MODE = "TEST";
     //private static final String MODE = "RMI";
     
-    private static String requestedMode = Computation_I.MODE_AMBILIGHT;
+    private static int requestedMode = Computation_I.MODE_AMBILIGHT;
     
     private static FrameMainWindow frameMainWindow = null;
 
@@ -135,11 +135,11 @@ public class Main {
         t.start();
     }
     
-    public static String getTempMode(){
+    public static int getTempMode(){
         return requestedMode;
     }
     
-    public static void setTempMode(String mode){
+    public static void setTempMode(int mode){
         requestedMode = mode;
     }
 

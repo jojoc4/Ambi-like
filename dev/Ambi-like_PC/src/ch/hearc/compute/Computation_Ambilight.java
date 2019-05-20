@@ -38,7 +38,7 @@ public class Computation_Ambilight extends Computation_I {
         colors[2] = new int[nbLed[2]][];
         colors[3] = new int[nbLed[3]][];
 
-        img = null;
+        img = printScreen();
 
         //boundaries (nb total LEDs)
         boundaries = new Boundaries(nbLed[0] + nbLed[1] + nbLed[2] + nbLed[3]);
@@ -103,7 +103,6 @@ public class Computation_Ambilight extends Computation_I {
     }
 
     private void buildBoundaries() {
-        BufferedImage img = printScreen();
 
         //col and oldCol = X axis (columns of pixels)
         //lin and oldLin = Y axis (lines of pixels)
