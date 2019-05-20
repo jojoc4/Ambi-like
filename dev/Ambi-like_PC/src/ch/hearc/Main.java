@@ -49,7 +49,7 @@ public class Main {
         
         //test
         //new JPanelConfigurator();
-        //new FrameCreator();
+        new FrameCreator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();

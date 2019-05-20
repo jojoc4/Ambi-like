@@ -33,7 +33,7 @@ public class PanelCreator extends JPanel {
         setLayout(layout);
 
         colorChooser = new PanelColorChooser();
-        preview = new PanelPreviewButtons();
+        preview = new PanelPreviewButtons(colorChooser);
         //buttons = new PanelButtons(this);
 
         add(colorChooser, BorderLayout.WEST);
@@ -48,8 +48,6 @@ public class PanelCreator extends JPanel {
     private void appearance() {
         int w = colorChooser.getWidth() + preview.getWidth() + MARGE;
         int h = Math.max(colorChooser.getHeight(), preview.getHeight()) + MARGE;
-
-        System.out.println(w + " " + h);
 
         Dimension d = new Dimension(w, h);
 

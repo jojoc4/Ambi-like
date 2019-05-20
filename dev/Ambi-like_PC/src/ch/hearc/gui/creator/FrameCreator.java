@@ -35,7 +35,7 @@ public class FrameCreator extends JFrame {
 
     private void appearance() {
         setTitle("Création de mode personnalisé");
-        setSize(1300, 500);
+        setSize(1300, 600);
         setResizable(false);
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!

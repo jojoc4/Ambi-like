@@ -23,9 +23,9 @@ public class PanelPreviewButtons extends JPanel{
     private PanelPreview preview;
     private PanelButtons buttons;
     
-    public PanelPreviewButtons() {
+    public PanelPreviewButtons(PanelColorChooser colorChooser) {
         
-        this.preview = new PanelPreview();
+        this.preview = new PanelPreview(colorChooser);
         this.buttons = new PanelButtons(this);
         
         add(preview, BorderLayout.CENTER);
