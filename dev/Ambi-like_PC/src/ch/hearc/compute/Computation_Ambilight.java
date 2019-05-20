@@ -82,7 +82,7 @@ public class Computation_Ambilight extends Computation_I {
 //                t.setImage(img);
 //            }
             try {
-                Thread.sleep(50); // ~25 FPS pour le refresh de l'image utilisée
+                Thread.sleep(33); // ~25 FPS pour le refresh de l'image utilisée
             } catch (InterruptedException ex) {
                 Logger.getLogger(WorkerThread.class.getName()).log(Level.SEVERE, null, ex);
             }
