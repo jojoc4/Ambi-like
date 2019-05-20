@@ -14,24 +14,22 @@ import java.util.Vector;
  *
  * @author Jonatan Baumgartner
  */
-public class PrivateMode implements Iterable<Pixel>, Serializable {
+public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     private String name;
     private int nbled[];
     private Vector<Pixel> l;
 
-    public PrivateMode() {
+    public ModePersonnalise() {
         Config cfg = Config.getConfig();
         nbled = cfg.getNbLed();
 
-        l = new Vector<Pixel>();
+        int totalLed = cfg.getNbLedTotal();
+        
+        l = new Vector<Pixel>(totalLed);
 
-        int totalLed = 0;
-        for (int i = 0; i < nbled.length; i++) {
-            totalLed += nbled[i];
-        }
         for (int i = 0; i < totalLed; i++) {
-            setLed(i, new Pixel(0, 0, 0));
+            addLed(new Pixel(0,0,0));
         }
     }
 
@@ -47,8 +45,12 @@ public class PrivateMode implements Iterable<Pixel>, Serializable {
         return l.get(index);
     }
 
-    public void setLed(int index, Pixel p) {
-        l.add(index, p);
+    public Pixel setLed(int index, Pixel p) {
+        return l.set(index, p);
+    }
+    
+    public void addLed(Pixel p) {
+        l.add(p);
     }
 
     @Override
@@ -62,13 +64,13 @@ public class PrivateMode implements Iterable<Pixel>, Serializable {
      * @param file filename to load
      * @return
      */
-    public static PrivateMode getMode(String file) {
+    public static ModePersonnalise getMode(String file) {
         try {
             File f = new File(file);
             if (f.exists() && !f.isDirectory()) {
                 FileInputStream fi = new FileInputStream(f);
                 ObjectInputStream oi = new ObjectInputStream(fi);
-                PrivateMode mp = (PrivateMode) oi.readObject();
+                ModePersonnalise mp = (ModePersonnalise) oi.readObject();
                 fi.close();
 
                 //TODO verify that the number of leds was the same when file created

@@ -1,13 +1,14 @@
 package ch.hearc;
 
 import java.awt.Color;
+import java.io.Serializable;
 
 /**
  * represents a pixel with its color
  *
  * @author Jonatan Baumgartner
  */
-public class Pixel {
+public class Pixel implements Serializable{
 
     private int red;
     private int green;

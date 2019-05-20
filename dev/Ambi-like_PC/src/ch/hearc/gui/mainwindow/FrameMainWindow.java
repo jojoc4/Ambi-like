@@ -46,6 +46,7 @@ public class FrameMainWindow extends JFrame {
     private void appearance() {
         setTitle("Demo");
         setSize(1000, 600);
+        setResizable(false);
         setLocationRelativeTo(null); // frame centrer
         setVisible(true); // last!
     }

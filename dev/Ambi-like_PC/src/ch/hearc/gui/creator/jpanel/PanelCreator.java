@@ -18,8 +18,9 @@ public class PanelCreator extends JPanel {
     private static final int MARGE = 40;
 
     private PanelColorChooser colorChooser;
-    PanelPreview preview;
+    //private PanelPreview preview;
     private BorderLayout layout;
+    private PanelPreviewButtons preview;
 
     public PanelCreator() {
         geometry();
@@ -32,10 +33,12 @@ public class PanelCreator extends JPanel {
         setLayout(layout);
 
         colorChooser = new PanelColorChooser();
-        preview = new PanelPreview();
+        preview = new PanelPreviewButtons();
+        //buttons = new PanelButtons(this);
 
         add(colorChooser, BorderLayout.WEST);
         add(preview, BorderLayout.CENTER);
+        //add(buttons, BorderLayout.SOUTH);
     }
 
     private void control() {

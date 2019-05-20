@@ -6,7 +6,7 @@
 package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.Config;
-import ch.hearc.PrivateMode;
+import ch.hearc.ModePersonnalise;
 import ch.hearc.Pixel;
 import ch.hearc.compute.Computation_Ambilight;
 import ch.hearc.compute.Computation_I;
@@ -73,7 +73,7 @@ public class PanelPreviewScreen extends JPanel {
     private void geometry() {
         //ImageIcon warning = MagasinImage.coffee;
         //button = new JButton(warning);
-        vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
+        vectorPixels = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         fillVector();
         startComputation();
     }
@@ -109,7 +109,7 @@ public class PanelPreviewScreen extends JPanel {
     public void updateDisplay(Graphics2D g2d) {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
-        int nbLedsRight = Config.getConfig().getNbLed(Config.WEST);
+        int nbLedsRight = nbLedsLeft;
 
         // Rectangle
         g2d.translate(MARGIN, MARGIN);
@@ -183,7 +183,7 @@ public class PanelPreviewScreen extends JPanel {
 
     private void fillVector() {
         Config config = Config.getConfig();
-        int nbLeds = config.getNombreTotalLed();
+        int nbLeds = config.getNbLedTotal();
 
         for (int i = 0; i < nbLeds; i++) {
             this.vectorPixels.add(new Pixel(1, 1, 1));
@@ -203,7 +203,7 @@ public class PanelPreviewScreen extends JPanel {
                 break;
 
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(previewSender, PrivateMode.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(previewSender, ModePersonnalise.getMode(Config.getConfig().getPersoModeFile()));
                 break;
             default:
                 c = new Computation_Ambilight(previewSender);
@@ -212,9 +212,9 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void changeComputation() {
-        if(config.getMode() != this.lastMode || config.getColor()[0] != this.previousPixel.getRed()
+        if(config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
-                || config.getColor()[2] != this.previousPixel.getBlue()){
+                || config.getColor()[2] != this.previousPixel.getBlue())){
             this.computation.stopComputation();
             this.startComputation();
         }

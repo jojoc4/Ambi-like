@@ -24,8 +24,8 @@ import javax.swing.JPanel;
  */
 public class PanelPreview extends JPanel {
 
-    private static final int WIDTH = 500;
-    private static final int HEIGHT = 400;
+    private static final int WIDTH = 640;
+    private static final int HEIGHT = 360;
     private static final int MARGIN = 40;
 
     private Vector<Pixel> vectorLEDs;
@@ -38,7 +38,7 @@ public class PanelPreview extends JPanel {
     }
 
     private void geometry() {
-        vectorLEDs = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
+        vectorLEDs = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         fillVector();
     }
 
@@ -92,13 +92,9 @@ public class PanelPreview extends JPanel {
         double demiMarge = MARGIN / 2;
 
         g2d.translate(espaceEntreLeds, -demiMarge);
-        int index = nbLedsGauche - 1;
+        
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < nbLedsHaut; i++) {
-                Pixel pixel = this.vectorLEDs.get(index);
-                System.out.println(pixel.getColor());
-                //g2d.setColor(pixel.getColor());
-                index++;
                 g2d.fill(new Ellipse2D.Double(0, 0, diametrePixel, diametrePixel));
                 g2d.translate(espaceEntreLeds + diametrePixel, 0.0);
             }
@@ -134,7 +130,7 @@ public class PanelPreview extends JPanel {
     }
 
     private void fillVector() {
-        int nbLeds = Config.getConfig().getNombreTotalLed();
+        int nbLeds = Config.getConfig().getNbLedTotal();
 
         for (int i = 0; i < nbLeds; ++i) {
             this.vectorLEDs.add(new Pixel(0, 0, 0));

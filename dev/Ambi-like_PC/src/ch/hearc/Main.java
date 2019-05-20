@@ -35,8 +35,6 @@ public class Main {
     private static final String MODE = "RMI";
     
     private static int requestedMode = Computation_I.MODE_AMBILIGHT;
-    
-    private static FrameMainWindow frameMainWindow = null;
 
     public static void main(String[] args) {
 
@@ -51,7 +49,7 @@ public class Main {
         
         //test
         //new JPanelConfigurator();
-        new FrameCreator();
+        //new FrameCreator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
@@ -67,9 +65,8 @@ public class Main {
         MenuItem messageItem = new MenuItem("Configuration");
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
-                if(Main.frameMainWindow == null){
-                    Main.frameMainWindow = new FrameMainWindow();
-                }
+                new FrameMainWindow();
+    
             }
         });
 
@@ -130,7 +127,7 @@ public class Main {
                 c = new Computation_fixedColor(sender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[2]));
                 break;
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(sender, PrivateMode.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(sender, ModePersonnalise.getMode(Config.getConfig().getPersoModeFile()));
         }
         Thread t = new Thread(c);
         t.setName("Computation");
