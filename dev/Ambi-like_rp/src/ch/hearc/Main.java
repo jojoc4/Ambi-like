@@ -47,10 +47,9 @@ public class Main {
                     if (System.currentTimeMillis() - commande.lastSetLed > 2000) {
                         led.setStrip(0, 0, 0);
                     }
-                    System.out.println("render");
                     led.render();
                     try {
-                        Thread.sleep(100);
+                        Thread.sleep(50);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }
