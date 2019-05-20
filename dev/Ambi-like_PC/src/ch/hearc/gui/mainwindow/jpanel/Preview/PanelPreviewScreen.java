@@ -73,7 +73,7 @@ public class PanelPreviewScreen extends JPanel {
     private void geometry() {
         //ImageIcon warning = MagasinImage.coffee;
         //button = new JButton(warning);
-        vectorPixels = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
+        vectorPixels = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         fillVector();
         startComputation();
     }
@@ -183,7 +183,7 @@ public class PanelPreviewScreen extends JPanel {
 
     private void fillVector() {
         Config config = Config.getConfig();
-        int nbLeds = config.getNombreTotalLed();
+        int nbLeds = config.getNbLedTotal();
 
         for (int i = 0; i < nbLeds; i++) {
             this.vectorPixels.add(new Pixel(1, 1, 1));

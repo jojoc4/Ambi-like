@@ -38,7 +38,7 @@ public class PanelPreview extends JPanel {
     }
 
     private void geometry() {
-        vectorLEDs = new Vector<Pixel>(Config.getConfig().getNombreTotalLed()); //initial size, better performance when adding elements
+        vectorLEDs = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         fillVector();
     }
 
@@ -130,7 +130,7 @@ public class PanelPreview extends JPanel {
     }
 
     private void fillVector() {
-        int nbLeds = Config.getConfig().getNombreTotalLed();
+        int nbLeds = Config.getConfig().getNbLedTotal();
 
         for (int i = 0; i < nbLeds; ++i) {
             this.vectorLEDs.add(new Pixel(0, 0, 0));
