@@ -24,7 +24,7 @@ public class Main {
     public static void main(String[] args) {
 
         //initialisation of the ledStrip
-        Ws281xLedStrip led = new Ws281xLedStrip(40, 18, 800000, 10, 255, 0, false, LedStripType.WS2811_STRIP_GRB, false);
+        Ws281xLedStrip led = new Ws281xLedStrip(150, 18, 800000, 10, 255, 0, false, LedStripType.WS2811_STRIP_GRB, false);
         led.setStrip(0, 0, 0);
         led.render();
 
