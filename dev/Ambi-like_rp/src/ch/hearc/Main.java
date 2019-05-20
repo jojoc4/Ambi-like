@@ -13,8 +13,8 @@ import java.util.logging.Logger;
 
 /**
  * @author jonatan.baumgart
- * @version 1
- * @since 06.05.2019
+ * @version 2
+ * @since 20.05.2019
  */
 public class Main {
 
@@ -49,7 +49,7 @@ public class Main {
                     }
                     led.render();
                     try {
-                        Thread.sleep(50);
+                        Thread.sleep(33);
                     } catch (InterruptedException ex) {
                         Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
                     }

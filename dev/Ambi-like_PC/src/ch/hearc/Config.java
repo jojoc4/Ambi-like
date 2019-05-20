@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 /**
  * Config singleton, use getConfig to get config instance
- *
+ * @version 3
+ * @since 10.03.2019
  * @author Jonatan Baumgartner
  */
 public class Config implements Serializable {
