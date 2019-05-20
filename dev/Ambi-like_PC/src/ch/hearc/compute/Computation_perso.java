@@ -19,6 +19,7 @@ public class Computation_perso extends Computation_I {
 
     private final Sender_I sender;
     private final PrivateMode mode;
+    private final BufferedImage img;
 
     /**
      *
@@ -28,6 +29,10 @@ public class Computation_perso extends Computation_I {
     public Computation_perso(Sender_I s, PrivateMode m) {
         this.sender = s;
         this.mode = m;
+        
+        this.img = printScreen();
+        
+        startComputation();
     }
 
     @Override
@@ -47,7 +52,6 @@ public class Computation_perso extends Computation_I {
 
     @Override
     public synchronized BufferedImage getImage() {
-        //TODO
-        return null;
+        return img;
     }
 }

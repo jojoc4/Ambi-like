@@ -18,6 +18,7 @@ public class Computation_fixedColor extends Computation_I {
 
     private final Sender_I sender;
     private final Pixel p;
+    private final BufferedImage img;
 
     /**
      *
@@ -27,6 +28,9 @@ public class Computation_fixedColor extends Computation_I {
     public Computation_fixedColor(Sender_I sender, Pixel p) {
         this.sender = sender;
         this.p = p;
+        
+        this.img = printScreen();
+        
         startComputation();
     }
 
@@ -53,7 +57,7 @@ public class Computation_fixedColor extends Computation_I {
      */
     @Override
     public synchronized BufferedImage getImage() {
-        return null;
+        return img;
     }
 
 }
