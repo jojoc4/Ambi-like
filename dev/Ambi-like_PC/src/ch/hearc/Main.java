@@ -7,6 +7,7 @@ import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.*;
 import ch.hearc.gui.configurator.JPanelConfigurator;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
+import ch.hearc.gui.creator.FrameCreator;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -30,8 +31,8 @@ import javax.swing.JPanel;
 public class Main {
 
     private static Computation_I c;
-    //private static final String MODE = "TEST";
-    private static final String MODE = "RMI";
+    private static final String MODE = "TEST";
+    //private static final String MODE = "RMI";
     
     private static int requestedMode = Computation_I.MODE_AMBILIGHT;
     
@@ -49,7 +50,8 @@ public class Main {
         createComputation();
         
         //test
-        new JPanelConfigurator();
+        //new JPanelConfigurator();
+        new FrameCreator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();

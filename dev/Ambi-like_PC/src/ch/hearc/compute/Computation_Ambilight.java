@@ -173,20 +173,6 @@ public class Computation_Ambilight extends Computation_I {
         }
     }
 
-    /**
-     * @return a BufferedImage containing the screenshot, or null if an
-     * exception is encountered
-     */
-    private BufferedImage printScreen() {
-        try {
-            Robot r = new Robot();
-            return r.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
-        } catch (AWTException ex) {
-            Logger.getLogger(Computation_Ambilight.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
-    }
-
     @Override
     public synchronized BufferedImage getImage() {
         return this.img;

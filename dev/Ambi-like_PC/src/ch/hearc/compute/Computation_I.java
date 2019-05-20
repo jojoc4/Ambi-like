@@ -1,6 +1,12 @@
 package ch.hearc.compute;
 
+import java.awt.AWTException;
+import java.awt.Rectangle;
+import java.awt.Robot;
+import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -28,6 +34,20 @@ public abstract class Computation_I implements Runnable {
     public boolean isRunning() {
         return this.running;
     }
-
+    
+    /**
+     * @return a BufferedImage containing the screenshot, or null if an
+     * exception is encountered
+     */
+    public final BufferedImage printScreen() {
+        try {
+            Robot r = new Robot();
+            return r.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
+        } catch (AWTException ex) {
+            Logger.getLogger(Computation_Ambilight.class.getName()).log(Level.SEVERE, null, ex);
+            return null;
+        }
+    }
+    
     public abstract BufferedImage getImage();
 }
