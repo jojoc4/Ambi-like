@@ -6,9 +6,9 @@
 package ch.hearc.gui.creator.jpanel;
 
 import java.awt.BorderLayout;
-import javax.swing.JButton;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
+import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 /**
  *
@@ -17,29 +17,24 @@ import javax.swing.JPanel;
 public class PanelColorChooser extends JPanel {
 
     private JColorChooser jcc;
-    private PanelButtons pb;
+    //private PanelButtons pb;
 
     public PanelColorChooser() {
         jcc = new JColorChooser();
-        pb = new PanelButtons();
+        jcc.setPreviewPanel(new JPanel());
+        
+        AbstractColorChooserPanel[] panels = jcc.getChooserPanels();
+        for (AbstractColorChooserPanel accp : panels) {
+           if(!accp.getDisplayName().equals("RGB")) {
+              jcc.removeChooserPanel(accp);
+           } 
+        }
+        
+        //pb = new PanelButtons();
 
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
-        add(pb, BorderLayout.SOUTH);
+        //add(pb, BorderLayout.SOUTH);
     }
 }
 
-class PanelButtons extends JPanel {
-
-    private JButton btnSave;
-    private JButton btnQuit;
-
-    public PanelButtons() {
-        btnSave = new JButton("Sauvegarder");
-        btnQuit = new JButton("Quitter");
-
-        setLayout(new BorderLayout());
-        add(btnSave, BorderLayout.WEST);
-        add(btnQuit, BorderLayout.EAST);
-    }
-}

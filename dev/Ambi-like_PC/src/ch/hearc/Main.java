@@ -130,7 +130,7 @@ public class Main {
                 c = new Computation_fixedColor(sender, new Pixel(Config.getConfig().getColor()[0], Config.getConfig().getColor()[1], Config.getConfig().getColor()[2]));
                 break;
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(sender, PrivateMode.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(sender, ModePersonnalise.getMode(Config.getConfig().getPersoModeFile()));
         }
         Thread t = new Thread(c);
         t.setName("Computation");

@@ -6,7 +6,7 @@
 package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.Config;
-import ch.hearc.PrivateMode;
+import ch.hearc.ModePersonnalise;
 import ch.hearc.Pixel;
 import ch.hearc.compute.Computation_Ambilight;
 import ch.hearc.compute.Computation_I;
@@ -203,7 +203,7 @@ public class PanelPreviewScreen extends JPanel {
                 break;
 
             case Computation_I.MODE_PERSO:
-                c = new Computation_perso(previewSender, PrivateMode.getMode(Config.getConfig().getPersoModeFile()));
+                c = new Computation_perso(previewSender, ModePersonnalise.getMode(Config.getConfig().getPersoModeFile()));
                 break;
             default:
                 c = new Computation_Ambilight(previewSender);

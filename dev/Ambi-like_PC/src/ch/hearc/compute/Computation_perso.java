@@ -1,6 +1,6 @@
 package ch.hearc.compute;
 
-import ch.hearc.PrivateMode;
+import ch.hearc.ModePersonnalise;
 import ch.hearc.Pixel;
 import ch.hearc.compute.senders.Sender_I;
 import java.awt.image.BufferedImage;
@@ -18,7 +18,7 @@ import java.util.logging.Logger;
 public class Computation_perso extends Computation_I {
 
     private final Sender_I sender;
-    private final PrivateMode mode;
+    private final ModePersonnalise mode;
     private final BufferedImage img;
 
     /**
@@ -26,7 +26,7 @@ public class Computation_perso extends Computation_I {
      * @param s used sender
      * @param m Personalized mode to apply
      */
-    public Computation_perso(Sender_I s, PrivateMode m) {
+    public Computation_perso(Sender_I s, ModePersonnalise m) {
         this.sender = s;
         this.mode = m;
         
