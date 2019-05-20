@@ -109,7 +109,7 @@ public class PanelPreviewScreen extends JPanel {
     public void updateDisplay(Graphics2D g2d) {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
-        int nbLedsRight = Config.getConfig().getNbLed(Config.WEST);
+        int nbLedsRight = nbLedsLeft;
 
         // Rectangle
         g2d.translate(MARGIN, MARGIN);
@@ -212,9 +212,9 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void changeComputation() {
-        if(config.getMode() != this.lastMode || config.getColor()[0] != this.previousPixel.getRed()
+        if(config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
-                || config.getColor()[2] != this.previousPixel.getBlue()){
+                || config.getColor()[2] != this.previousPixel.getBlue())){
             this.computation.stopComputation();
             this.startComputation();
         }

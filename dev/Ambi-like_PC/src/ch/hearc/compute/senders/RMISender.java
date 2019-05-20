@@ -15,6 +15,8 @@ import java.util.logging.Logger;
 /**
  * sends command via rmi
  *
+ * @version 2
+ * @since 18.05.2019
  * @author jonatan.baumgart
  */
 public class RMISender implements Sender_I {
@@ -39,9 +41,9 @@ public class RMISender implements Sender_I {
     }
 
     /**
-     * singletone pattern so the connection is only madae once
+     * singletone pattern so the connection is only made once
      *
-     * @return
+     * @return RmiSender instance
      */
     public static synchronized RMISender getInstance() {
         if (instance == null) {
@@ -76,6 +78,11 @@ public class RMISender implements Sender_I {
         }
     }
 
+    /**
+     * prevents sending error to the raspberry pi
+     * @param color color to check
+     * @return  corrected color
+     */
     private int checkColor(int color) {
         if (color > 255) {
             return 255;

@@ -10,7 +10,8 @@ import java.io.Serializable;
 
 /**
  * Config singleton, use getConfig to get config instance
- *
+ * @version 3
+ * @since 10.03.2019
  * @author Jonatan Baumgartner
  */
 public class Config implements Serializable {
@@ -19,9 +20,9 @@ public class Config implements Serializable {
         nbLed = new int[4];
         raspIp = "192.168.100.100";
         nbLed[0] = 10;
-        nbLed[1] = 10;
-        nbLed[2] = 10;
-        nbLed[3] = 10;
+        nbLed[1] = 20;
+        nbLed[2] = 30;
+        nbLed[3] = 40;
 
         lumMax = 120;
 
@@ -35,7 +36,7 @@ public class Config implements Serializable {
         color[1] = 255;
         color[2] = 255;
         
-        tempMode = "";
+        tempMode = 0;
     }
 
     //const
@@ -50,7 +51,7 @@ public class Config implements Serializable {
     private int[] nbLed;
     private int lumMax;
     private int mode;
-    private String tempMode;
+    private int tempMode;
     private String persoModeFile;
     private int[] color;
 
@@ -77,10 +78,6 @@ public class Config implements Serializable {
 
     public int getMode() {
         return mode;
-    }
-    
-    public String getTempMode() {
-        return tempMode;
     }
 
     public String getPersoModeFile() {
@@ -112,10 +109,6 @@ public class Config implements Serializable {
         this.mode = mode;
     }
     
-    public void setTempMode(String mode){
-        this.tempMode = mode;
-    }
-
     public void setPersoModeFile(String persoModeFile) {
         this.persoModeFile = persoModeFile;
     }
