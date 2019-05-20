@@ -29,6 +29,7 @@ hs_err_pid*
 *.metadata*
 *bin*
 *nbproject/private*
+**/private/*
 /dev/Ambi-like_PC/nbproject/private/
 /dev/Ambi-like_PC/build/
 /dev/Ambi-like_rp/dist/
