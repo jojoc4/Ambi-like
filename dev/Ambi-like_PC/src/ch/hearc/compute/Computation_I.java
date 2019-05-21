@@ -39,7 +39,7 @@ public abstract class Computation_I implements Runnable {
      * @return a BufferedImage containing the screenshot, or null if an
      * exception is encountered
      */
-    public final BufferedImage printScreen() {
+    public static final BufferedImage printScreen() {
         try {
             Robot r = new Robot();
             return r.createScreenCapture(new Rectangle(Toolkit.getDefaultToolkit().getScreenSize()));
