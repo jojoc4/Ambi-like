@@ -177,41 +177,44 @@ public class PanelPreview extends JPanel {
 
         g2d.setTransform(transform); //restore
         
+        System.out.println(vectorEllipses.size());
+        
 //        for(Ellipse2D e : vectorEllipses){
 //            System.out.println(e.getBounds2D());
 //        }
 //        System.out.println("okay");
         
-//        this.addMouseListener(new MouseListener() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {}
-//            @Override
-//            public void mousePressed(MouseEvent e) {}
-//            @Override
-//            public void mouseReleased(MouseEvent e) {
+        this.addMouseListener(new MouseListener() {
+            @Override
+            public void mouseClicked(MouseEvent e) {}
+            @Override
+            public void mousePressed(MouseEvent e) {}
+            @Override
+            public void mouseReleased(MouseEvent e) {
 //                System.out.println(e.getPoint());
-//                updateLEDColor(e.getPoint());
-//            }
-//            @Override
-//            public void mouseEntered(MouseEvent e) {}
-//            @Override
-//            public void mouseExited(MouseEvent e) {}
-//        });
+                updateLEDColor(e.getPoint());
+            }
+            @Override
+            public void mouseEntered(MouseEvent e) {}
+            @Override
+            public void mouseExited(MouseEvent e) {}
+        });
     }
     
     private void addEllipse(int index, double x, double y) {
         Ellipse2D ellipse = new Ellipse2D.Double(x, y, DIAMETRE, DIAMETRE);
+        g2d.setColor(vectorLEDs.elementAt(index).getColor());
         g2d.fill(ellipse);
         vectorEllipses.set(index, ellipse);
     }
     
     private void updateLEDColor(Point2D p){
         int i=0;
-        System.out.println("Entré!");
-        System.out.println(p);
+//        System.out.println("Entré!");
+//        System.out.println(p);
         for(Ellipse2D ellipse : vectorEllipses){
-            System.out.println(i);
             if(ellipse.contains(p)){
+//                System.out.println("entré");
                 double x = ellipse.getX();
                 double y = ellipse.getCenterY();
                 double w = ellipse.getWidth();
@@ -220,10 +223,10 @@ public class PanelPreview extends JPanel {
                 Color c = colorChooser.getColor();
                 
                 vectorLEDs.elementAt(i).setColor(c);
-                g2d.setColor(c);
+                //g2d.setColor(c);
                 
-                g2d.draw(ellipse);
-                
+                //g2d.draw(ellipse);
+                repaint();
                 break;
             }
             ++i;
