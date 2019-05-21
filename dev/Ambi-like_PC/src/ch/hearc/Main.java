@@ -49,8 +49,8 @@ public class Main {
         //createComputation();
         
         //test
-        new JFrameConfigurator();
-//        new FrameCreator();
+       // new JFrameConfigurator();
+        new FrameCreator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
