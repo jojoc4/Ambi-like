@@ -30,6 +30,10 @@ public class PanelPreviewButtons extends JPanel{
         
         add(preview, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
+        
+        System.out.println("PanelPreviewButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
+        
+        setSize(preview.getWidth() + buttons.getWidth(), preview.getHeight()+ buttons.getHeight());
     }
     
     public void saveMode() {
@@ -66,5 +70,9 @@ class PanelButtons extends JPanel {
                 parent.saveMode();
             }
         });
+        
+        //setSize(500, 80);
+        
+        System.out.println("PanelButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 }

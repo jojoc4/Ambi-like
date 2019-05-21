@@ -58,7 +58,6 @@ public class PanelChoice extends JPanel {
                     config.setMode(Main.getTempMode());
                     Main.changeMode();
                 }
-
             }
         });
     }

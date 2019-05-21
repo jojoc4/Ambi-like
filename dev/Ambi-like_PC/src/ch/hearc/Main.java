@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -46,11 +47,8 @@ public class Main {
         }
 
         //start main computation Thread
-        //createComputation();
-        
-        //test
-       // new JFrameConfigurator();
-        new FrameCreator();
+        createComputation();
+       
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();

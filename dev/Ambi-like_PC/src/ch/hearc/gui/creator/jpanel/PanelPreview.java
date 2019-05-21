@@ -49,6 +49,7 @@ public class PanelPreview extends JPanel {
         geometry();
         control();
         appearance();
+        System.out.println("PanelPreview - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 
     private void geometry() {
