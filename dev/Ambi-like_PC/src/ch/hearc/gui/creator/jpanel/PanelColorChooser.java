@@ -6,6 +6,7 @@
 package ch.hearc.gui.creator.jpanel;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import javax.swing.JColorChooser;
 import javax.swing.JPanel;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
@@ -35,6 +36,10 @@ public class PanelColorChooser extends JPanel {
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
         //add(pb, BorderLayout.SOUTH);
+    }
+    
+    public Color getColor(){
+        return jcc.getColor();
     }
 }
 
