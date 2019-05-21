@@ -29,9 +29,9 @@ public class Computation_perso extends Computation_I {
     public Computation_perso(Sender_I s, ModePersonnalise m) {
         this.sender = s;
         this.mode = m;
-        
+
         this.img = printScreen();
-        
+
         startComputation();
     }
 

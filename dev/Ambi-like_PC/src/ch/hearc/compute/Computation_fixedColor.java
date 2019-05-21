@@ -10,6 +10,7 @@ import java.util.logging.Logger;
 /**
  * computation used to set a fixed color to the ledstrip. needs to send color at
  * least once every 2 seconds so the ledstrip don't turn off
+ *
  * @version 1.1
  * @since 10.05.2019
  * @author jonatan.baumgart
@@ -28,14 +29,15 @@ public class Computation_fixedColor extends Computation_I {
     public Computation_fixedColor(Sender_I sender, Pixel p) {
         this.sender = sender;
         this.p = p;
-        
+
         this.img = printScreen();
-        
+
         startComputation();
     }
 
     /**
-     * sends the color to the led ten times a second so the strip doesn't tuen off
+     * sends the color to the led ten times a second so the strip doesn't tuen
+     * off
      */
     @Override
     public void run() {
@@ -53,7 +55,8 @@ public class Computation_fixedColor extends Computation_I {
 
     /**
      * used by preview windows
-     * @return 
+     *
+     * @return
      */
     @Override
     public synchronized BufferedImage getImage() {

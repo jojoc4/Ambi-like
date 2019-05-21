@@ -12,8 +12,8 @@ import javax.swing.JFrame;
  * @author teosc
  */
 public class Tester {
-    
-    public static void main(String[] args){
+
+    public static void main(String[] args) {
         JFrame f = new FrameCreator();
     }
 }

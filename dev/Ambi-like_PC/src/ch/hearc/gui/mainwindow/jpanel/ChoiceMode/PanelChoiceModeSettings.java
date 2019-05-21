@@ -92,7 +92,7 @@ public class PanelChoiceModeSettings extends JPanel {
                     panelChoiceModeColors.setVisible(true);
                     Main.setTempMode(Computation_I.MODE_FIXE);
                     //configFile.setMode(Computation_I.MODE_FIXE);
-                    
+
                 }
             }
         });

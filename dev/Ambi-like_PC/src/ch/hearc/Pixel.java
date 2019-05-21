@@ -8,7 +8,7 @@ import java.io.Serializable;
  *
  * @author Jonatan Baumgartner
  */
-public class Pixel implements Serializable{
+public class Pixel implements Serializable {
 
     private int red;
     private int green;

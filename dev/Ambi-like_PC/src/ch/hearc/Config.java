@@ -10,6 +10,7 @@ import java.io.Serializable;
 
 /**
  * Config singleton, use getConfig to get config instance
+ *
  * @version 3
  * @since 10.03.2019
  * @author Jonatan Baumgartner
@@ -35,7 +36,7 @@ public class Config implements Serializable {
         color[0] = 255;
         color[1] = 255;
         color[2] = 255;
-        
+
         tempMode = 0;
     }
 
@@ -104,7 +105,7 @@ public class Config implements Serializable {
     public void setMode(int mode) {
         this.mode = mode;
     }
-    
+
     public void setPersoModeFile(String persoModeFile) {
         this.persoModeFile = persoModeFile;
     }

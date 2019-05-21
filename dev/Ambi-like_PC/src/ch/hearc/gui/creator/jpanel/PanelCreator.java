@@ -33,13 +33,13 @@ public class PanelCreator extends JPanel {
         colorChooser = new PanelColorChooser();
         preview = new PanelPreviewButtons(colorChooser);
         //buttons = new PanelButtons(this);
-        
+
         layout = new BorderLayout();
         setLayout(layout);
         add(colorChooser, BorderLayout.WEST);
         add(preview, BorderLayout.CENTER);
         //add(buttons, BorderLayout.SOUTH);
-        
+
         //System.out.println("bite " + layout.getLayoutComponent(BorderLayout.CENTER));
     }
 

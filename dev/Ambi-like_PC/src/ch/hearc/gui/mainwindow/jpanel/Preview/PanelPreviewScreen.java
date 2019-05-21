@@ -49,14 +49,14 @@ public class PanelPreviewScreen extends JPanel {
     private int lastMode;
 
     private int nbRefresh = 0;
-    
+
     private Config config;
-    
+
     private Pixel previousPixel;
 
     public PanelPreviewScreen() {
         config = Config.getConfig();
-        previousPixel = new Pixel(0,0,0);
+        previousPixel = new Pixel(0, 0, 0);
         geometry();
         appearance();
 
@@ -98,7 +98,7 @@ public class PanelPreviewScreen extends JPanel {
     private void draw(Graphics2D g2d) {
 
         AffineTransform backup = g2d.getTransform();
-       
+
         changeComputation();
         updateDisplay(g2d);
 
@@ -115,7 +115,7 @@ public class PanelPreviewScreen extends JPanel {
         g2d.translate(MARGIN, MARGIN);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawRect(0, 0, WIDTH - 2 * MARGIN, HEIGHT - 2 * MARGIN);
-        g2d.drawImage(computation.getImage(), 1,1,WIDTH - 2 * MARGIN-1,HEIGHT - 2 * MARGIN-1, this);
+        g2d.drawImage(computation.getImage(), 1, 1, WIDTH - 2 * MARGIN - 1, HEIGHT - 2 * MARGIN - 1, this);
 
         double diameterPixel = 10.;
         double spaceBetweenLeds = (double) (WIDTH - 2 * MARGIN - nbLedsTop * diameterPixel) / (double) (nbLedsTop + 1);
@@ -169,7 +169,7 @@ public class PanelPreviewScreen extends JPanel {
                 nbRefresh = 0;
                 repaint();
             }
-            if(Computation_I.MODE_FIXE == config.getMode() && nbRefresh % 100 == 0){
+            if (Computation_I.MODE_FIXE == config.getMode() && nbRefresh % 100 == 0) {
                 nbRefresh = 0;
                 repaint();
             }
@@ -212,14 +212,15 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void changeComputation() {
-        if(config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
+        if (config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
-                || config.getColor()[2] != this.previousPixel.getBlue())){
+                || config.getColor()[2] != this.previousPixel.getBlue())) {
             this.computation.stopComputation();
             this.startComputation();
         }
     }
-    public void stopComputation(){
+
+    public void stopComputation() {
         this.computation.stopComputation();
     }
 }

@@ -30,7 +30,7 @@ public class FrameCreator extends JFrame {
 
     private void geometry() {
         panel = new PanelCreator();
-        
+
 //        layout = new BorderLayout();
 //        //setLayout(new BorderLayout());
 //        layout.addLayoutComponent(panel, BorderLayout.CENTER);
@@ -40,7 +40,7 @@ public class FrameCreator extends JFrame {
     }
 
     private void control() {
-        
+
     }
 
     private void appearance() {
@@ -48,11 +48,10 @@ public class FrameCreator extends JFrame {
         setSize(1300, 600);
         setResizable(false);
         setLocationRelativeTo(null); // frame centrer
-        
+
 //        synchronized(getTreeLock()) {
 //            validateTree();
 //        }
-        
         //pack();
         setVisible(true); // last!
     }

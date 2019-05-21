@@ -23,27 +23,24 @@ public class PanelColorChooser extends JPanel {
     public PanelColorChooser() {
         jcc = new JColorChooser();
         jcc.setPreviewPanel(new JPanel());
-        
+
         AbstractColorChooserPanel[] panels = jcc.getChooserPanels();
         for (AbstractColorChooserPanel accp : panels) {
-           if(!accp.getDisplayName().equals("RGB")) {
-              jcc.removeChooserPanel(accp);
-           } 
+            if (!accp.getDisplayName().equals("RGB")) {
+                jcc.removeChooserPanel(accp);
+            }
         }
-        
-        //pb = new PanelButtons();
 
+        //pb = new PanelButtons();
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
         //add(pb, BorderLayout.SOUTH);
-        
+
         //setSize(jcc.getSize());
-        
         System.out.println("PanelColorChooser - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
-    
-    public Color getColor(){
+
+    public Color getColor() {
         return jcc.getColor();
     }
 }
-

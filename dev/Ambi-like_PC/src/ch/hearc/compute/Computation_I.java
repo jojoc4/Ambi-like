@@ -17,7 +17,7 @@ public abstract class Computation_I implements Runnable {
     public final static int MODE_AMBILIGHT = 1;
     public final static int MODE_FIXE = 2;
     public final static int MODE_PERSO = 3;
-    
+
     private boolean running;
 
     @Override
@@ -34,7 +34,7 @@ public abstract class Computation_I implements Runnable {
     public boolean isRunning() {
         return this.running;
     }
-    
+
     /**
      * @return a BufferedImage containing the screenshot, or null if an
      * exception is encountered
@@ -48,6 +48,6 @@ public abstract class Computation_I implements Runnable {
             return null;
         }
     }
-    
+
     public abstract BufferedImage getImage();
 }
