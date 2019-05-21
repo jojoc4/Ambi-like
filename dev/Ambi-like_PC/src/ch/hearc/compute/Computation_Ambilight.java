@@ -2,10 +2,6 @@ package ch.hearc.compute;
 
 import ch.hearc.Config;
 import ch.hearc.compute.senders.PreviewSender;
-import java.awt.AWTException;
-import java.awt.Rectangle;
-import java.awt.Robot;
-import java.awt.Toolkit;
 import java.awt.image.BufferedImage;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -41,14 +37,14 @@ public class Computation_Ambilight extends Computation_I {
         img = printScreen();
 
         //boundaries (nb total LEDs)
-        boundaries = new Boundaries(nbLed[0] + nbLed[1] + nbLed[2] + nbLed[3]);
+        boundaries = new Boundaries(Config.getConfig().getNbLedTotal());
 
         //Use 1 single thread if the work will be done for previsualisation on the GUI, hammer the CPU otherwise.
         executor = (sender instanceof PreviewSender) ? Executors.newSingleThreadExecutor() : Executors.newWorkStealingPool();
         int nbThreads = (sender instanceof PreviewSender) ? 1 : Runtime.getRuntime().availableProcessors();
         workers = new WorkerThread[nbThreads];
 
-        super.stopComputation(); //set running to false. Must only be started when run() has been called.
+        stopComputation(); //set running to false. Must only be started when run() has been called.
     }
 
     @Override
