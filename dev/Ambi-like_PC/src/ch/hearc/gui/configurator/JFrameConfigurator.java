@@ -1,7 +1,6 @@
 package ch.hearc.gui.configurator;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
 import javax.swing.JFrame;
 
 /**
@@ -22,8 +21,7 @@ public class JFrameConfigurator extends JFrame {
     private void geometry() {
         this.jPanelConfigurator = new JPanelConfigurator();
 
-        BorderLayout borderLayout = new BorderLayout();
-        setLayout(borderLayout);
+        setLayout(new BorderLayout());
 
         add(this.jPanelConfigurator, BorderLayout.CENTER);
     }
@@ -33,8 +31,10 @@ public class JFrameConfigurator extends JFrame {
     }
 
     private void appearance() {
-        setLocationRelativeTo(null); // frame centrer
-        setVisible(true); // last!
+        this.setSize(220, 330);
+        this.setLocation(300, 500);
+        this.setTitle("Configurator");
+        this.setVisible(true); //imp�rativement EN DERNIER !!
     }
 
 }

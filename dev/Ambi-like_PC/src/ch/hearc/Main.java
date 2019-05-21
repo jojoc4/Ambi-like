@@ -5,6 +5,7 @@ import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.*;
+import ch.hearc.gui.configurator.JFrameConfigurator;
 import ch.hearc.gui.configurator.JPanelConfigurator;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
 import ch.hearc.gui.creator.FrameCreator;
@@ -48,8 +49,8 @@ public class Main {
         //createComputation();
         
         //test
-        //new JPanelConfigurator();
-        new FrameCreator();
+        new JFrameConfigurator();
+//        new FrameCreator();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
