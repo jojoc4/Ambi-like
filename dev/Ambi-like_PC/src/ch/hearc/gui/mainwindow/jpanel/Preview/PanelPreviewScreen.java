@@ -36,7 +36,7 @@ import javax.swing.Timer;
  */
 public class PanelPreviewScreen extends JPanel {
 
-    private static final int WIDTH = 500;
+    private static final int WIDTH = 600;
     private static final int HEIGHT = 400;
     private static final int MARGIN = 40;
 
@@ -108,8 +108,10 @@ public class PanelPreviewScreen extends JPanel {
 
     public void updateDisplay(Graphics2D g2d) {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
-        int nbLedsLeft = Config.getConfig().getNbLed(Config.EAST);
-        int nbLedsRight = nbLedsLeft;
+        int nbLedsLeft = Config.getConfig().getNbLed(Config.WEST);
+        int nbLedsRight = Config.getConfig().getNbLed(Config.EAST);
+        
+        int nbLedsTotal = nbLedsTop*2 + nbLedsLeft + nbLedsRight;
 
         // Rectangle
         g2d.translate(MARGIN, MARGIN);
@@ -126,12 +128,11 @@ public class PanelPreviewScreen extends JPanel {
         g2d.translate(spaceBetweenLeds, -halfMargin);
         int index = nbLedsLeft;
         for (int j = 0; j < 2; j++) {
-
             for (int i = 0; i < nbLedsTop; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
                 g2d.setColor(pixel.getColor());
                 index++;
-                index %= Config.getConfig().getNbLedTotal();
+                index %= nbLedsTotal;
                 g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
                 g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
             }
@@ -144,7 +145,7 @@ public class PanelPreviewScreen extends JPanel {
                 Pixel pixel = this.vectorPixels.get(index);
                 g2d.setColor(pixel.getColor());
                 index++;
-                index %= Config.getConfig().getNbLedTotal();
+                index %= nbLedsTotal;
 
                 g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
                 g2d.translate(spaceBetweenLedsWidth + diameterPixel, 0.0);
