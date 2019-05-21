@@ -128,8 +128,8 @@ public class PanelPreview extends JPanel {
 //        g2d.rotate(-Math.PI / 2);
 //        g2d.translate(leftSpacing/2, 0);
         
-        double x = MARGIN/2;
-        double y = MARGIN + HEIGHT - leftSpacing/2;
+        double x = MARGIN/2 - DIAMETRE/2;
+        double y = MARGIN + HEIGHT - leftSpacing/2 - DIAMETRE;
         
         for(int i=0; i<nbLedsLeft; ++i){
             addEllipse(ellipseIndex++, x, y);
@@ -142,7 +142,7 @@ public class PanelPreview extends JPanel {
 //        g2d.translate(MARGIN, MARGIN/2);
 //        g2d.translate(topSpacing/2, 0);
         x = MARGIN + topSpacing/2;
-        y = MARGIN/2;
+        y = MARGIN/2 - DIAMETRE/2;
         for(int i=0; i<nbLedsTop; ++i){
             addEllipse(ellipseIndex++, x, y);
             //g2d.translate(topSpacing + DIAMETRE, 0d);
@@ -154,7 +154,7 @@ public class PanelPreview extends JPanel {
 //        g2d.translate(WIDTH - (MARGIN/2), MARGIN);
 //        g2d.rotate(Math.PI / 2);
 //        g2d.translate(rightSpacing/2, 0);
-        x = WIDTH + MARGIN + (MARGIN/2);
+        x = WIDTH + MARGIN + (MARGIN/2) - DIAMETRE/2;
         y = MARGIN + rightSpacing/2;
         for(int i=0; i<nbLedsRight; ++i){
             addEllipse(ellipseIndex++, x, y);
@@ -167,8 +167,8 @@ public class PanelPreview extends JPanel {
 //        g2d.translate(WIDTH - MARGIN, HEIGHT - (MARGIN/2));
 //        g2d.rotate(-Math.PI);
 //        g2d.translate(bottomSpacing/2, 0);
-        x = WIDTH + MARGIN - bottomSpacing/2;
-        y = HEIGHT + MARGIN + (MARGIN/2);
+        x = WIDTH + MARGIN - bottomSpacing/2 - DIAMETRE;
+        y = HEIGHT + MARGIN + (MARGIN/2) - DIAMETRE/2;
         for(int i=0; i<nbLedsBottom; ++i){
             addEllipse(ellipseIndex++, x, y);
             //g2d.translate((bottomSpacing + DIAMETRE), 0d);
