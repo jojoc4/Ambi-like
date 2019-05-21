@@ -19,11 +19,9 @@ public class FrameMainWindow extends JFrame {
     private PanelMainWindow panelMainWindow;
 
     public FrameMainWindow() {
-
         geometry();
         control();
         appearance();
-
     }
 
     private void geometry() {

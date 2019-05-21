@@ -112,7 +112,7 @@ public class WorkerThread implements Runnable {
 //            
 //            System.out.println(index + ") rouge2: " + red + " vert2: " + green + " bleu2: " + blue);
             //send the values to the specified output (chosen in constructor)
-            //sendValues();
+            sendValues();
 
             try {
                 Thread.sleep(10);

@@ -36,6 +36,10 @@ public class PanelColorChooser extends JPanel {
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
         //add(pb, BorderLayout.SOUTH);
+        
+        //setSize(jcc.getSize());
+        
+        System.out.println("PanelColorChooser - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
     
     public Color getColor(){
