@@ -24,8 +24,7 @@ public class PanelChoice extends JPanel {
 
     private PanelChoiceMode panelChoiceMode;
     private JButton buttonApplyParameter;
-    
-    
+
     private Config config;
 
     public PanelChoice() {
@@ -38,9 +37,9 @@ public class PanelChoice extends JPanel {
     private void geometry() {
         panelChoiceMode = new PanelChoiceMode();
         buttonApplyParameter = new JButton("Appliquer le mode sélectionné");
-        
+
         config = Config.getConfig();
-        
+
         BorderLayout layout = new BorderLayout();
         Box boxV = Box.createVerticalBox();
         boxV.add(panelChoiceMode);
@@ -58,7 +57,6 @@ public class PanelChoice extends JPanel {
                     config.setMode(Main.getTempMode());
                     Main.changeMode();
                 }
-
             }
         });
     }

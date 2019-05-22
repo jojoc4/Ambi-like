@@ -28,10 +28,10 @@ hs_err_pid*
 # Eclipse/netbeans data and project binaries
 *.metadata*
 *bin*
-*nbproject/private*
 **/private/*
+**/genfiles.properties
 /dev/Ambi-like_PC/nbproject/private/
 /dev/Ambi-like_PC/build/
-/dev/Ambi-like_rp/dist/
 /dev/Ambi-like_PC/dist/
+/dev/Ambi-like_rp/dist/
 /dev/Ambi-like_rp/nbproject/private/

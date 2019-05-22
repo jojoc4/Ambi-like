@@ -44,8 +44,8 @@ public class PanelMainWindow extends JPanel {
     private void appearance() {
 
     }
-    
-    public void stopComputation(){
+
+    public void stopComputation() {
         this.panelPreview.stopComputation();
     }
 

@@ -25,11 +25,11 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         nbled = cfg.getNbLed();
 
         int totalLed = cfg.getNbLedTotal();
-        
+
         l = new Vector<Pixel>(totalLed);
 
         for (int i = 0; i < totalLed; i++) {
-            addLed(new Pixel(0,0,0));
+            addLed(new Pixel(0, 0, 0));
         }
     }
 
@@ -48,7 +48,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     public Pixel setLed(int index, Pixel p) {
         return l.set(index, p);
     }
-    
+
     public void addLed(Pixel p) {
         l.add(p);
     }

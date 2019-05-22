@@ -80,8 +80,9 @@ public class RMISender implements Sender_I {
 
     /**
      * prevents sending error to the raspberry pi
+     *
      * @param color color to check
-     * @return  corrected color
+     * @return corrected color
      */
     private int checkColor(int color) {
         if (color > 255) {

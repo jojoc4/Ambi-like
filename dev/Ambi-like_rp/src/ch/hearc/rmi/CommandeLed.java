@@ -5,6 +5,7 @@ import java.rmi.RemoteException;
 
 /**
  * implementation of CommandeLed_I
+ *
  * @author jonatan.baumgart
  * @version 1.5
  * @since 20.05.2019
@@ -15,7 +16,7 @@ public class CommandeLed implements CommandeLed_I {
     public long lastSetLed;
 
     /**
-     * 
+     *
      * @param led led strip we want to command
      */
     public CommandeLed(Ws281xLedStrip led) {

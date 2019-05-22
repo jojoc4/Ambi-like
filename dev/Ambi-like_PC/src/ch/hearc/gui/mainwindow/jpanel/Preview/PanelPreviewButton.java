@@ -65,7 +65,7 @@ public class PanelPreviewButton extends JPanel {
                 jFrameConfigurator = new JFrameConfigurator();
             }
         });
-        
+
         buttonCreateNewDisplayMode.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

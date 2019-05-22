@@ -18,34 +18,38 @@ import javax.swing.JPanel;
  *
  * @author teosc
  */
-public class PanelPreviewButtons extends JPanel{
-    
+public class PanelPreviewButtons extends JPanel {
+
     private PanelPreview preview;
     private PanelButtons buttons;
-    
+
     public PanelPreviewButtons(PanelColorChooser colorChooser) {
-        
+
         this.preview = new PanelPreview(colorChooser);
         this.buttons = new PanelButtons(this);
-        
+
         add(preview, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
+
+        System.out.println("PanelPreviewButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
+
+        setSize(preview.getWidth() + buttons.getWidth(), preview.getHeight() + buttons.getHeight());
     }
-    
+
     public void saveMode() {
         ModePersonnalise m = new ModePersonnalise();
-        
-        int i=0;
-        for(Pixel p : preview.getVectorPixel()){
+
+        int i = 0;
+        for (Pixel p : preview.getVectorPixel()) {
             m.setLed(i++, p);
         }
-        
+
         m.save("test.amm");
     }
 }
 
-
 class PanelButtons extends JPanel {
+
     private JButton btnSave;
     private PanelPreviewButtons parent;
 
@@ -59,12 +63,15 @@ class PanelButtons extends JPanel {
         add(btnSave, BorderLayout.CENTER);
         add(Box.createVerticalStrut(20), BorderLayout.SOUTH);
         add(Box.createVerticalStrut(20), BorderLayout.NORTH);
-        
+
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 parent.saveMode();
             }
         });
+
+        //setSize(500, 80);
+        System.out.println("PanelButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 }

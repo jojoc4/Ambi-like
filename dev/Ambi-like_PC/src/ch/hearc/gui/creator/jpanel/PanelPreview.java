@@ -41,39 +41,48 @@ public class PanelPreview extends JPanel {
         this.colorChooser = colorChooser;
         vectorLEDs = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         vectorEllipses = new Vector<Ellipse2D>(Config.getConfig().getNbLedTotal());
-        
+
         fillVectors();
-        
+
         img = Computation_I.printScreen();
-        
+
         geometry();
         control();
         appearance();
+        System.out.println("PanelPreview - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 
     private void geometry() {
-        
+
     }
 
     private void control() {
         this.addMouseListener(new MouseListener() {
             @Override
-            public void mouseClicked(MouseEvent e) {}
+            public void mouseClicked(MouseEvent e) {
+            }
+
             @Override
-            public void mousePressed(MouseEvent e) {}
+            public void mousePressed(MouseEvent e) {
+            }
+
             @Override
             public void mouseReleased(MouseEvent e) {
                 updateLEDColor(e.getPoint());
             }
+
             @Override
-            public void mouseEntered(MouseEvent e) {}
+            public void mouseEntered(MouseEvent e) {
+            }
+
             @Override
-            public void mouseExited(MouseEvent e) {}
+            public void mouseExited(MouseEvent e) {
+            }
         });
     }
-    
+
     private void appearance() {
-        setPreferredSize(new Dimension(WIDTH + 2*MARGIN, HEIGHT + 2*MARGIN));
+        setPreferredSize(new Dimension(WIDTH + 2 * MARGIN, HEIGHT + 2 * MARGIN));
     }
 
     @Override
@@ -90,70 +99,70 @@ public class PanelPreview extends JPanel {
         int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.WEST);
         int nbLedsRight = Config.getConfig().getNbLed(Config.EAST);
-        
+
         // Draw the screen
         g2d.setStroke(new BasicStroke(1));
         g2d.drawRect(MARGIN, MARGIN, WIDTH, HEIGHT);
         g2d.drawImage(img, MARGIN, MARGIN, WIDTH, HEIGHT, this);
-        
-        double leftSpacing = ((HEIGHT ) - (nbLedsLeft * DIAMETER)) / nbLedsLeft;
-        double topSpacing = ((WIDTH ) - (nbLedsTop * DIAMETER)) / nbLedsTop;
-        double rightSpacing = ((HEIGHT ) - (nbLedsRight * DIAMETER)) / nbLedsRight;
-        double bottomSpacing = ((WIDTH ) - (nbLedsBottom * DIAMETER)) / nbLedsBottom;
-        
+
+        double leftSpacing = ((HEIGHT) - (nbLedsLeft * DIAMETER)) / nbLedsLeft;
+        double topSpacing = ((WIDTH) - (nbLedsTop * DIAMETER)) / nbLedsTop;
+        double rightSpacing = ((HEIGHT) - (nbLedsRight * DIAMETER)) / nbLedsRight;
+        double bottomSpacing = ((WIDTH) - (nbLedsBottom * DIAMETER)) / nbLedsBottom;
+
         int ellipseIndex = 0;
-        
+
         //LEFT
-        double x = MARGIN/2 - DIAMETER/2;
-        double y = MARGIN + HEIGHT - leftSpacing/2 - DIAMETER;
-        for(int i=0; i<nbLedsLeft; ++i){
+        double x = MARGIN / 2 - DIAMETER / 2;
+        double y = MARGIN + HEIGHT - leftSpacing / 2 - DIAMETER;
+        for (int i = 0; i < nbLedsLeft; ++i) {
             addEllipse(ellipseIndex++, x, y);
             y -= (leftSpacing + DIAMETER);
         }
-        
+
         //TOP
-        x = MARGIN + topSpacing/2;
-        y = MARGIN/2 - DIAMETER/2;
-        for(int i=0; i<nbLedsTop; ++i){
+        x = MARGIN + topSpacing / 2;
+        y = MARGIN / 2 - DIAMETER / 2;
+        for (int i = 0; i < nbLedsTop; ++i) {
             addEllipse(ellipseIndex++, x, y);
             x += (topSpacing + DIAMETER);
         }
-        
+
         //RIGHT
-        x = WIDTH + MARGIN + (MARGIN/2) - DIAMETER/2;
-        y = MARGIN + rightSpacing/2;
-        for(int i=0; i<nbLedsRight; ++i){
+        x = WIDTH + MARGIN + (MARGIN / 2) - DIAMETER / 2;
+        y = MARGIN + rightSpacing / 2;
+        for (int i = 0; i < nbLedsRight; ++i) {
             addEllipse(ellipseIndex++, x, y);
             y += (rightSpacing + DIAMETER);
         }
-        
+
         //BOTTOM
-        x = WIDTH + MARGIN - bottomSpacing/2 - DIAMETER;
-        y = HEIGHT + MARGIN + (MARGIN/2) - DIAMETER/2;
-        for(int i=0; i<nbLedsBottom; ++i){
+        x = WIDTH + MARGIN - bottomSpacing / 2 - DIAMETER;
+        y = HEIGHT + MARGIN + (MARGIN / 2) - DIAMETER / 2;
+        for (int i = 0; i < nbLedsBottom; ++i) {
             addEllipse(ellipseIndex++, x, y);
             x -= (bottomSpacing + DIAMETER);
         }
     }
-    
+
     private void addEllipse(int index, double x, double y) {
         Ellipse2D ellipse = new Ellipse2D.Double(x, y, DIAMETER, DIAMETER);
         g2d.setColor(vectorLEDs.elementAt(index).getColor());
         g2d.fill(ellipse);
         vectorEllipses.set(index, ellipse);
     }
-    
-    private void updateLEDColor(Point2D p){
-        int i=0;
-        for(Ellipse2D ellipse : vectorEllipses){
-            if(ellipse.contains(p)){
+
+    private void updateLEDColor(Point2D p) {
+        int i = 0;
+        for (Ellipse2D ellipse : vectorEllipses) {
+            if (ellipse.contains(p)) {
                 double x = ellipse.getX();
                 double y = ellipse.getCenterY();
                 double w = ellipse.getWidth();
                 double h = ellipse.getHeight();
-                
+
                 vectorLEDs.elementAt(i).setColor(colorChooser.getColor());
-                
+
                 repaint();
                 break;
             }

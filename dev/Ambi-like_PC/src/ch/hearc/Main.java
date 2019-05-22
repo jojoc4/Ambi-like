@@ -22,6 +22,7 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
@@ -32,9 +33,9 @@ import javax.swing.JPanel;
 public class Main {
 
     private static Computation_I c;
-    private static final String MODE = "TEST";
-    //private static final String MODE = "RMI";
-    
+    //private static final String MODE = "TEST";
+    private static final String MODE = "RMI";
+
     private static int requestedMode = Computation_I.MODE_AMBILIGHT;
 
     public static void main(String[] args) {
@@ -46,11 +47,7 @@ public class Main {
         }
 
         //start main computation Thread
-        //createComputation();
-        
-        //test
-        new JFrameConfigurator();
-//        new FrameCreator();
+        createComputation();
 
         //add elements to systemTray
         SystemTray tray = SystemTray.getSystemTray();
@@ -67,7 +64,7 @@ public class Main {
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FrameMainWindow();
-    
+
             }
         });
 
@@ -118,7 +115,7 @@ public class Main {
         } else if ("RMI".equals(MODE)) {
             sender = RMISender.getInstance();
         }
-        
+
         System.out.println(Config.getConfig().getMode() + " contenu");
         switch (Config.getConfig().getMode()) {
             case Computation_I.MODE_AMBILIGHT:
@@ -134,12 +131,12 @@ public class Main {
         t.setName("Computation");
         t.start();
     }
-    
-    public static int getTempMode(){
+
+    public static int getTempMode() {
         return requestedMode;
     }
-    
-    public static void setTempMode(int mode){
+
+    public static void setTempMode(int mode) {
         requestedMode = mode;
     }
 
