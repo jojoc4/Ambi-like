@@ -45,7 +45,7 @@ public class Main {
             System.out.println("SystemTray is not supported");
             return;
         }
-
+       
         //start main computation Thread
         createComputation();
 

@@ -12,6 +12,7 @@ import ch.hearc.compute.Computation_I;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
 import javax.swing.JPanel;
@@ -32,6 +33,8 @@ public class PanelChoiceModeSettings extends JPanel {
     private JRadioButton rbCustomMode2;
     private JRadioButton rbCustomMode3;
 
+    private File[] listFile;
+
     private Config configFile;
 
     public PanelChoiceModeSettings() {
@@ -39,6 +42,8 @@ public class PanelChoiceModeSettings extends JPanel {
         geometry();
         control();
         appearance();
+
+        displayModePerso();
     }
 
     private void geometry() {
@@ -71,12 +76,6 @@ public class PanelChoiceModeSettings extends JPanel {
         add(boxVertical, BorderLayout.CENTER);
 
         configFile = Config.getConfig();
-        
-        ModePersonnalise modePerso = ModePersonnalise.getMode(configFile.getPersoModeFile());
-        
-        if(modePerso != null){
-            rbCustomMode1.setVisible(true);
-        }
 
     }
 
@@ -107,14 +106,16 @@ public class PanelChoiceModeSettings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelChoiceModeColors.setVisible(false);
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                configFile.setPersoModeFile(listFile[0].getAbsolutePath());
+                Main.setTempMode(Computation_I.MODE_PERSO);
             }
         });
         rbCustomMode2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelChoiceModeColors.setVisible(false);
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                configFile.setPersoModeFile(listFile[1].getAbsolutePath());
+                Main.setTempMode(Computation_I.MODE_PERSO);
 
             }
         });
@@ -122,7 +123,8 @@ public class PanelChoiceModeSettings extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) {
                 panelChoiceModeColors.setVisible(false);
-                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                configFile.setPersoModeFile(listFile[2].getAbsolutePath());
+                Main.setTempMode(Computation_I.MODE_PERSO);
             }
         });
     }
@@ -132,5 +134,19 @@ public class PanelChoiceModeSettings extends JPanel {
         rbCustomMode1.setVisible(false);
         rbCustomMode2.setVisible(false);
         rbCustomMode3.setVisible(false);
+    }
+
+    private void displayModePerso() {
+        this.listFile = ModePersonnalise.getListMode();
+
+        if (listFile.length > 0) {
+            rbCustomMode1.setVisible(true);
+        }
+        if (listFile.length > 1) {
+            rbCustomMode2.setVisible(true);
+        }
+        if (listFile.length > 2) {
+            rbCustomMode3.setVisible(true);
+        }
     }
 }
