@@ -25,7 +25,7 @@ public class FrameCreator extends JFrame {
         geometry();
         control();
         appearance();
-        System.out.println("FrameCreator - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
+        //System.out.println("FrameCreator - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 
     private void geometry() {
@@ -40,7 +40,7 @@ public class FrameCreator extends JFrame {
     }
 
     private void control() {
-
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void appearance() {

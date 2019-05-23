@@ -26,7 +26,7 @@ public class PanelCreator extends JPanel {
         geometry();
         control();
         appearance();
-        System.out.println("PanelCreator - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
+        //System.out.println("PanelCreator - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 
     private void geometry() {

@@ -44,6 +44,10 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     public Pixel getPixel(int index) {
         return l.get(index);
     }
+    
+    public Vector<Pixel> getPixels(){
+        return l;
+    }
 
     public Pixel setLed(int index, Pixel p) {
         return l.set(index, p);
