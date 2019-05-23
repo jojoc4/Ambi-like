@@ -32,6 +32,11 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
             addLed(new Pixel(0, 0, 0));
         }
     }
+    
+    public ModePersonnalise(String name) {
+        this();
+        this.name = name;
+    }
 
     public String getName() {
         return name;
@@ -47,6 +52,10 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     
     public Vector<Pixel> getPixels(){
         return l;
+    }
+    
+    public void setName(String name){
+        this.name = name;
     }
 
     public Pixel setLed(int index, Pixel p) {

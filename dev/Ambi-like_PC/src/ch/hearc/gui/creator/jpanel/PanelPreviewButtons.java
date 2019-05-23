@@ -8,12 +8,15 @@ package ch.hearc.gui.creator.jpanel;
 import ch.hearc.ModePersonnalise;
 import ch.hearc.Pixel;
 import java.awt.BorderLayout;
+import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.FilenameFilter;
 import javax.swing.Box;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 /**
  *
@@ -32,13 +35,13 @@ public class PanelPreviewButtons extends JPanel {
         add(preview, BorderLayout.CENTER);
         add(buttons, BorderLayout.SOUTH);
 
-        System.out.println("PanelPreviewButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
+        //System.out.println("PanelPreviewButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
 
-        setSize(preview.getWidth() + buttons.getWidth(), preview.getHeight() + buttons.getHeight());
+        //setSize(preview.getWidth() + buttons.getWidth(), preview.getHeight() + buttons.getHeight());
     }
 
-    public void saveMode(String fileName) {
-        ModePersonnalise m = new ModePersonnalise();
+    public void saveMode(String fileName, String modeName) {
+        ModePersonnalise m = new ModePersonnalise(modeName);
 
         int i = 0;
         for (Pixel p : preview.getVectorPixel()) {
@@ -54,29 +57,40 @@ public class PanelPreviewButtons extends JPanel {
 }
 
 class PanelButtons extends JPanel {
-    private JButton btnEdit;
+    private JButton btnLoad;
     private JButton btnSave;
+    private JLabel labelName;
+    private JTextField textName;
     private PanelPreviewButtons parent;
     private String fileName;
 
     public PanelButtons(PanelPreviewButtons parent) {
-        btnEdit = new JButton("Editer un mode");
+        btnLoad = new JButton("Charger un mode");
         btnSave = new JButton("Sauvegarder");
+        labelName = new JLabel("Nom :");
+        textName = new JTextField("Nouveau mode personnalisé");
+        textName.setColumns(30);
         this.parent = parent;
         fileName = null;
-
-        setLayout(new BorderLayout());
-//        add(Box.createHorizontalStrut(20), BorderLayout.WEST);
-        add(Box.createHorizontalStrut(20), BorderLayout.CENTER);
-        add(btnEdit, BorderLayout.WEST);
-        add(btnSave, BorderLayout.EAST);
-        add(Box.createVerticalStrut(20), BorderLayout.SOUTH);
-        add(Box.createVerticalStrut(20), BorderLayout.NORTH);
         
-        btnEdit.addActionListener(new ActionListener() {
+        FlowLayout layout = new FlowLayout();
+        setLayout(layout);
+//        add(Box.createHorizontalStrut(20), BorderLayout.WEST);
+        add(btnLoad);//, BorderLayout.WEST);
+        add(labelName);//, BorderLayout.CENTER);
+        add(textName);//, BorderLayout.CENTER);
+        add(btnSave);//, BorderLayout.EAST);
+//        add(Box.createVerticalStrut(20), BorderLayout.SOUTH);
+//        add(Box.createVerticalStrut(20), BorderLayout.NORTH);
+        
+        layout.setHgap(20);
+        layout.setVgap(40);
+        
+        btnLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null, "Choix d'un fichier", java.awt.FileDialog.LOAD);
+                fd.setMultipleMode​(false);
                 fd.setVisible(true);
                 //fd.setFilenameFilter​(new FilenameFilter("*.amm"));
                 
@@ -84,6 +98,7 @@ class PanelButtons extends JPanel {
                 
                 if(fileName != null){
                     ModePersonnalise m = ModePersonnalise.getMode(fileName);
+                    textName.setText(m.getName());
                     parent.useMode(m);
                 }
             }
@@ -92,11 +107,20 @@ class PanelButtons extends JPanel {
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                parent.saveMode(fileName);
+                java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null, "Choix d'un dossier", java.awt.FileDialog.SAVE);
+                fd.setMultipleMode​(false);
+                fd.setFile(textName.getText() + ".amm");
+                //fd.setFilenameFilter​(new FilenameFilter("*.amm"));
+                fd.setVisible(true);
+                
+                fileName = fd.getFile();
+                
+                if(fileName != null){
+                    parent.saveMode(fileName, textName.getText());
+                }
             }
         });
-
-        //setSize(500, 80);
+        
         //System.out.println("PanelButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 }
