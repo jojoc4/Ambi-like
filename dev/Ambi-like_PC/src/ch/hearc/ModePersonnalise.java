@@ -99,8 +99,9 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         }
     }
     
-    public static List<ModePersonnalise> getListMode(){
-        return null;
+    public static File[] getListMode(){
+        File folder = new File("modes/");
+        return folder.listFiles();
     }
 
     /**
