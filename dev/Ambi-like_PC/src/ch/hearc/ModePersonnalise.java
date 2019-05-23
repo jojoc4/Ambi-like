@@ -85,7 +85,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         return null;
     }
     public static List<ModePersonnalise> getListMode(){
-        
+        return null;
     }
 
     /**

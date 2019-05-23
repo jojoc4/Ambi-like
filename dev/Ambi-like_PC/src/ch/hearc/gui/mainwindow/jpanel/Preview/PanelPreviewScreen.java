@@ -53,11 +53,12 @@ public class PanelPreviewScreen extends JPanel {
     private Config config;
 
     private Pixel previousPixel;
-    
+
     private double diameterPixel;
     private double spaceBetweenLeds;
     private double spaceBetweenLedsWidth;
     private double halfMargin;
+    private int nbLedsTotal;
 
     public PanelPreviewScreen() {
         config = Config.getConfig();
@@ -115,9 +116,10 @@ public class PanelPreviewScreen extends JPanel {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.WEST);
         int nbLedsRight = Config.getConfig().getNbLed(Config.EAST);
-        
-        int nbLedsTotal = nbLedsTop*2 + nbLedsLeft + nbLedsRight;
-        
+        int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
+
+        nbLedsTotal = nbLedsTop * 2 + nbLedsLeft + nbLedsRight;
+
         // Rectangle
         g2d.translate(MARGIN, MARGIN);
         g2d.setStroke(new BasicStroke(1));
@@ -132,36 +134,59 @@ public class PanelPreviewScreen extends JPanel {
 
         g2d.translate(spaceBetweenLeds, -halfMargin);
         int index = nbLedsLeft;
-        
-        for (int j = 0; j < 2; j++) {
-            for (int i = 0; i < nbLedsTop; i++) {
-                Pixel pixel = this.vectorPixels.get(index);
-                g2d.setColor(pixel.getColor());
-                index++;
-                index %= nbLedsTotal;
-                g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
-                g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
-            }
 
-            g2d.translate(halfMargin, halfMargin);
-            g2d.rotate(Math.PI / 2);
-            g2d.translate(spaceBetweenLedsWidth, 0.0);
-
-            for (int i = 0; i < nbLedsLeft; i++) {
-                Pixel pixel = this.vectorPixels.get(index);
-                g2d.setColor(pixel.getColor());
-                index++;
-                index %= nbLedsTotal;
-
-                g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
-                g2d.translate(spaceBetweenLedsWidth + diameterPixel, 0.0);
-
-            }
-            g2d.translate(halfMargin, halfMargin);
-            g2d.rotate(Math.PI / 2);
-            g2d.translate(spaceBetweenLeds, 0.0);
-            g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
+        for (int i = 0; i < nbLedsTop; i++) {
+            index = drawEllipse(g2d, index);
+            g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
         }
+
+        rotateTranslate(g2d);
+        g2d.translate(spaceBetweenLedsWidth, 0.0);
+
+        for (int i = 0; i < nbLedsRight; i++) {
+            index = drawEllipse(g2d, index);
+            g2d.translate(spaceBetweenLedsWidth + diameterPixel, 0.0);
+
+        }
+        rotateTranslate(g2d);
+        g2d.translate(spaceBetweenLeds, 0.0);
+
+        for (int i = 0; i < nbLedsBottom; i++) {
+            index = drawEllipse(g2d, index);
+            g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
+        }
+        
+        for(int i = 0; i < nbLedsTop - nbLedsTop; i++){
+            g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
+        }
+
+        rotateTranslate(g2d);
+        g2d.translate(spaceBetweenLedsWidth, 0.0);
+
+        for (int i = 0; i < nbLedsLeft; i++) {
+            index = drawEllipse(g2d, index);
+            g2d.translate(spaceBetweenLedsWidth + diameterPixel, 0.0);
+
+        }
+        rotateTranslate(g2d);
+        g2d.translate(spaceBetweenLeds, 0.0);
+
+    }
+
+    public void rotateTranslate(Graphics2D g2d) {
+        g2d.translate(halfMargin, halfMargin);
+        g2d.rotate(Math.PI / 2);
+    }
+
+    public int drawEllipse(Graphics2D g2d, int index) {
+        Pixel pixel = this.vectorPixels.get(index);
+        g2d.setColor(pixel.getColor());
+        index++;
+        index %= nbLedsTotal;
+
+        g2d.fill(new Ellipse2D.Double(0, 0, diameterPixel, diameterPixel));
+
+        return index;
     }
 
     public Vector<Pixel> getVectorPixel() {
