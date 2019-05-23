@@ -20,7 +20,6 @@ public class FrameCreator extends JFrame {
 
     public FrameCreator() {
         geometry();
-        control();
         appearance();
         //System.out.println("FrameCreator - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
@@ -29,11 +28,6 @@ public class FrameCreator extends JFrame {
         panel = new PanelCreator();
         
         add(panel);
-
-    }
-
-    private void control() {
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
     private void appearance() {

@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -90,11 +91,15 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
                 //TODO verify that the number of leds was the same when file created
                 return mp;
             } else {
-                throw new Exception("File don't exsist");
+                throw new Exception("File doesn't exsist");
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
+            return new ModePersonnalise();
         }
+    }
+    
+    public static List<ModePersonnalise> getListMode(){
         return null;
     }
 
