@@ -20,9 +20,9 @@ public class Config implements Serializable {
     private Config() {
         nbLed = new int[4];
         raspIp = "192.168.100.100";
-        nbLed[0] = 10;
+        nbLed[0] = 5;
         nbLed[1] = 10;
-        nbLed[2] = 10;
+        nbLed[2] = 5;
         nbLed[3] = 10;
 
         lumMax = 120;
@@ -42,10 +42,10 @@ public class Config implements Serializable {
 
     //const
     //used for number of leds on each side
-    public static final int NORTH = 0;
-    public static final int EAST = 1;
-    public static final int SOUTH = 2;
-    public static final int WEST = 3;
+    public static final int NORTH = 1;
+    public static final int EAST = 2;
+    public static final int SOUTH = 3;
+    public static final int WEST = 0;
 
     //attribute
     private String raspIp;

@@ -7,6 +7,7 @@ package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import ch.hearc.Config;
 import ch.hearc.Main;
+import ch.hearc.ModePersonnalise;
 import ch.hearc.compute.Computation_I;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
@@ -70,6 +71,12 @@ public class PanelChoiceModeSettings extends JPanel {
         add(boxVertical, BorderLayout.CENTER);
 
         configFile = Config.getConfig();
+        
+        ModePersonnalise modePerso = ModePersonnalise.getMode(configFile.getPersoModeFile());
+        
+        if(modePerso != null){
+            rbCustomMode1.setVisible(true);
+        }
 
     }
 
