@@ -58,17 +58,12 @@ public class PanelPreview extends JPanel {
         wLock = rwLock.writeLock();
         
         setNbLeds(Config.getConfig().getNbLed());
-
+        
         img = Computation_I.printScreen();
         
-        geometry();
         control();
         appearance();
         //System.out.println("PanelPreview - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
-    }
-
-    private void geometry() {
-
     }
 
     private void control() {
@@ -155,12 +150,12 @@ public class PanelPreview extends JPanel {
         for (Ellipse2D ellipse : vectorEllipses) {
             if (ellipse.contains(p)) {
                 double x = ellipse.getX();
-                double y = ellipse.getCenterY();
+                double y = ellipse.getY();
                 double w = ellipse.getWidth();
                 double h = ellipse.getHeight();
 
                 vectorLEDs.elementAt(i).setColor(colorChooser.getColor());
-
+                
                 repaint();
                 break;
             }

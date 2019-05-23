@@ -7,9 +7,6 @@ package ch.hearc.gui.creator;
 
 import ch.hearc.gui.creator.jpanel.PanelCreator;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import java.awt.event.WindowEvent;
-import java.awt.event.WindowListener;
 import javax.swing.JFrame;
 
 /**
@@ -30,11 +27,7 @@ public class FrameCreator extends JFrame {
 
     private void geometry() {
         panel = new PanelCreator();
-
-//        layout = new BorderLayout();
-//        //setLayout(new BorderLayout());
-//        layout.addLayoutComponent(panel, BorderLayout.CENTER);
-//        setLayout(layout);
+        
         add(panel);
 
     }
@@ -48,11 +41,6 @@ public class FrameCreator extends JFrame {
         setSize(1300, 600);
         setResizable(false);
         setLocationRelativeTo(null); // frame centrer
-
-//        synchronized(getTreeLock()) {
-//            validateTree();
-//        }
-        //pack();
         setVisible(true); // last!
     }
 }

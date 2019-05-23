@@ -23,6 +23,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     public ModePersonnalise() {
         Config cfg = Config.getConfig();
         nbled = cfg.getNbLed();
+        name = "";
 
         int totalLed = cfg.getNbLedTotal();
 
@@ -104,7 +105,9 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
      */
     public void save(String file) {
         try {
-            this.name = file;
+            if(name == "")
+                this.name = file;
+            
             FileOutputStream fileOut = new FileOutputStream(file);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(this);

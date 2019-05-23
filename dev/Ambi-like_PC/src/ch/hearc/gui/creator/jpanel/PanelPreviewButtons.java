@@ -11,8 +11,6 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.FilenameFilter;
-import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -36,8 +34,6 @@ public class PanelPreviewButtons extends JPanel {
         add(buttons, BorderLayout.SOUTH);
 
         //System.out.println("PanelPreviewButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
-
-        //setSize(preview.getWidth() + buttons.getWidth(), preview.getHeight() + buttons.getHeight());
     }
 
     public void saveMode(String fileName, String modeName) {
@@ -57,11 +53,11 @@ public class PanelPreviewButtons extends JPanel {
 }
 
 class PanelButtons extends JPanel {
-    private JButton btnLoad;
-    private JButton btnSave;
-    private JLabel labelName;
+    private final JButton btnLoad;
+    private final JButton btnSave;
+    private final JLabel labelName;
     private JTextField textName;
-    private PanelPreviewButtons parent;
+    private final PanelPreviewButtons parent;
     private String fileName;
 
     public PanelButtons(PanelPreviewButtons parent) {
@@ -75,13 +71,10 @@ class PanelButtons extends JPanel {
         
         FlowLayout layout = new FlowLayout();
         setLayout(layout);
-//        add(Box.createHorizontalStrut(20), BorderLayout.WEST);
-        add(btnLoad);//, BorderLayout.WEST);
-        add(labelName);//, BorderLayout.CENTER);
-        add(textName);//, BorderLayout.CENTER);
-        add(btnSave);//, BorderLayout.EAST);
-//        add(Box.createVerticalStrut(20), BorderLayout.SOUTH);
-//        add(Box.createVerticalStrut(20), BorderLayout.NORTH);
+        add(btnLoad);
+        add(labelName);
+        add(textName);
+        add(btnSave);
         
         layout.setHgap(20);
         layout.setVgap(40);
@@ -92,13 +85,12 @@ class PanelButtons extends JPanel {
                 java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null, "Choix d'un fichier", java.awt.FileDialog.LOAD);
                 fd.setMultipleMode​(false);
                 fd.setVisible(true);
-                //fd.setFilenameFilter​(new FilenameFilter("*.amm"));
                 
                 fileName = fd.getFile();
                 
                 if(fileName != null){
                     ModePersonnalise m = ModePersonnalise.getMode(fileName);
-                    textName.setText(m.getName());
+                    textName.setText(m.getName().split(".amm")[0]);
                     parent.useMode(m);
                 }
             }
@@ -110,7 +102,6 @@ class PanelButtons extends JPanel {
                 java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null, "Choix d'un dossier", java.awt.FileDialog.SAVE);
                 fd.setMultipleMode​(false);
                 fd.setFile(textName.getText() + ".amm");
-                //fd.setFilenameFilter​(new FilenameFilter("*.amm"));
                 fd.setVisible(true);
                 
                 fileName = fd.getFile();
