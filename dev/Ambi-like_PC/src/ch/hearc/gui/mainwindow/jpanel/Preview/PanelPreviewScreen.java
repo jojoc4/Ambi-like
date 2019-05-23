@@ -53,6 +53,11 @@ public class PanelPreviewScreen extends JPanel {
     private Config config;
 
     private Pixel previousPixel;
+    
+    private double diameterPixel;
+    private double spaceBetweenLeds;
+    private double spaceBetweenLedsWidth;
+    private double halfMargin;
 
     public PanelPreviewScreen() {
         config = Config.getConfig();
@@ -112,18 +117,18 @@ public class PanelPreviewScreen extends JPanel {
         int nbLedsRight = Config.getConfig().getNbLed(Config.EAST);
         
         int nbLedsTotal = nbLedsTop*2 + nbLedsLeft + nbLedsRight;
-
+        
         // Rectangle
         g2d.translate(MARGIN, MARGIN);
         g2d.setStroke(new BasicStroke(1));
         g2d.drawRect(0, 0, WIDTH - 2 * MARGIN, HEIGHT - 2 * MARGIN);
         g2d.drawImage(computation.getImage(), 1, 1, WIDTH - 2 * MARGIN - 1, HEIGHT - 2 * MARGIN - 1, this);
 
-        double diameterPixel = 10.;
-        double spaceBetweenLeds = (double) (WIDTH - 2 * MARGIN - nbLedsTop * diameterPixel) / (double) (nbLedsTop + 1);
-        double spaceBetweenLedsWidth = (double) (HEIGHT - 2 * MARGIN - nbLedsRight * diameterPixel - 2) / (double) (nbLedsRight + 1);
+        diameterPixel = 10.;
+        spaceBetweenLeds = (double) (WIDTH - 2 * MARGIN - nbLedsTop * diameterPixel) / (double) (nbLedsTop + 1);
+        spaceBetweenLedsWidth = (double) (HEIGHT - 2 * MARGIN - nbLedsRight * diameterPixel - 2) / (double) (nbLedsRight + 1);
 
-        double halfMargin = MARGIN / 2;
+        halfMargin = MARGIN / 2;
 
         g2d.translate(spaceBetweenLeds, -halfMargin);
         int index = nbLedsLeft;

@@ -7,6 +7,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Vector;
 
 /**
@@ -82,6 +83,9 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
             ex.printStackTrace();
         }
         return null;
+    }
+    public static List<ModePersonnalise> getListMode(){
+        
     }
 
     /**
