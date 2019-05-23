@@ -132,6 +132,7 @@ public class PanelPreviewScreen extends JPanel {
 
         g2d.translate(spaceBetweenLeds, -halfMargin);
         int index = nbLedsLeft;
+        
         for (int j = 0; j < 2; j++) {
             for (int i = 0; i < nbLedsTop; i++) {
                 Pixel pixel = this.vectorPixels.get(index);
