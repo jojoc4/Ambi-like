@@ -24,6 +24,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     public ModePersonnalise() {
         Config cfg = Config.getConfig();
         nbled = cfg.getNbLed();
+        name = "";
 
         int totalLed = cfg.getNbLedTotal();
 
@@ -32,6 +33,11 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         for (int i = 0; i < totalLed; i++) {
             addLed(new Pixel(0, 0, 0));
         }
+    }
+    
+    public ModePersonnalise(String name) {
+        this();
+        this.name = name;
     }
 
     public String getName() {
@@ -44,6 +50,14 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     public Pixel getPixel(int index) {
         return l.get(index);
+    }
+    
+    public Vector<Pixel> getPixels(){
+        return l;
+    }
+    
+    public void setName(String name){
+        this.name = name;
     }
 
     public Pixel setLed(int index, Pixel p) {
@@ -77,15 +91,17 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
                 //TODO verify that the number of leds was the same when file created
                 return mp;
             } else {
-                throw new Exception("File don't exsist");
+                throw new Exception("File doesn't exsist");
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            //ex.printStackTrace();
+            return new ModePersonnalise();
         }
-        return null;
     }
-    public static List<ModePersonnalise> getListMode(){
-        return null;
+    
+    public static File[] getListMode(){
+        File folder = new File("modes/");
+        return folder.listFiles();
     }
 
     /**
@@ -95,7 +111,9 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
      */
     public void save(String file) {
         try {
-            this.name = file;
+            if(name == "")
+                this.name = file;
+            
             FileOutputStream fileOut = new FileOutputStream(file);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(this);

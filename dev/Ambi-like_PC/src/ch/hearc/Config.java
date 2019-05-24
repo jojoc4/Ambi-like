@@ -20,9 +20,9 @@ public class Config implements Serializable {
     private Config() {
         nbLed = new int[4];
         raspIp = "192.168.100.100";
-        nbLed[0] = 5;
+        nbLed[0] = 10;
         nbLed[1] = 10;
-        nbLed[2] = 5;
+        nbLed[2] = 10;
         nbLed[3] = 10;
 
         lumMax = 120;

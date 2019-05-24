@@ -155,8 +155,8 @@ public class PanelPreviewScreen extends JPanel {
             index = drawEllipse(g2d, index);
             g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
         }
-        
-        for(int i = 0; i < nbLedsTop - nbLedsTop; i++){
+        // si il n'y a pas de leds en bas
+        for (int i = 0; i < nbLedsTop - nbLedsBottom; i++) {
             g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
         }
 
@@ -202,6 +202,11 @@ public class PanelPreviewScreen extends JPanel {
                 repaint();
             }
             if (Computation_I.MODE_FIXE == config.getMode() && nbRefresh % 100 == 0) {
+                nbRefresh = 0;
+                repaint();
+            }
+
+            if (Computation_I.MODE_PERSO == config.getMode() && nbRefresh % 5 == 0) {
                 nbRefresh = 0;
                 repaint();
             }
