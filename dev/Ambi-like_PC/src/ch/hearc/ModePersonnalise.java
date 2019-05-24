@@ -34,7 +34,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
             addLed(new Pixel(0, 0, 0));
         }
     }
-    
+
     public ModePersonnalise(String name) {
         this();
         this.name = name;
@@ -51,12 +51,12 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     public Pixel getPixel(int index) {
         return l.get(index);
     }
-    
-    public Vector<Pixel> getPixels(){
+
+    public Vector<Pixel> getPixels() {
         return l;
     }
-    
-    public void setName(String name){
+
+    public void setName(String name) {
         this.name = name;
     }
 
@@ -98,8 +98,8 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
             return new ModePersonnalise();
         }
     }
-    
-    public static File[] getListMode(){
+
+    public static File[] getListMode() {
         File folder = new File("modes/");
         return folder.listFiles();
     }
@@ -111,9 +111,10 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
      */
     public void save(String file) {
         try {
-            if(name == "")
+            if (name == "") {
                 this.name = file;
-            
+            }
+
             FileOutputStream fileOut = new FileOutputStream(file);
             ObjectOutputStream objectOut = new ObjectOutputStream(fileOut);
             objectOut.writeObject(this);

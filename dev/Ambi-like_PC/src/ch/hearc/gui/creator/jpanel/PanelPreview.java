@@ -39,28 +39,28 @@ public class PanelPreview extends JPanel {
     private Graphics2D g2d;
     private final PanelColorChooser colorChooser;
     private final BufferedImage img;
-    
+
     private int nbLedsTop;
     private int nbLedsBottom;
     private int nbLedsLeft;
     private int nbLedsRight;
     private int nbLedsTotal;
-    
+
     private final ReentrantReadWriteLock rwLock;
     private final ReadLock rLock;
     private final WriteLock wLock;
 
     public PanelPreview(PanelColorChooser colorChooser) {
         this.colorChooser = colorChooser;
-        
+
         rwLock = new ReentrantReadWriteLock(true);
         rLock = rwLock.readLock();
         wLock = rwLock.writeLock();
-        
+
         setNbLeds(Config.getConfig().getNbLed());
-        
+
         img = Computation_I.printScreen();
-        
+
         control();
         appearance();
         //System.out.println("PanelPreview - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
@@ -82,13 +82,13 @@ public class PanelPreview extends JPanel {
     @Override
     protected void paintComponent(Graphics g) {
         rLock.lock();
-        try{
+        try {
             super.paintComponent(g);
 
             Graphics2D g2D = (Graphics2D) g;
             this.g2d = g2D;
             createDisplay();
-        }finally{
+        } finally {
             rLock.unlock();
         }
     }
@@ -155,7 +155,7 @@ public class PanelPreview extends JPanel {
                 double h = ellipse.getHeight();
 
                 vectorLEDs.elementAt(i).setColor(colorChooser.getColor());
-                
+
                 repaint();
                 break;
             }
@@ -165,57 +165,57 @@ public class PanelPreview extends JPanel {
 
     public Vector<Pixel> getVectorPixel() {
         Vector<Pixel> v = null;
-        
+
         rLock.lock();
-        try{
+        try {
             v = new Vector<Pixel>(this.vectorLEDs);
-        }finally{
+        } finally {
             rLock.unlock();
         }
-        
+
         return v;
     }
-    
-    private void setNbLeds(int[] nbLeds){
+
+    private void setNbLeds(int[] nbLeds) {
         wLock.lock();
-        try{
+        try {
             nbLedsTop = nbLeds[1];
             nbLedsBottom = nbLeds[3];
             nbLedsLeft = nbLeds[0];
             nbLedsRight = nbLeds[2];
 
-            nbLedsTotal = nbLeds[0]+nbLeds[1]+nbLeds[2]+nbLeds[3];
+            nbLedsTotal = nbLeds[0] + nbLeds[1] + nbLeds[2] + nbLeds[3];
 
             vectorLEDs = new Vector<Pixel>(nbLedsTotal); //initial size, better performance when adding elements
             vectorEllipses = new Vector<Ellipse2D>(nbLedsTotal);
 
             fillVectors();
-        }finally{
+        } finally {
             wLock.unlock();
         }
     }
-    
-    public void setPixels(Vector<Pixel> pixels, int[] nbLedsBySide){
+
+    public void setPixels(Vector<Pixel> pixels, int[] nbLedsBySide) {
         wLock.lock();
-        try{
+        try {
             setNbLeds(nbLedsBySide);
             this.vectorLEDs = pixels;
 
-        }finally{
+        } finally {
             wLock.unlock();
         }
-        
+
         repaint();
     }
 
     private void fillVectors() {
         wLock.lock();
-        try{
+        try {
             for (int i = 0; i < nbLedsTotal; ++i) {
                 this.vectorLEDs.add(new Pixel(0, 0, 0));
                 this.vectorEllipses.add(new Ellipse2D.Double());
             }
-        }finally{
+        } finally {
             wLock.unlock();
         }
     }

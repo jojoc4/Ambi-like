@@ -46,13 +46,14 @@ public class PanelPreviewButtons extends JPanel {
 
         m.save(fileName);
     }
-    
-    public synchronized void useMode(ModePersonnalise m){
+
+    public synchronized void useMode(ModePersonnalise m) {
         preview.setPixels(m.getPixels(), m.getNbled());
     }
 }
 
 class PanelButtons extends JPanel {
+
     private final JButton btnLoad;
     private final JButton btnSave;
     private final JLabel labelName;
@@ -68,27 +69,27 @@ class PanelButtons extends JPanel {
         textName.setColumns(30);
         this.parent = parent;
         fileName = null;
-        
+
         FlowLayout layout = new FlowLayout();
         setLayout(layout);
         add(btnLoad);
         add(labelName);
         add(textName);
         add(btnSave);
-        
+
         layout.setHgap(20);
         layout.setVgap(40);
-        
+
         btnLoad.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null, "Choix d'un fichier", java.awt.FileDialog.LOAD);
-                fd.setMultipleMode​(false);
+                java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null, "Choix d'un fichier", java.awt.FileDialog.LOAD);
+                fd.setMultipleMode(false);
                 fd.setVisible(true);
-                
+
                 fileName = fd.getFile();
-                
-                if(fileName != null){
+
+                if (fileName != null) {
                     ModePersonnalise m = ModePersonnalise.getMode(fileName);
                     textName.setText(m.getName().split(".amm")[0]);
                     parent.useMode(m);
@@ -99,19 +100,19 @@ class PanelButtons extends JPanel {
         btnSave.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame)null, "Choix d'un dossier", java.awt.FileDialog.SAVE);
-                fd.setMultipleMode​(false);
+                java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null, "Choix d'un dossier", java.awt.FileDialog.SAVE);
+                fd.setMultipleMode(false);
                 fd.setFile(textName.getText() + ".amm");
                 fd.setVisible(true);
-                
+
                 fileName = fd.getFile();
-                
-                if(fileName != null){
+
+                if (fileName != null) {
                     parent.saveMode(fileName, textName.getText());
                 }
             }
         });
-        
+
         //System.out.println("PanelButtons - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 }

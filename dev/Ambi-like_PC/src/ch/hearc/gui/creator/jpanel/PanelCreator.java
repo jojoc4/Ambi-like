@@ -28,7 +28,7 @@ public class PanelCreator extends JPanel {
         setLayout(layout);
         add(colorChooser, BorderLayout.WEST);
         add(preview, BorderLayout.CENTER);
-        
+
         //System.out.println("PanelCreator - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
 

@@ -26,7 +26,7 @@ public class FrameCreator extends JFrame {
 
     private void geometry() {
         panel = new PanelCreator();
-        
+
         add(panel);
     }
 
