@@ -118,7 +118,7 @@ public class PanelPreviewScreen extends JPanel {
         int nbLedsRight = Config.getConfig().getNbLed(Config.EAST);
         int nbLedsBottom = Config.getConfig().getNbLed(Config.SOUTH);
 
-        nbLedsTotal = nbLedsTop * 2 + nbLedsLeft + nbLedsRight;
+        nbLedsTotal = nbLedsTop + nbLedsBottom + nbLedsLeft + nbLedsRight;
 
         // Rectangle
         g2d.translate(MARGIN, MARGIN);
@@ -155,7 +155,7 @@ public class PanelPreviewScreen extends JPanel {
             index = drawEllipse(g2d, index);
             g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
         }
-        // si il n'y a pas de leds en bas
+        // s'il n'y a pas de leds en bas
         for (int i = 0; i < nbLedsTop - nbLedsBottom; i++) {
             g2d.translate(spaceBetweenLeds + diameterPixel, 0.0);
         }

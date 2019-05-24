@@ -139,14 +139,17 @@ public class PanelChoiceModeSettings extends JPanel {
     private void displayModePerso() {
         this.listFile = ModePersonnalise.getListMode();
 
-        if (listFile.length > 0) {
-            rbCustomMode1.setVisible(true);
+        if (listFile != null) {
+            if (listFile.length > 0) {
+                rbCustomMode1.setVisible(true);
+            }
+            if (listFile.length > 1) {
+                rbCustomMode2.setVisible(true);
+            }
+            if (listFile.length > 2) {
+                rbCustomMode3.setVisible(true);
+            }
         }
-        if (listFile.length > 1) {
-            rbCustomMode2.setVisible(true);
-        }
-        if (listFile.length > 2) {
-            rbCustomMode3.setVisible(true);
-        }
+
     }
 }
