@@ -30,6 +30,7 @@ public class Config implements Serializable {
         mode = Computation_I.MODE_AMBILIGHT;
 
         persoModeFile = "";
+        persoModeDefaultDirectory = "";
 
         color = new int[3];
 
@@ -54,6 +55,7 @@ public class Config implements Serializable {
     private int mode;
     private int tempMode;
     private String persoModeFile;
+    private final String persoModeDefaultDirectory;
     private int[] color;
 
     //getter
@@ -83,6 +85,10 @@ public class Config implements Serializable {
 
     public String getPersoModeFile() {
         return persoModeFile;
+    }
+
+    public String getPersoModeDefaultDirectory() {
+        return persoModeDefaultDirectory;
     }
 
     public int[] getColor() {
