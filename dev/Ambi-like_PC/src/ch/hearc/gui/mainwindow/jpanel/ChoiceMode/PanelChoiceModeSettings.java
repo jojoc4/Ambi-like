@@ -13,10 +13,14 @@ import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FilenameFilter;
 import javax.swing.Box;
 import javax.swing.ButtonGroup;
+import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JPanel;
 import javax.swing.JRadioButton;
+import javax.swing.filechooser.FileNameExtensionFilter;
 
 /**
  *
@@ -33,7 +37,10 @@ public class PanelChoiceModeSettings extends JPanel {
     private JRadioButton rbCustomMode2;
     private JRadioButton rbCustomMode3;
 
+    private JButton buttonBrowse;
+
     private File[] listFile;
+    private String folderPath;
 
     private Config configFile;
 
@@ -43,7 +50,6 @@ public class PanelChoiceModeSettings extends JPanel {
         control();
         appearance();
 
-        displayModePerso();
     }
 
     private void geometry() {
@@ -56,6 +62,7 @@ public class PanelChoiceModeSettings extends JPanel {
         panelChoiceModeColors = new PanelChoiceModeColors(this);
 
         group = new ButtonGroup();
+        buttonBrowse = new JButton("Choisir dossier mode perso");
 
         group.add(rbAmbilight);
         group.add(rbFixedColor);
@@ -70,6 +77,7 @@ public class PanelChoiceModeSettings extends JPanel {
         boxVertical.add(rbCustomMode1);
         boxVertical.add(rbCustomMode2);
         boxVertical.add(rbCustomMode3);
+        boxVertical.add(buttonBrowse);
 
         setLayout(new BorderLayout());
 
@@ -127,6 +135,24 @@ public class PanelChoiceModeSettings extends JPanel {
                 Main.setTempMode(Computation_I.MODE_PERSO);
             }
         });
+
+        buttonBrowse.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                JFileChooser chooser;
+                chooser = new JFileChooser();
+                chooser.setCurrentDirectory(new java.io.File("."));
+                chooser.setDialogTitle("Titre");
+                chooser.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
+                if (chooser.showOpenDialog(null) == JFileChooser.APPROVE_OPTION) {
+                    File f = chooser.getSelectedFile();
+                    folderPath = f.getAbsolutePath();
+                } else {
+                    System.out.println("No Selection ");
+                }
+                displayModePerso();
+            }
+        });
     }
 
     private void appearance() {
@@ -137,9 +163,14 @@ public class PanelChoiceModeSettings extends JPanel {
     }
 
     private void displayModePerso() {
-        this.listFile = ModePersonnalise.getListMode();
+        File folder = new File(folderPath);
+        this.listFile = folder.listFiles(new FilenameFilter() {
+            public boolean accept(File dir, String name) {
+                return name.toLowerCase().endsWith(".amm");
+            }
+        });
 
-        if (listFile != null) {
+        if (listFile.length > 0) {
             if (listFile.length > 0) {
                 rbCustomMode1.setVisible(true);
             }
@@ -149,6 +180,17 @@ public class PanelChoiceModeSettings extends JPanel {
             if (listFile.length > 2) {
                 rbCustomMode3.setVisible(true);
             }
+        } else {
+            rbCustomMode1.setVisible(false);
+            rbCustomMode2.setVisible(false);
+            rbCustomMode3.setVisible(false);
+            rbCustomMode1.setSelected(false);
+            rbCustomMode2.setSelected(false);
+            rbCustomMode3.setSelected(false);
+            rbFixedColor.setSelected(false);
+            rbAmbilight.doClick();
+            
+            
         }
 
     }

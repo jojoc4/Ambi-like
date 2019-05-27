@@ -24,8 +24,6 @@ import javax.swing.JPanel;
 public class PanelPreviewButton extends JPanel {
 
     private JButton buttonCreateNewDisplayMode;
-    private JLabel labelDisplayLED;
-    private JCheckBox checkBoxDisplayLED;
     private JButton buttonParameters;
 
     private JFrameConfigurator jFrameConfigurator;
@@ -37,9 +35,6 @@ public class PanelPreviewButton extends JPanel {
     }
 
     private void geometry() {
-        labelDisplayLED = new JLabel("Visualisation LED : ");
-        checkBoxDisplayLED = new JCheckBox();
-
         String message1 = "<html>Créer un mode<br>de visualisation LED</html>";
 
         String message2 = "<html> Paramètres de<br>l'application</html>";
@@ -48,8 +43,6 @@ public class PanelPreviewButton extends JPanel {
         buttonParameters = new JButton(message2);
 
         Box hBox = Box.createHorizontalBox();
-        hBox.add(labelDisplayLED);
-        hBox.add(checkBoxDisplayLED);
         hBox.add(Box.createHorizontalGlue());
 
         hBox.add(buttonCreateNewDisplayMode);
