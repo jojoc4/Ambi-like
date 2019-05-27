@@ -7,8 +7,8 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.Iterator;
-import java.util.List;
 import java.util.Vector;
+import javax.swing.JOptionPane;
 
 /**
  * represents a personalized mode, is serializable and iterable
@@ -18,15 +18,12 @@ import java.util.Vector;
 public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     private String name;
-    private int nbled[];
     private Vector<Pixel> l;
 
     public ModePersonnalise() {
-        Config cfg = Config.getConfig();
-        nbled = cfg.getNbLed();
         name = "";
 
-        int totalLed = cfg.getNbLedTotal();
+        int totalLed = Config.getConfig().getNbLedTotal();
 
         l = new Vector<Pixel>(totalLed);
 
@@ -42,10 +39,6 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     public String getName() {
         return name;
-    }
-
-    public int[] getNbled() {
-        return nbled;
     }
 
     public Pixel getPixel(int index) {
@@ -87,14 +80,18 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
                 ObjectInputStream oi = new ObjectInputStream(fi);
                 ModePersonnalise mp = (ModePersonnalise) oi.readObject();
                 fi.close();
-
-                //TODO verify that the number of leds was the same when file created
+                
+                if(mp.getPixels().size() != Config.getConfig().getNbLedTotal()){
+                    JOptionPane.showMessageDialog(null, "Le nombre de LEDs de votre mode personnalisé ne correspond pas à la configuration actuelle.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
+                    mp = new ModePersonnalise(mp.getName());
+                }
+                
                 return mp;
             } else {
                 throw new Exception("File doesn't exsist");
             }
         } catch (Exception ex) {
-            //ex.printStackTrace();
+            ex.printStackTrace();
             return new ModePersonnalise();
         }
     }

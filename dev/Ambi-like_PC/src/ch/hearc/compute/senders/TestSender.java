@@ -22,7 +22,7 @@ public class TestSender implements Sender_I {
         r = checkColor(r);
         g = checkColor(g);
         b = checkColor(b);
-        System.out.println("Led n°" + nbLed + ") : RGB(" + r + "; " + g + "; " + b + ")");
+        //System.out.println("Led n°" + nbLed + ") : RGB(" + r + "; " + g + "; " + b + ")");
     }
 
     private int checkColor(int color) {

@@ -200,7 +200,6 @@ public class PanelPreview extends JPanel {
         try {
             setNbLeds(nbLedsBySide);
             this.vectorLEDs = pixels;
-
         } finally {
             wLock.unlock();
         }

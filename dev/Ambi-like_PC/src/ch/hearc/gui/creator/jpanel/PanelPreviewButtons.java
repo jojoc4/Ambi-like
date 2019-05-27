@@ -5,12 +5,14 @@
  */
 package ch.hearc.gui.creator.jpanel;
 
+import ch.hearc.Config;
 import ch.hearc.ModePersonnalise;
 import ch.hearc.Pixel;
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -48,7 +50,7 @@ public class PanelPreviewButtons extends JPanel {
     }
 
     public synchronized void useMode(ModePersonnalise m) {
-        preview.setPixels(m.getPixels(), m.getNbled());
+        preview.setPixels(m.getPixels(), Config.getConfig().getNbLed());//m.getNbled());
     }
 }
 
@@ -85,11 +87,11 @@ class PanelButtons extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null, "Choix d'un fichier", java.awt.FileDialog.LOAD);
                 fd.setMultipleMode(false);
+                fd.setDirectory(Config.getConfig().getPersoModeDefaultDirectory());
                 fd.setVisible(true);
-
-                fileName = fd.getFile();
-
-                if (fileName != null) {
+                
+                if (fd.getFile() != null) {
+                    fileName = new File(fd.getDirectory() + fd.getFile()).getAbsolutePath();
                     ModePersonnalise m = ModePersonnalise.getMode(fileName);
                     textName.setText(m.getName().split(".amm")[0]);
                     parent.useMode(m);
@@ -102,13 +104,14 @@ class PanelButtons extends JPanel {
             public void actionPerformed(ActionEvent e) {
                 java.awt.FileDialog fd = new java.awt.FileDialog((java.awt.Frame) null, "Choix d'un dossier", java.awt.FileDialog.SAVE);
                 fd.setMultipleMode(false);
+                fd.setDirectory(Config.getConfig().getPersoModeDefaultDirectory());
                 fd.setFile(textName.getText() + ".amm");
                 fd.setVisible(true);
 
-                fileName = fd.getFile();
-
-                if (fileName != null)
+                if (fd.getFile() != null){
+                    fileName = new File(fd.getDirectory() + fd.getFile()).getAbsolutePath();
                     parent.saveMode(fileName, textName.getText());
+                }
             }
         });
 

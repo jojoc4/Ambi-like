@@ -30,7 +30,7 @@ public class Config implements Serializable {
         mode = Computation_I.MODE_AMBILIGHT;
 
         persoModeFile = "";
-        persoModeDefaultDirectory = "";
+        persoModeDefaultDirectory = "modes\\";
 
         color = new int[3];
 
