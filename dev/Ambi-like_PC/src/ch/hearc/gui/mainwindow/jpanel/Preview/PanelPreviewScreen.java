@@ -250,7 +250,7 @@ public class PanelPreviewScreen extends JPanel {
     public void changeComputation() {
         if (config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
-                || config.getColor()[2] != this.previousPixel.getBlue())) {
+                || config.getColor()[2] != this.previousPixel.getBlue()) || config.getMode() == Computation_I.MODE_PERSO) {
             this.computation.stopComputation();
             this.startComputation();
         }
