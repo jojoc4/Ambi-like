@@ -18,8 +18,11 @@ public class PanelPreview extends JPanel {
 
     private PanelPreviewScreen panelPreviewScreen;
     private PanelPreviewButton panelPreviewButton;
+    
+    
 
-    public PanelPreview() {
+    public PanelPreview(PanelPreviewScreen panelPreviewScreen) {
+        this.panelPreviewScreen = panelPreviewScreen;
         geometry();
         control();
         appearance();
@@ -27,7 +30,6 @@ public class PanelPreview extends JPanel {
     }
 
     private void geometry() {
-        panelPreviewScreen = new PanelPreviewScreen();
         panelPreviewButton = new PanelPreviewButton();
 
         Box vLayout = Box.createVerticalBox();

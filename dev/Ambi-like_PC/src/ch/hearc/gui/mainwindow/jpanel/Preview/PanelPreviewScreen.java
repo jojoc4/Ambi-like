@@ -105,7 +105,6 @@ public class PanelPreviewScreen extends JPanel {
 
         AffineTransform backup = g2d.getTransform();
 
-        changeComputation();
         updateDisplay(g2d);
 
         g2d.setTransform(backup);
@@ -248,7 +247,7 @@ public class PanelPreviewScreen extends JPanel {
         return c;
     }
 
-    private void changeComputation() {
+    public void changeComputation() {
         if (config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
                 || config.getColor()[2] != this.previousPixel.getBlue())) {

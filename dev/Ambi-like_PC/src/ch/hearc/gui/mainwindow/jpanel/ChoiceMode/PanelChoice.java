@@ -7,6 +7,8 @@ package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import ch.hearc.Config;
 import ch.hearc.Main;
+import ch.hearc.compute.Computation_I;
+import ch.hearc.gui.mainwindow.jpanel.Preview.PanelPreviewScreen;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -25,9 +27,12 @@ public class PanelChoice extends JPanel {
     private PanelChoiceMode panelChoiceMode;
     private JButton buttonApplyParameter;
 
+    private PanelPreviewScreen panelPreviewScreen;
+
     private Config config;
 
-    public PanelChoice() {
+    public PanelChoice(PanelPreviewScreen panelPreviewScreen) {
+        this.panelPreviewScreen = panelPreviewScreen;
         geometry();
         control();
         appearance();
@@ -53,9 +58,10 @@ public class PanelChoice extends JPanel {
         buttonApplyParameter.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (config.getMode() != Main.getTempMode()) {
+                if (config.getMode() != Main.getTempMode() || config.getMode() == Computation_I.MODE_FIXE) {
                     config.setMode(Main.getTempMode());
                     Main.changeMode();
+                    panelPreviewScreen.changeComputation();
                 }
             }
         });
