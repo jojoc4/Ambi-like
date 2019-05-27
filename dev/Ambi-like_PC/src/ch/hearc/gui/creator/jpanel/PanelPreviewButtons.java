@@ -107,9 +107,8 @@ class PanelButtons extends JPanel {
 
                 fileName = fd.getFile();
 
-                if (fileName != null) {
+                if (fileName != null)
                     parent.saveMode(fileName, textName.getText());
-                }
             }
         });
 
