@@ -173,12 +173,15 @@ public class PanelChoiceModeSettings extends JPanel {
         if (listFile.length > 0) {
             if (listFile.length > 0) {
                 rbCustomMode1.setVisible(true);
+                rbCustomMode1.setText((ModePersonnalise.getMode(listFile[0].toString())).getName());
             }
             if (listFile.length > 1) {
                 rbCustomMode2.setVisible(true);
+                rbCustomMode2.setText((ModePersonnalise.getMode(listFile[1].toString())).getName());
             }
             if (listFile.length > 2) {
                 rbCustomMode3.setVisible(true);
+                rbCustomMode3.setText((ModePersonnalise.getMode(listFile[2].toString())).getName());
             }
         } else {
             rbCustomMode1.setVisible(false);
