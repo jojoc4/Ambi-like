@@ -64,7 +64,6 @@ public class Main {
         messageItem.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent e) {
                 new FrameMainWindow();
-
             }
         });
 
