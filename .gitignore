@@ -25,8 +25,13 @@ hs_err_pid*
 #MS Project
 *.mpp
 
-# Eclipse data and project binaries
+# Eclipse/netbeans data and project binaries
 *.metadata*
 *bin*
-
+**/private/*
+**/genfiles.properties
 /dev/Ambi-like_PC/nbproject/private/
+/dev/Ambi-like_PC/build/
+/dev/Ambi-like_PC/dist/
+/dev/Ambi-like_rp/dist/
+/dev/Ambi-like_rp/nbproject/private/
