@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import ch.hearc.Config;
@@ -16,8 +11,11 @@ import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 
 /**
+ * Describe PanelChoiceModeColors content
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 18.04.2019
+ * @author Julien Chappuis
  */
 public class PanelChoiceModeColors extends JPanel {
 
@@ -119,5 +117,4 @@ public class PanelChoiceModeColors extends JPanel {
 
         this.setVisible(false);
     }
-
 }

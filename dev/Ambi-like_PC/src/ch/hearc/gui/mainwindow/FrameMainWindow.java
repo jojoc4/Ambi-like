@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow;
 
 import ch.hearc.gui.mainwindow.jpanel.PanelMainWindow;
@@ -11,8 +6,11 @@ import java.awt.event.WindowEvent;
 import javax.swing.JFrame;
 
 /**
+ * Contain the mainWindow panel
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 17.04.2019
+ * @author Julien Chappuis
  */
 public class FrameMainWindow extends JFrame {
 
@@ -32,8 +30,6 @@ public class FrameMainWindow extends JFrame {
     private void control() {
 
         addWindowListener(new WindowAdapter() {
-            //I skipped unused callbacks for readability
-
             @Override
             public void windowClosing(WindowEvent e) {
                 panelMainWindow.stopComputation();

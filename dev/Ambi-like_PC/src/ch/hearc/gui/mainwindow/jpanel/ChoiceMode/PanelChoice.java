@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import ch.hearc.Config;
@@ -12,15 +7,16 @@ import ch.hearc.gui.mainwindow.jpanel.Preview.PanelPreviewScreen;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.Box;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
+ * Describe PanelChoice content
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 18.04.2019
+ * @author Julien Chappuis
  */
 public class PanelChoice extends JPanel {
 
@@ -35,8 +31,6 @@ public class PanelChoice extends JPanel {
         this.panelPreviewScreen = panelPreviewScreen;
         geometry();
         control();
-        appearance();
-
     }
 
     private void geometry() {
@@ -66,9 +60,4 @@ public class PanelChoice extends JPanel {
             }
         });
     }
-
-    private void appearance() {
-
-    }
-
 }

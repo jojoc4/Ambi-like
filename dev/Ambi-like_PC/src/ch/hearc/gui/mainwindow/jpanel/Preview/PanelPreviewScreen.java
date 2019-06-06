@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.Config;
@@ -13,26 +8,23 @@ import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.PreviewSender;
-import ch.hearc.compute.senders.TestSender;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.util.TimerTask;
-import java.util.Vector;
-import javax.swing.ImageIcon;
+import java.util.*;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
+ * Describe the content of PanelPreviewScreen
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 17.04.2019
+ * @author Julien Chappuis
  */
 public class PanelPreviewScreen extends JPanel {
 
@@ -41,7 +33,6 @@ public class PanelPreviewScreen extends JPanel {
     private static final int MARGIN = 40;
 
     private Vector<Pixel> vectorPixels;
-    private Graphics2D g2d;
 
     private PreviewSender previewSender;
     private Computation_I computation;
@@ -77,8 +68,6 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void geometry() {
-        //ImageIcon warning = MagasinImage.coffee;
-        //button = new JButton(warning);
         vectorPixels = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         fillVector();
         startComputation();
@@ -90,25 +79,25 @@ public class PanelPreviewScreen extends JPanel {
 
         Graphics2D g2D = (Graphics2D) g;
 
-        AffineTransform transform = g2D.getTransform(); //sauvegarde
-        Color color = g2D.getColor(); //sauvegarde
-        Font font = g2D.getFont(); //sauvegarde
+        // sauvegarde
+        AffineTransform transform = g2D.getTransform();
+        Color color = g2D.getColor();
+        Font font = g2D.getFont();
 
         draw(g2D);
 
-        g2D.setFont(font); //restore
-        g2D.setColor(color); //restore
-        g2D.setTransform(transform); //restore
+        // restaure
+        g2D.setFont(font);
+        g2D.setColor(color);
+        g2D.setTransform(transform);
     }
 
     private void draw(Graphics2D g2d) {
-
         AffineTransform backup = g2d.getTransform();
 
         updateDisplay(g2d);
 
         g2d.setTransform(backup);
-
     }
 
     public void updateDisplay(Graphics2D g2d) {
@@ -209,7 +198,6 @@ public class PanelPreviewScreen extends JPanel {
                 nbRefresh = 0;
                 repaint();
             }
-
         }
     }
 

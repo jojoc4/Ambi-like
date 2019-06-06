@@ -1,25 +1,19 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.gui.configurator.JFrameConfigurator;
 import ch.hearc.gui.creator.FrameCreator;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.JButton;
-import javax.swing.JCheckBox;
-import javax.swing.JLabel;
-
 import javax.swing.JPanel;
 
 /**
+ * Describe the content of PanelPreviewButton
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 17.04.2019
+ * @author Julien Chappuis
  */
 public class PanelPreviewButton extends JPanel {
 
@@ -31,7 +25,6 @@ public class PanelPreviewButton extends JPanel {
     public PanelPreviewButton() {
         geometry();
         control();
-        appearance();
     }
 
     private void geometry() {
@@ -66,9 +59,4 @@ public class PanelPreviewButton extends JPanel {
             }
         });
     }
-
-    private void appearance() {
-
-    }
-
 }

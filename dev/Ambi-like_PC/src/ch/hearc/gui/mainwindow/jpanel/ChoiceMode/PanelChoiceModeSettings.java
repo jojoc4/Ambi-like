@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import ch.hearc.Config;
@@ -25,8 +20,11 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 /**
+ * Describe PanelChoiceModeSettings content
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 18.04.2019
+ * @author Julien Chappuis
  */
 public class PanelChoiceModeSettings extends JPanel {
 
@@ -79,7 +77,7 @@ public class PanelChoiceModeSettings extends JPanel {
         add(boxVertical, BorderLayout.CENTER);
 
         configFile = Config.getConfig();
-        
+
         folderPath = "./modes";
         displayModePerso();
     }
@@ -132,17 +130,17 @@ public class PanelChoiceModeSettings extends JPanel {
     }
 
     private void displayModePerso() {
-        for(JRadioButton jrb : listRadioButton){
+        for (JRadioButton jrb : listRadioButton) {
             boxVertical.remove(jrb);
         }
-        
+
         File folder = new File(folderPath);
         this.listFile = folder.listFiles(new FilenameFilter() {
             public boolean accept(File dir, String name) {
                 return name.toLowerCase().endsWith(".amm");
             }
         });
-        
+
         listRadioButton = new ArrayList<JRadioButton>();
 
         for (int i = 0; i < listFile.length; i++) {
@@ -161,7 +159,7 @@ public class PanelChoiceModeSettings extends JPanel {
                 }
             });
         }
-        
+
         revalidate();
         repaint();
     }
