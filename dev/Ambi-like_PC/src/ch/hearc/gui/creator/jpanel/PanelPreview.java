@@ -198,7 +198,7 @@ public class PanelPreview extends JPanel {
     /**
      * Gives the vector of Pixels. Thread-safe.
      * 
-     * @return 
+     * @return Vector of all the Pixels
      */
     public Vector<Pixel> getVectorPixel() {
         Vector<Pixel> v = null;

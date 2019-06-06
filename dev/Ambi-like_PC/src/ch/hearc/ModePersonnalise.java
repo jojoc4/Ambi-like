@@ -48,7 +48,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     /**
      * get the pixel at the specified index
-     * @param index
+     * @param index index at which to get the Pixel
      * @return Pixel at given index
      */
     public Pixel getPixel(int index) {
@@ -92,6 +92,11 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         l.add(p);
     }
 
+    /**
+     * Gives an iterator on the Vector of Pixels
+     * 
+     * @return iterator on the Vector of Pixels
+     */
     @Override
     public Iterator<Pixel> iterator() {
         return l.iterator();
@@ -112,9 +117,9 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
                 ModePersonnalise mp = (ModePersonnalise) oi.readObject();
                 fi.close();
                 
-                if(mp.getPixels().size() != Config.getConfig().getNbLedTotal()){
+                if(mp.l.size() != Config.getConfig().getNbLedTotal()){
                     JOptionPane.showMessageDialog(null, "Le nombre de LEDs de votre mode personnalisé ne correspond pas à la configuration actuelle.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
-                    mp = new ModePersonnalise(mp.getName());
+                    mp = new ModePersonnalise(mp.name);
                 }
                 
                 return mp;

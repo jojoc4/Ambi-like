@@ -64,9 +64,9 @@ public class Config implements Serializable {
     }
 
     /**
-     * return the number of left on the specified side
-     * @param pos use Config.NORTH, WEST, EAST or SOUTH
-     * @return 
+     * return the number of LEDs on the specified side
+     * @param pos side of the screen (use Config.NORTH, WEST, EAST or SOUTH)
+     * @return number of LEDs on the specified side of the screen
      */
     public int getNbLed(int pos) {
         return nbLed[pos];
@@ -74,7 +74,7 @@ public class Config implements Serializable {
 
     /**
      * return an array with the number of leds on each side
-     * @return 
+     * @return array with the number of leds on each side
      */
     public int[] getNbLed() {
         return nbLed;

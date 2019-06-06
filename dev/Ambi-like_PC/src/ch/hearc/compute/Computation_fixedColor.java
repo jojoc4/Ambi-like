@@ -56,7 +56,7 @@ public class Computation_fixedColor extends Computation_I {
     /**
      * used by preview windows
      *
-     * @return
+     * @return the printscreen that was taken when the Computation was created
      */
     @Override
     public synchronized BufferedImage getImage() {
