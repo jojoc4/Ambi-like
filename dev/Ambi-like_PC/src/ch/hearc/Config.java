@@ -63,10 +63,19 @@ public class Config implements Serializable {
         return raspIp;
     }
 
+    /**
+     * return the number of left on the specified side
+     * @param pos use Config.NORTH, WEST, EAST or SOUTH
+     * @return 
+     */
     public int getNbLed(int pos) {
         return nbLed[pos];
     }
 
+    /**
+     * return an array with the number of leds on each side
+     * @return 
+     */
     public int[] getNbLed() {
         return nbLed;
     }
@@ -123,6 +132,10 @@ public class Config implements Serializable {
     //singleton
     private static Config config;
 
+    /**
+     * get the config instance, if not initialized either load it frrom file or if file not exsist, create it with default values
+     * @return Config instance 
+     */
     public static Config getConfig() {
         if (config == null) {
             try {

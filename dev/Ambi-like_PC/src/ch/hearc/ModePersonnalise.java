@@ -41,10 +41,19 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         return name;
     }
 
+    /**
+     * get the pixel at the specified index
+     * @param index
+     * @return Pixel
+     */
     public Pixel getPixel(int index) {
         return l.get(index);
     }
 
+    /**
+     * get the entire pixels vector
+     * @return 
+     */
     public Vector<Pixel> getPixels() {
         return l;
     }
@@ -53,10 +62,19 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         this.name = name;
     }
 
-    public Pixel setLed(int index, Pixel p) {
-        return l.set(index, p);
+    /**
+     * set the pixel of the specified index
+     * @param index index
+     * @param p new Pixel
+     */
+    public void setLed(int index, Pixel p) {
+        l.set(index, p);
     }
 
+    /**
+     * add pixel at the end
+     * @param p Pixel to add
+     */
     public void addLed(Pixel p) {
         l.add(p);
     }
