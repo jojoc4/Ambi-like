@@ -7,37 +7,25 @@ stages:
     - push-latest
 
 variables:
-    DOCKER_IMAGE:        registry.jojoc4.ch/p2-java:${CI_BUILD_REF_NAME}
+    DOCKER_IMAGE:        registry.jojoc4.ch/p2-java:${CI_BUILD_REF_NAME} #private registry where the containers will be stored
     DOCKER_LATEST_IMAGE: registry.jojoc4.ch/p2-java:latest
 
-#
-# Make sure we are logged into the GitLab container registry for each script.
-#
-before_script:
-#    - docker login -u jojoc4 -p ${CI_DOCKERHUB_PASSWORD}
-
-#
-# Build a docker image using the files in the 'docker/' subdirectory.
-#
 build:
     stage: build
     tags:
         - ubuntu-docker
     script:
-        - docker build -t ${DOCKER_IMAGE} .
-        - docker push ${DOCKER_IMAGE}
+        - docker build -t ${DOCKER_IMAGE} . #build the image, copy the code, compile and create jars
+        - docker push ${DOCKER_IMAGE} #push the image on the registry
         - mkdir a
-        - docker run --mount type=bind,source="$(pwd)"/a,target=/usr/jarf ${DOCKER_IMAGE} cp -r /usr/jar/ /usr/jarf
+        - docker run --mount type=bind,source="$(pwd)"/a,target=/usr/jarf ${DOCKER_IMAGE} cp -r /usr/jar/ /usr/jarf #copy jar in artifact directory
     artifacts:
         paths:
-        - a/jar/alpc.jar
+        - a/jar/alpc.jar #save jars on gitlab server
         - a/jar/alrp.jar
         expire_in: 1 week
 
-
-#
-# Tag the master image as 'latest'.
-#
+# if commit on branch master, push the container on registry with latest tag
 push-latest:
     stage: push-latest
     tags:

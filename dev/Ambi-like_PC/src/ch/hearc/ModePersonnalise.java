@@ -127,11 +127,6 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         }
     }
 
-    public static File[] getListMode() {
-        File folder = new File("modes/");
-        return folder.listFiles();
-    }
-
     /**
      * saves current mode to a file
      *
