@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @version 2
  * @since 18.05.2019
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class RMISender implements Sender_I {
 

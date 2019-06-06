@@ -24,7 +24,7 @@ import javax.swing.JPanel;
 
 /**
  *
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class Main {
 

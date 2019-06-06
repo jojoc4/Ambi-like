@@ -13,7 +13,9 @@ import java.util.logging.Logger;
  *
  * can latter be used to send animated personalized mode to ledstrip
  *
- * @author jonatan.baumgart
+ * @version 1.1
+ * @since 10.05.2019
+ * @author Jonatan Baumgartner
  */
 public class Computation_perso extends Computation_I {
 

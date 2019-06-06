@@ -11,7 +11,7 @@ package ch.hearc.compute.senders;
 public interface Sender_I {
 
     /**
-     * send new color to raspberry pi
+     * sends new color to output specified by implementing class
      *
      * @param nbLed led number on ledstrip
      * @param r red color, beetween 1 and 255

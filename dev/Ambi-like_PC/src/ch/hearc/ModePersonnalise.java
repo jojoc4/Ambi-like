@@ -37,6 +37,11 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         this.name = name;
     }
 
+    /**
+     * Gives the name of this mode
+     * 
+     * @return name of the mode
+     */
     public String getName() {
         return name;
     }
@@ -44,7 +49,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     /**
      * get the pixel at the specified index
      * @param index
-     * @return Pixel
+     * @return Pixel at given index
      */
     public Pixel getPixel(int index) {
         return l.get(index);
@@ -52,18 +57,25 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     /**
      * get the entire pixels vector
-     * @return 
+     * 
+     * @return Vector containing all the Pixels
      */
     public Vector<Pixel> getPixels() {
         return l;
     }
 
+    /**
+     * Sets the name of the mode
+     * 
+     * @param name the new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
     /**
      * set the pixel of the specified index
+     * 
      * @param index index
      * @param p new Pixel
      */
@@ -73,6 +85,7 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
 
     /**
      * add pixel at the end
+     * 
      * @param p Pixel to add
      */
     public void addLed(Pixel p) {
@@ -85,10 +98,10 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
     }
 
     /**
-     * return a personalized mode loaded from a file
+     * returns a personalized mode loaded from a file
      *
      * @param file filename to load
-     * @return
+     * @return personalized mode loaded from a file
      */
     public static ModePersonnalise getMode(String file) {
         try {

@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 /**
  * frame that contains the configuration panel
  *
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class JFrameConfigurator extends JFrame {
 

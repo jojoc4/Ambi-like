@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @version 1.1
  * @since 10.05.2019
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class Computation_fixedColor extends Computation_I {
 

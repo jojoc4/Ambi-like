@@ -25,7 +25,7 @@ public class PreviewSender implements Sender_I {
     /**
      * update the leds in previsualisation
      *
-     * @param nbLed led number on ledstrip
+     * @param indexLed led number on ledstrip
      * @param r red color, beetween 1 and 255
      * @param g green color, beetween 1 and 255
      * @param b blue color, beetween 1 and 255

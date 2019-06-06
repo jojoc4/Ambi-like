@@ -6,7 +6,7 @@ import ch.hearc.Main;
 /**
  * configuration panel
  *
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class JPanelConfigurator extends javax.swing.JPanel {
 

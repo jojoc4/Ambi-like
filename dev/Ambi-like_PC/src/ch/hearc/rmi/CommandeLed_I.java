@@ -8,7 +8,7 @@ import java.rmi.RemoteException;
  *
  * @version 1
  * @since 06.05.2019
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public interface CommandeLed_I extends Remote {
 

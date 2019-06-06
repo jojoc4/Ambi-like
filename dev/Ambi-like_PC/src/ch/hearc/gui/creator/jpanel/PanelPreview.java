@@ -24,8 +24,13 @@ import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 import javax.swing.JPanel;
 
 /**
- *
- * @author teosc
+ * Panel containing the preview of the current edited mode. Displays the screen and the LEDs' colors, according to modifications. <br>
+ * Used in PanelPreviewButtons. <br>
+ * This class is thread-safe!
+ * 
+ * @version 3.0.1
+ * @since 06.06.2019
+ * @author Téo Schaffner
  */
 public class PanelPreview extends JPanel {
 
@@ -49,7 +54,12 @@ public class PanelPreview extends JPanel {
     private final ReentrantReadWriteLock rwLock;
     private final ReadLock rLock;
     private final WriteLock wLock;
-
+    
+    /**
+     * Constructor
+     * 
+     * @param colorChooser PanelColorChooser from which to get the color to set to LEDs.
+     */
     public PanelPreview(PanelColorChooser colorChooser) {
         this.colorChooser = colorChooser;
 
@@ -63,9 +73,11 @@ public class PanelPreview extends JPanel {
 
         control();
         appearance();
-        //System.out.println("PanelPreview - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
-
+    
+    /**
+     * Adds behaviour to the panel (Listeners).
+     */
     private void control() {
         this.addMouseListener(new MouseAdapter() {
             @Override
@@ -74,11 +86,19 @@ public class PanelPreview extends JPanel {
             }
         });
     }
-
+    
+    /**
+     * Sets the panel's appearance.
+     */
     private void appearance() {
         setPreferredSize(new Dimension(WIDTH + 2 * MARGIN, HEIGHT + 2 * MARGIN));
     }
-
+    
+    /**
+     * Uses Graphics2D to draw the preview of the LEDs on the panel. Thread-safe.
+     * 
+     * @param g Graphics object to use.
+     */
     @Override
     protected void paintComponent(Graphics g) {
         rLock.lock();
@@ -92,12 +112,16 @@ public class PanelPreview extends JPanel {
             rLock.unlock();
         }
     }
-
+    
+    /**
+     * Draws everything that needs to be drawn. 
+     */
     private void createDisplay() {
         // Draw the screen
         g2d.setStroke(new BasicStroke(1));
         g2d.drawImage(img, MARGIN, MARGIN, WIDTH, HEIGHT, this);
-
+        
+        //Sapcing between LEDs on each side of the screen
         double leftSpacing = ((HEIGHT) - (nbLedsLeft * DIAMETER)) / nbLedsLeft;
         double topSpacing = ((WIDTH) - (nbLedsTop * DIAMETER)) / nbLedsTop;
         double rightSpacing = ((HEIGHT) - (nbLedsRight * DIAMETER)) / nbLedsRight;
@@ -106,11 +130,11 @@ public class PanelPreview extends JPanel {
         int ellipseIndex = 0;
 
         //LEFT
-        double x = MARGIN / 2 - DIAMETER / 2;
-        double y = MARGIN + HEIGHT - leftSpacing / 2 - DIAMETER;
+        double x = MARGIN / 2 - DIAMETER / 2; //x coordinate where to draw the LED
+        double y = MARGIN + HEIGHT - leftSpacing / 2 - DIAMETER; //y coordinate
         for (int i = 0; i < nbLedsLeft; ++i) {
             addEllipse(ellipseIndex++, x, y);
-            y -= (leftSpacing + DIAMETER);
+            y -= (leftSpacing + DIAMETER); //move up for next LED
         }
 
         //TOP
@@ -118,7 +142,7 @@ public class PanelPreview extends JPanel {
         y = MARGIN / 2 - DIAMETER / 2;
         for (int i = 0; i < nbLedsTop; ++i) {
             addEllipse(ellipseIndex++, x, y);
-            x += (topSpacing + DIAMETER);
+            x += (topSpacing + DIAMETER); //move right
         }
 
         //RIGHT
@@ -126,7 +150,7 @@ public class PanelPreview extends JPanel {
         y = MARGIN + rightSpacing / 2;
         for (int i = 0; i < nbLedsRight; ++i) {
             addEllipse(ellipseIndex++, x, y);
-            y += (rightSpacing + DIAMETER);
+            y += (rightSpacing + DIAMETER); //move down
         }
 
         //BOTTOM
@@ -134,10 +158,17 @@ public class PanelPreview extends JPanel {
         y = HEIGHT + MARGIN + (MARGIN / 2) - DIAMETER / 2;
         for (int i = 0; i < nbLedsBottom; ++i) {
             addEllipse(ellipseIndex++, x, y);
-            x -= (bottomSpacing + DIAMETER);
+            x -= (bottomSpacing + DIAMETER); //move left
         }
     }
-
+    
+    /**
+     * Puts an Ellipse2D to the vector of LEDs, at given index, with the current color.
+     * 
+     * @param index index at which the Ellipse2D should be added
+     * @param x x coordinate where to draw it
+     * @param y y coordinate where to draw it
+     */
     private void addEllipse(int index, double x, double y) {
         Ellipse2D ellipse = new Ellipse2D.Double(x, y, DIAMETER, DIAMETER);
         g2d.setColor(vectorLEDs.elementAt(index).getColor());
@@ -145,14 +176,15 @@ public class PanelPreview extends JPanel {
         vectorEllipses.set(index, ellipse);
     }
 
+    /**
+     * Updates the color of the LED that contains the point at given point's coordinates and triggers a redraw.
+     * 
+     * @param p Point2D that represents the coordintes at which to update the LED's color
+     */
     private void updateLEDColorAtClick(Point2D p) {
         int i = 0;
         for (Ellipse2D ellipse : vectorEllipses) {
             if (ellipse.contains(p)) {
-                double x = ellipse.getX();
-                double y = ellipse.getY();
-                double w = ellipse.getWidth();
-                double h = ellipse.getHeight();
 
                 vectorLEDs.elementAt(i).setColor(colorChooser.getColor());
 
@@ -163,6 +195,11 @@ public class PanelPreview extends JPanel {
         }
     }
 
+    /**
+     * Gives the vector of Pixels. Thread-safe.
+     * 
+     * @return 
+     */
     public Vector<Pixel> getVectorPixel() {
         Vector<Pixel> v = null;
 
@@ -176,6 +213,11 @@ public class PanelPreview extends JPanel {
         return v;
     }
 
+    /**
+     * Changes the number of LEDs and sets them all to default color (see fillVectors). Thread-safe.
+     * 
+     * @param nbLeds new number of LEDs
+     */
     private void setNbLeds(int[] nbLeds) {
         wLock.lock();
         try {
@@ -188,13 +230,20 @@ public class PanelPreview extends JPanel {
 
             vectorLEDs = new Vector<Pixel>(nbLedsTotal); //initial size, better performance when adding elements
             vectorEllipses = new Vector<Ellipse2D>(nbLedsTotal);
-
+            
+            //fill new vectors with default values
             fillVectors();
         } finally {
             wLock.unlock();
         }
     }
 
+    /**
+     * Changes the complete vetor of Pixels and resets the vector of Ellipse2D and triggers a redraw. Thread-safe.
+     * 
+     * @param pixels new vector of Pixels
+     * @param nbLedsBySide number of pixels on each side of the screen
+     */
     public void setPixels(Vector<Pixel> pixels, int[] nbLedsBySide) {
         wLock.lock();
         try {
@@ -207,6 +256,9 @@ public class PanelPreview extends JPanel {
         repaint();
     }
 
+    /**
+     * Fills both vectors with default Pixels (all are black by default). Thread-safe.
+     */
     private void fillVectors() {
         wLock.lock();
         try {
