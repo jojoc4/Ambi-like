@@ -29,8 +29,8 @@ import javax.swing.JPanel;
 public class Main {
 
     private static Computation_I c;
-    private static final String MODE = "TEST";
-    //private static final String MODE = "RMI";
+    //private static final String MODE = "TEST";
+    private static final String MODE = "RMI";
 
     private static int requestedMode = Computation_I.MODE_AMBILIGHT;
 
