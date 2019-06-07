@@ -189,7 +189,7 @@ public class PanelPreviewScreen extends JPanel {
     /**
      * Draw an ellipse
      *
-     * @param g2d
+     * @param g2d g2d instance
      * @param index : index of the led to draw
      * @return the index of the next led
      */
@@ -207,7 +207,7 @@ public class PanelPreviewScreen extends JPanel {
     /**
      * Getter
      *
-     * @return Vector<Pixel> contains pixel object
+     * @return Vector contains pixel object
      */
     public Vector<Pixel> getVectorPixel() {
         return this.vectorPixels;
