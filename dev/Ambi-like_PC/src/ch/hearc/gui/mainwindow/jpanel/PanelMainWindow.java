@@ -40,6 +40,9 @@ public class PanelMainWindow extends JPanel {
 
     }
 
+    /**
+     * Stop the computation
+     */
     public void stopComputation() {
         this.panelPreview.stopComputation();
     }

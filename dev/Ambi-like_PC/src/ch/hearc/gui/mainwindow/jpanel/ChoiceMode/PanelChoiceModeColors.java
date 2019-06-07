@@ -84,6 +84,13 @@ public class PanelChoiceModeColors extends JPanel {
         jSliderBlue.addChangeListener(addListener(jTextFieldBlue, jSliderBlue));
     }
 
+    /**
+     * Add an action Listener on the the JTextField and modify the JSlider
+     *
+     * @param textField to focus with the listener
+     * @param slider which one the slider changes the value
+     * @return an instance of ChangeListener set to the JSlider
+     */
     private ChangeListener addListener(JTextField textField, JSlider slider) {
         return new ChangeListener() {
             @Override
