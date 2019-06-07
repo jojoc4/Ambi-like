@@ -35,3 +35,6 @@ hs_err_pid*
 /dev/Ambi-like_PC/dist/
 /dev/Ambi-like_rp/dist/
 /dev/Ambi-like_rp/nbproject/private/
+
+# JVM, et autres fichiers pour la création de l'installeur
+creation-installeur/
