@@ -19,7 +19,7 @@ public interface CommandeLed_I extends Remote {
      * @param r red value beetween 0 and 255
      * @param g green value beetween 0 and 255
      * @param b blue value beetween 0 and 255
-     * @throws RemoteException
+     * @throws RemoteException problem with connection
      */
     public void setLed(int nbLed, int r, int g, int b) throws RemoteException;
 }
