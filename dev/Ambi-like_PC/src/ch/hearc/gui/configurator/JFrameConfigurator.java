@@ -6,7 +6,7 @@ import javax.swing.JFrame;
 /**
  * frame that contains the configuration panel
  *
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class JFrameConfigurator extends JFrame {
 
@@ -34,7 +34,7 @@ public class JFrameConfigurator extends JFrame {
         this.setSize(220, 330);
         this.setLocation(300, 500);
         this.setTitle("Configurator");
-        this.setVisible(true); //imp�rativement EN DERNIER !!
+        this.setVisible(true);
     }
 
 }

@@ -13,7 +13,7 @@ import java.util.logging.Logger;
  *
  * @version 1.1
  * @since 10.05.2019
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class Computation_fixedColor extends Computation_I {
 
@@ -56,7 +56,7 @@ public class Computation_fixedColor extends Computation_I {
     /**
      * used by preview windows
      *
-     * @return
+     * @return the printscreen that was taken when the Computation was created
      */
     @Override
     public synchronized BufferedImage getImage() {

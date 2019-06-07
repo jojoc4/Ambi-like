@@ -5,10 +5,7 @@ import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.*;
-import ch.hearc.gui.configurator.JFrameConfigurator;
-import ch.hearc.gui.configurator.JPanelConfigurator;
 import ch.hearc.gui.mainwindow.FrameMainWindow;
-import ch.hearc.gui.creator.FrameCreator;
 import java.awt.AWTException;
 import java.awt.Image;
 import java.awt.MenuItem;
@@ -22,19 +19,18 @@ import java.net.URL;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
  *
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class Main {
 
     private static Computation_I c;
-    private static final String MODE = "TEST";
-    //private static final String MODE = "RMI";
+    //private static final String MODE = "TEST";
+    private static final String MODE = "RMI";
 
     private static int requestedMode = Computation_I.MODE_AMBILIGHT;
 

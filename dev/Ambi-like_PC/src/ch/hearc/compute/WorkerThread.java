@@ -1,20 +1,18 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.compute;
 
-import ch.hearc.Config;
 import java.awt.image.BufferedImage;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ch.hearc.compute.senders.Sender_I;
-import java.awt.Color;
 
 /**
- *
- * @author teosc
+ * Calculates the average color of areas around the screen and sends them to the desired output. Only used by Computation_Ambilight. <br>
+ * Gets the areas by using Boundaries, so it runs around the screen, in harmony with all the other workers. <br>
+ * This class implements Runnable interface.
+ * 
+ * @version 2.5.3
+ * @since 25.05.2019
+ * @author Téo Schaffner
  */
 public class WorkerThread implements Runnable {
 
@@ -34,22 +32,40 @@ public class WorkerThread implements Runnable {
     private int blue;
     private boolean running;
 
+    /**
+     * Constructor
+     * 
+     * @param boundaries The boundaries object containing all the areas that should be calculated.
+     * @param sender The sender that should be used to send the claculated color to the desired output.
+     */
     public WorkerThread(Boundaries boundaries, Sender_I sender) {
         this.boundaries = boundaries;
         this.running = false;
         this.sender = sender;
     }
-
+    
+    /**
+     * Set a new image to use for colors. Thread-safe.
+     * 
+     * @param img the new image
+     */
     public synchronized void setImage(BufferedImage img) {
         this.img = img;
     }
-
+    
+    /**
+     * Gives the ARGB color of the pixel at index (x,y) in the current image.
+     * 
+     * @param x x coordinate of the pixel
+     * @param y y coordinate of the pixel
+     * @return integer containing the ARGB value of the pixel's color
+     */
     private int getRGB(int x, int y) {
         //System.out.println("x: " + x + " y: " + y);
         try {
             synchronized (this) {
-                return (img != null) ? img.getRGB(x, y) : 0;
-            } //0 means the LEDs will be switched off when there's no image available.
+                return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
+            } 
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println(e.getClass() + " -- problematic coordinates (x: " + x + "; y: " + y
                     + "). Image size : " + img.getWidth() + " x " + img.getHeight()
@@ -57,7 +73,10 @@ public class WorkerThread implements Runnable {
         }
         return 0;
     }
-
+    
+    /**
+     * Calculates the average color of the next area as long as the thread is marked as running (see startRun, stopRun and isRunning)
+     */
     @Override
     public void run() {
         startRun();
@@ -74,9 +93,6 @@ public class WorkerThread implements Runnable {
             int totalR = 0;
             int totalG = 0;
             int totalB = 0;
-//            int totalR2 = 0;
-//            int totalG2 = 0;
-//            int totalB2 = 0;
             int totalPx = 0;
 
             //System.out.println(xMin + " " + yMin + " " + xMax + " " + yMax + " ");
@@ -87,33 +103,21 @@ public class WorkerThread implements Runnable {
                     totalR += (rgb >> 16) & 0xFF;
                     totalG += (rgb >> 8) & 0xFF;
                     totalB += (rgb) & 0xFF;
-//                    Color c = new Color(rgb);
-//                    totalR2 += c.getRed();
-//                    totalG2 += c.getGreen();
-//                    totalB2 += c.getBlue();
 
                     ++totalPx;
                 }
             }
 
-//            System.out.println(totalR + " " + totalG + " " + totalB);
-//            System.out.println((int)((((float)totalR / (float)totalPx) / 255f ) * Config.getConfig().getLumMax()));
             totalPx = (totalPx == 0) ? 1 : totalPx; //make sure there is no zero-division if the area to compute is ill-formed.
 
             this.red = (totalR / totalPx);
             this.green = (totalG / totalPx);
             this.blue = (totalB / totalPx);
 
-//            System.out.println(index + ") rouge: " + red + " vert: " + green + " bleu: " + blue);
-//            
-//            this.red = (totalR2 / totalPx);
-//            this.green = (totalG2 / totalPx);
-//            this.blue = (totalB2 / totalPx);
-//            
-//            System.out.println(index + ") rouge2: " + red + " vert2: " + green + " bleu2: " + blue);
             //send the values to the specified output (chosen in constructor)
             sendValues();
-
+            
+            //wait a moment before calculating next area
             try {
                 Thread.sleep(10);
             } catch (InterruptedException ex) {
@@ -121,23 +125,33 @@ public class WorkerThread implements Runnable {
             }
         }
     }
-
+    
+    /**
+     * sends the values to the desired output, specified by the sender given in constructor
+     */
     private void sendValues() {
-        //For testing : (can also simply use a TestSender object)
-        //System.out.println("entre (" + xMin + "; " + yMin + ") et (" + xMax + "; " + yMax + ") : RGB(" + red + "; " + green + "; "+ blue + ")");
-
-        //send the values to the desired output
         sender.send(index, red, green, blue);
     }
-
+    
+    /**
+     * enables the thread to run
+     */
     public synchronized void startRun() {
         this.running = true;
     }
-
+    
+    /**
+     * disables the thread to run
+     */
     public synchronized void stopRun() {
         this.running = false;
     }
-
+    
+    /**
+     * Tells if the thread is enabled or not.
+     * 
+     * @return true if enabled, false otherwise
+     */
     public synchronized boolean isRunning() {
         return this.running;
     }

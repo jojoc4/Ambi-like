@@ -9,8 +9,11 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 
 /**
+ * Describe the panel of the mainWindow
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 17.04.2019
+ * @author Julien Chappuis
  */
 public class PanelMainWindow extends JPanel {
 
@@ -20,15 +23,13 @@ public class PanelMainWindow extends JPanel {
 
     public PanelMainWindow() {
         geometry();
-        control();
-        appearance();
     }
 
     private void geometry() {
         panelPreviewScreen = new PanelPreviewScreen();
         panelChoice = new PanelChoice(panelPreviewScreen);
         panelPreview = new PanelPreview(panelPreviewScreen);
-        
+
         Box boxH = Box.createHorizontalBox();
 
         boxH.add(panelChoice);
@@ -39,14 +40,9 @@ public class PanelMainWindow extends JPanel {
 
     }
 
-    private void control() {
-
-    }
-
-    private void appearance() {
-
-    }
-
+    /**
+     * Stop the computation
+     */
     public void stopComputation() {
         this.panelPreview.stopComputation();
     }

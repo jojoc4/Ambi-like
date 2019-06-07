@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.Preview;
 
 import ch.hearc.Config;
@@ -13,26 +8,23 @@ import ch.hearc.compute.Computation_I;
 import ch.hearc.compute.Computation_fixedColor;
 import ch.hearc.compute.Computation_perso;
 import ch.hearc.compute.senders.PreviewSender;
-import ch.hearc.compute.senders.TestSender;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-
 import java.awt.geom.AffineTransform;
 import java.awt.geom.Ellipse2D;
-import java.awt.geom.Rectangle2D;
-import java.util.TimerTask;
-import java.util.Vector;
-import javax.swing.ImageIcon;
+import java.util.*;
 import javax.swing.JPanel;
-import javax.swing.Timer;
 
 /**
+ * Describe the content of PanelPreviewScreen
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 17.04.2019
+ * @author Julien Chappuis
  */
 public class PanelPreviewScreen extends JPanel {
 
@@ -41,7 +33,6 @@ public class PanelPreviewScreen extends JPanel {
     private static final int MARGIN = 40;
 
     private Vector<Pixel> vectorPixels;
-    private Graphics2D g2d;
 
     private PreviewSender previewSender;
     private Computation_I computation;
@@ -77,40 +68,53 @@ public class PanelPreviewScreen extends JPanel {
     }
 
     private void geometry() {
-        //ImageIcon warning = MagasinImage.coffee;
-        //button = new JButton(warning);
         vectorPixels = new Vector<Pixel>(Config.getConfig().getNbLedTotal()); //initial size, better performance when adding elements
         fillVector();
         startComputation();
     }
 
+    /**
+     * Draw the preview screen on this JPanel
+     *
+     * @param g graphical con text
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
 
         Graphics2D g2D = (Graphics2D) g;
 
-        AffineTransform transform = g2D.getTransform(); //sauvegarde
-        Color color = g2D.getColor(); //sauvegarde
-        Font font = g2D.getFont(); //sauvegarde
+        // sauvegarde
+        AffineTransform transform = g2D.getTransform();
+        Color color = g2D.getColor();
+        Font font = g2D.getFont();
 
         draw(g2D);
 
-        g2D.setFont(font); //restore
-        g2D.setColor(color); //restore
-        g2D.setTransform(transform); //restore
+        // restaure
+        g2D.setFont(font);
+        g2D.setColor(color);
+        g2D.setTransform(transform);
     }
 
+    /**
+     * Draw the preview screen on this JPanel without axis transformation
+     *
+     * @param g graphical context
+     */
     private void draw(Graphics2D g2d) {
-
         AffineTransform backup = g2d.getTransform();
 
         updateDisplay(g2d);
 
         g2d.setTransform(backup);
-
     }
 
+    /**
+     * Draw the stuff with all the parameters required
+     *
+     * @param g2d graphical context
+     */
     public void updateDisplay(Graphics2D g2d) {
         int nbLedsTop = Config.getConfig().getNbLed(Config.NORTH);
         int nbLedsLeft = Config.getConfig().getNbLed(Config.WEST);
@@ -172,11 +176,23 @@ public class PanelPreviewScreen extends JPanel {
 
     }
 
+    /**
+     * Rotate and translate
+     *
+     * @param g2d graphical context
+     */
     public void rotateTranslate(Graphics2D g2d) {
         g2d.translate(halfMargin, halfMargin);
         g2d.rotate(Math.PI / 2);
     }
 
+    /**
+     * Draw an ellipse
+     *
+     * @param g2d g2d instance
+     * @param index : index of the led to draw
+     * @return the index of the next led
+     */
     public int drawEllipse(Graphics2D g2d, int index) {
         Pixel pixel = this.vectorPixels.get(index);
         g2d.setColor(pixel.getColor());
@@ -188,10 +204,21 @@ public class PanelPreviewScreen extends JPanel {
         return index;
     }
 
+    /**
+     * Getter
+     *
+     * @return Vector contains pixel object
+     */
     public Vector<Pixel> getVectorPixel() {
         return this.vectorPixels;
     }
 
+    /**
+     * Called by PreviewSender to fill the vector of Pixel
+     *
+     * @param index of the led
+     * @param pixel to add on a specific index
+     */
     public synchronized void setPixelAt(int index, Pixel pixel) {
         if (index < vectorPixels.size()) {
             vectorPixels.set(index, pixel);
@@ -209,7 +236,6 @@ public class PanelPreviewScreen extends JPanel {
                 nbRefresh = 0;
                 repaint();
             }
-
         }
     }
 
@@ -217,6 +243,9 @@ public class PanelPreviewScreen extends JPanel {
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
     }
 
+    /**
+     * Initialize the vector with default values
+     */
     private void fillVector() {
         Config config = Config.getConfig();
         int nbLeds = config.getNbLedTotal();
@@ -226,6 +255,11 @@ public class PanelPreviewScreen extends JPanel {
         }
     }
 
+    /**
+     * Manage the computation when the user changes the mode
+     *
+     * @return Computation_I
+     */
     private Computation_I createComputation() {
         Computation_I c;
         this.previewSender = new PreviewSender(this);
@@ -247,6 +281,9 @@ public class PanelPreviewScreen extends JPanel {
         return c;
     }
 
+    /**
+     * Change the computation mode according to the Configfile Singleton
+     */
     public void changeComputation() {
         if (config.getMode() != this.lastMode || (config.getColor()[0] != this.previousPixel.getRed()
                 || config.getColor()[1] != this.previousPixel.getGreen()
@@ -256,6 +293,9 @@ public class PanelPreviewScreen extends JPanel {
         }
     }
 
+    /**
+     * Stop the ancient computation when the user change the mode.
+     */
     public void stopComputation() {
         this.computation.stopComputation();
     }

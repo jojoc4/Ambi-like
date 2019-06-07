@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  *
  * @version 2
  * @since 18.05.2019
- * @author jonatan.baumgart
+ * @author Jonatan Baumgartner
  */
 public class RMISender implements Sender_I {
 
@@ -30,8 +30,7 @@ public class RMISender implements Sender_I {
      */
     private RMISender() {
         try {
-            //InetAddress serveurInetAdress = InetAddress.getByName(Config.getConfig().getRaspIp());
-            InetAddress serveurInetAdress = InetAddress.getByName("192.168.100.100");
+            InetAddress serveurInetAdress = InetAddress.getByName(Config.getConfig().getRaspIp());
             RmiURL rmiURL = new RmiURL("commande_led", serveurInetAdress, RmiTools.PORT_RMI_DEFAUT);
             Remote remote = RmiTools.connectionRemoteObjectBloquant(rmiURL);
             commande = (CommandeLed_I) remote;

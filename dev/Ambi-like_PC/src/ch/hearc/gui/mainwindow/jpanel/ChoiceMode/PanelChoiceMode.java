@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.mainwindow.jpanel.ChoiceMode;
 
 import javax.swing.BorderFactory;
@@ -10,8 +5,11 @@ import javax.swing.Box;
 import javax.swing.JPanel;
 
 /**
+ * Describe PanelChoiceMode content
  *
- * @author julien.chappuis1
+ * @version 1.0
+ * @since 18.04.2019
+ * @author Julien Chappuis
  */
 public class PanelChoiceMode extends JPanel {
 
@@ -19,7 +17,6 @@ public class PanelChoiceMode extends JPanel {
 
     public PanelChoiceMode() {
         geometry();
-        control();
         appearance();
 
     }
@@ -34,12 +31,7 @@ public class PanelChoiceMode extends JPanel {
         add(boxv);
     }
 
-    private void control() {
-
-    }
-
     private void appearance() {
         setBorder(BorderFactory.createTitledBorder("Choix du mode"));
     }
-
 }

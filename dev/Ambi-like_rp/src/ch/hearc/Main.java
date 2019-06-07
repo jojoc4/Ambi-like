@@ -18,9 +18,6 @@ import java.util.logging.Logger;
  */
 public class Main {
 
-    /**
-     * Main program
-     */
     public static void main(String[] args) {
 
         //initialisation of the ledStrip

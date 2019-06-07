@@ -31,7 +31,7 @@ public class CommandeLed implements CommandeLed_I {
      * @param r red value beetween 0 and 255
      * @param g green value beetween 0 and 255
      * @param b blue value beetween 0 and 255
-     * @throws RemoteException
+     * @throws RemoteException connection problem
      */
     @Override
     public void setLed(int nbLed, int r, int g, int b) throws RemoteException {

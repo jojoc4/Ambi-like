@@ -37,40 +37,76 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
         this.name = name;
     }
 
+    /**
+     * Gives the name of this mode
+     * 
+     * @return name of the mode
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * get the pixel at the specified index
+     * @param index index at which to get the Pixel
+     * @return Pixel at given index
+     */
     public Pixel getPixel(int index) {
         return l.get(index);
     }
 
+    /**
+     * get the entire pixels vector
+     * 
+     * @return Vector containing all the Pixels
+     */
     public Vector<Pixel> getPixels() {
         return l;
     }
 
+    /**
+     * Sets the name of the mode
+     * 
+     * @param name the new name
+     */
     public void setName(String name) {
         this.name = name;
     }
 
-    public Pixel setLed(int index, Pixel p) {
-        return l.set(index, p);
+    /**
+     * set the pixel of the specified index
+     * 
+     * @param index index
+     * @param p new Pixel
+     */
+    public void setLed(int index, Pixel p) {
+        l.set(index, p);
     }
 
+    /**
+     * add pixel at the end
+     * 
+     * @param p Pixel to add
+     */
     public void addLed(Pixel p) {
         l.add(p);
     }
 
+    /**
+     * Gives an iterator on the Vector of Pixels
+     * 
+     * @return iterator on the Vector of Pixels
+     */
     @Override
     public Iterator<Pixel> iterator() {
         return l.iterator();
     }
 
     /**
-     * return a personalized mode loaded from a file
+     * returns a personalized mode loaded from a file
      *
      * @param file filename to load
-     * @return
+     * @return personalized mode loaded from a file
      */
     public static ModePersonnalise getMode(String file) {
         try {
@@ -81,9 +117,9 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
                 ModePersonnalise mp = (ModePersonnalise) oi.readObject();
                 fi.close();
                 
-                if(mp.getPixels().size() != Config.getConfig().getNbLedTotal()){
+                if(mp.l.size() != Config.getConfig().getNbLedTotal()){
                     JOptionPane.showMessageDialog(null, "Le nombre de LEDs de votre mode personnalisé ne correspond pas à la configuration actuelle.", "Erreur", JOptionPane.INFORMATION_MESSAGE);
-                    mp = new ModePersonnalise(mp.getName());
+                    mp = new ModePersonnalise(mp.name);
                 }
                 
                 return mp;
@@ -94,11 +130,6 @@ public class ModePersonnalise implements Iterable<Pixel>, Serializable {
             ex.printStackTrace();
             return new ModePersonnalise();
         }
-    }
-
-    public static File[] getListMode() {
-        File folder = new File("modes/");
-        return folder.listFiles();
     }
 
     /**

@@ -13,7 +13,9 @@ import java.util.logging.Logger;
  *
  * can latter be used to send animated personalized mode to ledstrip
  *
- * @author jonatan.baumgart
+ * @version 1.1
+ * @since 10.05.2019
+ * @author Jonatan Baumgartner
  */
 public class Computation_perso extends Computation_I {
 
@@ -23,7 +25,7 @@ public class Computation_perso extends Computation_I {
 
     /**
      *
-     * @param s used sender
+     * @param s used sender sender to use
      * @param m Personalized mode to apply
      */
     public Computation_perso(Sender_I s, ModePersonnalise m) {
@@ -35,6 +37,9 @@ public class Computation_perso extends Computation_I {
         startComputation();
     }
 
+    /**
+     * sends evry pixel of the mode ten times a second
+     */
     @Override
     public void run() {
         while (isRunning()) {
@@ -50,6 +55,10 @@ public class Computation_perso extends Computation_I {
         }
     }
 
+    /**
+     * used by the previsualisation
+     * @return screenshot
+     */
     @Override
     public synchronized BufferedImage getImage() {
         return img;

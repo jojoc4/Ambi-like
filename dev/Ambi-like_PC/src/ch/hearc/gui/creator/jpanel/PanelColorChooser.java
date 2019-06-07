@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package ch.hearc.gui.creator.jpanel;
 
 import java.awt.BorderLayout;
@@ -12,13 +7,20 @@ import javax.swing.JPanel;
 import javax.swing.colorchooser.AbstractColorChooserPanel;
 
 /**
- *
- * @author teosc
+ * Panel that contains a JColorChooser. Extends JPanel. <br>
+ * Used by PanelCreator.
+ * 
+ * @version 1.4
+ * @since 28.05.2019
+ * @author Téo Schaffner
  */
 public class PanelColorChooser extends JPanel {
 
     private JColorChooser jcc;
-
+    
+    /**
+     * Constructor
+     */
     public PanelColorChooser() {
         jcc = new JColorChooser();
         jcc.setPreviewPanel(new JPanel());
@@ -32,10 +34,12 @@ public class PanelColorChooser extends JPanel {
 
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
-
-        //System.out.println("PanelColorChooser - width: " + getWidth() + " height: " + getHeight() + " x: " + getX() + " y: " + getY() + " visible: " + isVisible() + " valid: " + isValid());
     }
-
+    
+    /**
+     * Gives the selected color
+     * @return selected color
+     */
     public Color getColor() {
         return jcc.getColor();
     }
