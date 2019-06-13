@@ -9,7 +9,7 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 /**
  * Panel that contains a JColorChooser. Extends JPanel. <br>
  * Used by PanelCreator.
- * 
+ *
  * @version 1.4
  * @since 28.05.2019
  * @author Téo Schaffner
@@ -17,7 +17,7 @@ import javax.swing.colorchooser.AbstractColorChooserPanel;
 public class PanelColorChooser extends JPanel {
 
     private JColorChooser jcc;
-    
+
     /**
      * Constructor
      */
@@ -35,9 +35,10 @@ public class PanelColorChooser extends JPanel {
         setLayout(new BorderLayout());
         add(jcc, BorderLayout.CENTER);
     }
-    
+
     /**
      * Gives the selected color
+     *
      * @return selected color
      */
     public Color getColor() {

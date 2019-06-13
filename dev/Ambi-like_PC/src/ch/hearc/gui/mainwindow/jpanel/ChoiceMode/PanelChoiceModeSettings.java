@@ -130,7 +130,8 @@ public class PanelChoiceModeSettings extends JPanel {
     }
 
     /**
-     * Create a specific number of radio buttons according to the list of files that contains a PersoMode.
+     * Create a specific number of radio buttons according to the list of files
+     * that contains a PersoMode.
      */
     private void displayModePerso() {
         for (JRadioButton jrb : listRadioButton) {

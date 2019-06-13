@@ -7,12 +7,14 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 /**
- * Contains the areas on which to compute the colors, top-left and bottom-right corners as delimiters <br>
+ * Contains the areas on which to compute the colors, top-left and bottom-right
+ * corners as delimiters <br>
  * Works similarly to producer-consumer pattern <br>
- * Use setNext to insert an area (producer), and getNext to access the next area (consumer) <br>
+ * Use setNext to insert an area (producer), and getNext to access the next area
+ * (consumer) <br>
  * Works in the First-in First-out behaviour. <br>
  * This class is thread-safe!
- * 
+ *
  * @version 2.1
  * @since 13.05.2019
  * @author Téo Schaffner
@@ -28,11 +30,12 @@ public class Boundaries {
 
     private final Lock lock;
     private final Condition condition;
-    
+
     /**
      * Constructor
-     * 
-     * @param nbLeds Number of LEDs you have. There will be as many areas as LEDs.
+     *
+     * @param nbLeds Number of LEDs you have. There will be as many areas as
+     * LEDs.
      */
     public Boundaries(int nbLeds) {
         this.boundaries = new int[nbLeds][5];
@@ -44,11 +47,12 @@ public class Boundaries {
         this.lock = new ReentrantLock();
         this.condition = lock.newCondition();
     }
-    
+
     /**
      * Gives the next area that should be calculated. Thread-safe.
-     * 
-     * @return Array containing the coordinates of the area and the index of the area {xMin, yMin, xMax, yMax, index}
+     *
+     * @return Array containing the coordinates of the area and the index of the
+     * area {xMin, yMin, xMax, yMax, index}
      */
     public int[] getNext() {
         int ind = 0;
@@ -71,10 +75,11 @@ public class Boundaries {
 
         return boundaries[ind];
     }
-    
+
     /**
-     * Inserts an area at the end of the array. If the array if already full, it overwrites the first element and so-on. Thread-safe.
-     * 
+     * Inserts an area at the end of the array. If the array if already full, it
+     * overwrites the first element and so-on. Thread-safe.
+     *
      * @param xMin x coordinate of the bottom-left corner
      * @param yMin y coordinate of the bottom-left corner
      * @param xMax x coordinate of the top-right corner
@@ -101,7 +106,9 @@ public class Boundaries {
     }
 
     /**
-     * FOR DEBUGGING PURPOSE ONLY!! Prints all the areas to the console. Don't use this method for anything other than debugging as it is not thread-safe.
+     * FOR DEBUGGING PURPOSE ONLY!! Prints all the areas to the console. Don't
+     * use this method for anything other than debugging as it is not
+     * thread-safe.
      */
     public void printAll() {
         int num = 0;

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 
 /**
  * The window on which a mode can be created or modified. Extends JFrame.
- * 
+ *
  * @version 3.0.1
  * @since 06.06.2019
  * @author Téo Schaffner

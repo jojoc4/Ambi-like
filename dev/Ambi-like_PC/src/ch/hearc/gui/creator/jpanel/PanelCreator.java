@@ -4,8 +4,9 @@ import java.awt.BorderLayout;
 import javax.swing.JPanel;
 
 /**
- * Main panel of the mode creator window. Contains the other panels. Used by FrameCreator.
- * 
+ * Main panel of the mode creator window. Contains the other panels. Used by
+ * FrameCreator.
+ *
  * @version 3.0.1
  * @since 06.06.2019
  * @author Téo Schaffner
@@ -15,7 +16,7 @@ public class PanelCreator extends JPanel {
     private PanelColorChooser colorChooser;
     private BorderLayout layout;
     private PanelPreviewButtons preview;
-    
+
     /**
      * Constructor
      */

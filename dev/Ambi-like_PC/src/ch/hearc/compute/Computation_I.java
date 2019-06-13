@@ -10,7 +10,7 @@ import java.util.logging.Logger;
 
 /**
  * Abstract class that defines the Computation. Implements Runnable interface.
- * 
+ *
  * @version 2.0
  * @since 22.04.2019
  * @author Téo Schaffner
@@ -25,24 +25,26 @@ public abstract class Computation_I implements Runnable {
 
     @Override
     public abstract void run();
-    
+
     /**
-     * Enables the computation. Must start the thread after calling this if you want the computation to actually do something.
+     * Enables the computation. Must start the thread after calling this if you
+     * want the computation to actually do something.
      */
     public void startComputation() {
         this.running = true;
     }
-    
+
     /**
-     * Stops the computation in a clean way. The thread will finish it's job and exit.
+     * Stops the computation in a clean way. The thread will finish it's job and
+     * exit.
      */
     public void stopComputation() {
         this.running = false;
     }
-    
+
     /**
      * Tells if the computation is currently enabled.
-     * 
+     *
      * @return true if the computation is enabled, false otherwise.
      */
     public boolean isRunning() {
@@ -51,8 +53,9 @@ public abstract class Computation_I implements Runnable {
 
     /**
      * Takes a screenshot and returns it.
-     * 
-     * @return BufferedImage containing the screenshot, or null if an exception is encountered.
+     *
+     * @return BufferedImage containing the screenshot, or null if an exception
+     * is encountered.
      */
     public static final BufferedImage printScreen() {
         try {
