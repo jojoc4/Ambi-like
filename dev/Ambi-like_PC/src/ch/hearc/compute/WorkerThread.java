@@ -6,10 +6,12 @@ import java.util.logging.Logger;
 import ch.hearc.compute.senders.Sender_I;
 
 /**
- * Calculates the average color of areas around the screen and sends them to the desired output. Only used by Computation_Ambilight. <br>
- * Gets the areas by using Boundaries, so it runs around the screen, in harmony with all the other workers. <br>
+ * Calculates the average color of areas around the screen and sends them to the
+ * desired output. Only used by Computation_Ambilight. <br>
+ * Gets the areas by using Boundaries, so it runs around the screen, in harmony
+ * with all the other workers. <br>
  * This class implements Runnable interface.
- * 
+ *
  * @version 2.5.3
  * @since 25.05.2019
  * @author Téo Schaffner
@@ -34,28 +36,30 @@ public class WorkerThread implements Runnable {
 
     /**
      * Constructor
-     * 
-     * @param boundaries The boundaries object containing all the areas that should be calculated.
-     * @param sender The sender that should be used to send the claculated color to the desired output.
+     *
+     * @param boundaries The boundaries object containing all the areas that
+     * should be calculated.
+     * @param sender The sender that should be used to send the claculated color
+     * to the desired output.
      */
     public WorkerThread(Boundaries boundaries, Sender_I sender) {
         this.boundaries = boundaries;
         this.running = false;
         this.sender = sender;
     }
-    
+
     /**
      * Set a new image to use for colors. Thread-safe.
-     * 
+     *
      * @param img the new image
      */
     public synchronized void setImage(BufferedImage img) {
         this.img = img;
     }
-    
+
     /**
      * Gives the ARGB color of the pixel at index (x,y) in the current image.
-     * 
+     *
      * @param x x coordinate of the pixel
      * @param y y coordinate of the pixel
      * @return integer containing the ARGB value of the pixel's color
@@ -65,7 +69,7 @@ public class WorkerThread implements Runnable {
         try {
             synchronized (this) {
                 return (img != null) ? img.getRGB(x, y) : 0; //0 means the LEDs will be switched off when there's no image available.
-            } 
+            }
         } catch (ArrayIndexOutOfBoundsException e) {
             System.err.println(e.getClass() + " -- problematic coordinates (x: " + x + "; y: " + y
                     + "). Image size : " + img.getWidth() + " x " + img.getHeight()
@@ -73,9 +77,10 @@ public class WorkerThread implements Runnable {
         }
         return 0;
     }
-    
+
     /**
-     * Calculates the average color of the next area as long as the thread is marked as running (see startRun, stopRun and isRunning)
+     * Calculates the average color of the next area as long as the thread is
+     * marked as running (see startRun, stopRun and isRunning)
      */
     @Override
     public void run() {
@@ -116,7 +121,7 @@ public class WorkerThread implements Runnable {
 
             //send the values to the specified output (chosen in constructor)
             sendValues();
-            
+
             //wait a moment before calculating next area
             try {
                 Thread.sleep(10);
@@ -125,31 +130,32 @@ public class WorkerThread implements Runnable {
             }
         }
     }
-    
+
     /**
-     * sends the values to the desired output, specified by the sender given in constructor
+     * sends the values to the desired output, specified by the sender given in
+     * constructor
      */
     private void sendValues() {
         sender.send(index, red, green, blue);
     }
-    
+
     /**
      * enables the thread to run
      */
     public synchronized void startRun() {
         this.running = true;
     }
-    
+
     /**
      * disables the thread to run
      */
     public synchronized void stopRun() {
         this.running = false;
     }
-    
+
     /**
      * Tells if the thread is enabled or not.
-     * 
+     *
      * @return true if enabled, false otherwise
      */
     public synchronized boolean isRunning() {

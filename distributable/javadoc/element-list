@@ -1,0 +1,11 @@
+ch.hearc
+ch.hearc.compute
+ch.hearc.compute.senders
+ch.hearc.gui.configurator
+ch.hearc.gui.creator
+ch.hearc.gui.creator.jpanel
+ch.hearc.gui.mainwindow
+ch.hearc.gui.mainwindow.jpanel
+ch.hearc.gui.mainwindow.jpanel.ChoiceMode
+ch.hearc.gui.mainwindow.jpanel.Preview
+ch.hearc.rmi

@@ -57,6 +57,7 @@ public class Computation_perso extends Computation_I {
 
     /**
      * used by the previsualisation
+     *
      * @return screenshot
      */
     @Override

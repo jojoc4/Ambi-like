@@ -65,6 +65,7 @@ public class Config implements Serializable {
 
     /**
      * return the number of LEDs on the specified side
+     *
      * @param pos side of the screen (use Config.NORTH, WEST, EAST or SOUTH)
      * @return number of LEDs on the specified side of the screen
      */
@@ -74,6 +75,7 @@ public class Config implements Serializable {
 
     /**
      * return an array with the number of leds on each side
+     *
      * @return array with the number of leds on each side
      */
     public int[] getNbLed() {
@@ -133,8 +135,10 @@ public class Config implements Serializable {
     private static Config config;
 
     /**
-     * get the config instance, if not initialized either load it frrom file or if file not exsist, create it with default values
-     * @return Config instance 
+     * get the config instance, if not initialized either load it frrom file or
+     * if file not exsist, create it with default values
+     *
+     * @return Config instance
      */
     public static Config getConfig() {
         if (config == null) {

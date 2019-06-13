@@ -10,9 +10,11 @@ import java.util.logging.Logger;
 import ch.hearc.compute.senders.Sender_I;
 
 /**
- * Manages the ambilight mode. This class is responsible for taking screenshots, building the areas and managing the worker threads. <br>
- * This class extends Computation_I, which implements Runnable. So this class is Runnable.
- * 
+ * Manages the ambilight mode. This class is responsible for taking screenshots,
+ * building the areas and managing the worker threads. <br>
+ * This class extends Computation_I, which implements Runnable. So this class is
+ * Runnable.
+ *
  * @version 3.2
  * @since 20.05.2019
  * @author Téo Schaffner
@@ -26,10 +28,11 @@ public class Computation_Ambilight extends Computation_I {
     private final WorkerThread[] workers;
     private final ExecutorService executor;
     private final Sender_I sender;
-    
+
     /**
-     * Constructor. Must give it a valid Sender_I, which will be used to send the colors to the desired output.
-     * 
+     * Constructor. Must give it a valid Sender_I, which will be used to send
+     * the colors to the desired output.
+     *
      * @param sender The sender which will be used by all the worker threads
      */
     public Computation_Ambilight(Sender_I sender) {
@@ -55,9 +58,11 @@ public class Computation_Ambilight extends Computation_I {
 
         stopComputation(); //set running to false. Must only be started when run() has been called.
     }
-    
+
     /**
-     * This method does all that needs to be done : builds the boundaries (areas) that will be used, creates the worker threads and gives them a new image every once in a while.
+     * This method does all that needs to be done : builds the boundaries
+     * (areas) that will be used, creates the worker threads and gives them a
+     * new image every once in a while.
      */
     @Override
     public void run() {
@@ -70,7 +75,6 @@ public class Computation_Ambilight extends Computation_I {
 //        } catch (InterruptedException ex) {
 //            Logger.getLogger(Computation_Ambilight.class.getName()).log(Level.SEVERE, null, ex);
 //        }
-
         //Create the threads and start them.
         img = printScreen();
         for (int i = 0; i < workers.length; ++i) {
@@ -104,9 +108,10 @@ public class Computation_Ambilight extends Computation_I {
             t = null;
         }
     }
-    
+
     /**
-     * Builds the boundaries (areas) on which to calculate the colors, based on the image taken by printscreen(). Used by run().
+     * Builds the boundaries (areas) on which to calculate the colors, based on
+     * the image taken by printscreen(). Used by run().
      */
     private void buildBoundaries() {
 
@@ -178,10 +183,10 @@ public class Computation_Ambilight extends Computation_I {
             }
         }
     }
-    
+
     /**
      * Gives the latest screenshot taken by printscreen().
-     * 
+     *
      * @return latest screenshot
      */
     @Override

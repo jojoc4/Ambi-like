@@ -17,7 +17,7 @@
 *.zip
 *.tar.gz
 *.rar
-*.7z
+
 
 # virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
 hs_err_pid*
@@ -35,3 +35,6 @@ hs_err_pid*
 /dev/Ambi-like_PC/dist/
 /dev/Ambi-like_rp/dist/
 /dev/Ambi-like_rp/nbproject/private/
+
+# JVM, et autres fichiers pour la création de l'installeur
+creation-installeur/
